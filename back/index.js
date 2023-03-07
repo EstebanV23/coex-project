@@ -2,7 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 import environmentVars from './configEnvironment.js'
-import { authRouter } from './src/routes/authentication/authRoute.js'
+import authRouter from './src/routes/authentication/authRoute.js'
 
 // Inicialización del proyecto
 const app = express()
