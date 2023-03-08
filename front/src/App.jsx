@@ -1,6 +1,6 @@
 function App () {
   return (
-    <h1 className="text-primary-blue font-work">Project</h1>
+    <h1 className='text-primary-blue font-work'>Project</h1>
   )
 }
 

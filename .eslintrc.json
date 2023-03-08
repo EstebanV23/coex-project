@@ -6,7 +6,7 @@
   },
   "extends": [
     "plugin:react/recommended",
-    "standard"
+    "./node_modules/standard/eslintrc.json"
   ],
   "overrides": [
   ],
