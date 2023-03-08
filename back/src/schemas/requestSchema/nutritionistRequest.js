@@ -1,6 +1,6 @@
 import Joi from 'joi'
 
-const nutritionistSchemaJoi = Joi.object(
+const nutritionistRegister = Joi.object(
   {
     name: Joi.string()
       .pattern(/^[a-zA-Z]+$/)
@@ -10,39 +10,29 @@ const nutritionistSchemaJoi = Joi.object(
       .pattern(/^[a-zA-Z]+$/)
       .min(3)
       .required(),
-    email: {
-      type: String,
-      required: true
-    },
-    dni: {
-      type: String,
-      required: true
-    },
-    password: {
-      type: String,
-      required: true
-    },
-    verify: {
-      type: Boolean,
-      required: false
-    },
-    phone: {
-      type: String,
-      required: false
-    },
-    createdAt: {
-      type: Date,
-      required: true
-    },
-    verificationDate: {
-      type: Date,
-      required: false
-    },
-    lastConnection: {
-      type: Date,
-      required: false
-    }
+    email: Joi.string()
+      .pattern(/^[a-z0-9+_-]+@[a-z]+\\.[a-z]{2,3}$/)
+      .required(),
+    dni: Joi.string()
+      .pattern(/\d{0, 10}/)
+      .required(),
+    password: Joi.string()
+      .pattern(/^(?=.*[!@#$%^&*?])(?=.*[0-9])(?=.*[A-Z]).{8,}$/)
+      .required(),
+    phone: Joi.string()
+      .pattern(/^(\\+\\d{12}|\\d{10})$/)
   }
 )
 
-export default nutritionistSchemaJoi
+const nutritionistLogin = Joi.object(
+  {
+    email: Joi.string()
+      .pattern(/^[a-z0-9+_-]+@[a-z]+\\.[a-z]{2,3}$/)
+      .required(),
+    password: Joi.string()
+      .pattern(/^(?=.*[!@#$%^&*?])(?=.*[0-9])(?=.*[A-Z]).{8,}$/)
+      .required()
+  }
+)
+
+export { nutritionistRegister, nutritionistLogin }
