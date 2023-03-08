@@ -1,8 +1,9 @@
 // Importacines de dependencias
 import express from 'express'
 import cors from 'cors'
-import environmentVars from './configEnvironment.js'
+import environmentVars from './src/config/configEnvironment.js'
 import authRouter from './src/routes/authentication/authRoute.js'
+import mongoDb from './src/database/mongo.js'
 
 // Inicialización del proyecto
 const app = express()
@@ -10,6 +11,9 @@ const app = express()
 // Uso de middlewares generales
 app.use(cors())
 app.use(express.json())
+
+// Conexion a la base de datos
+mongoDb()
 
 // Rutas para los endpoints
 app.use('/auth', authRouter)

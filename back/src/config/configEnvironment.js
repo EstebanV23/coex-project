@@ -4,5 +4,6 @@ config()
 // Configuración de variables de entorno
 export default {
   port: process.env.PORT || 3000,
-  secretKey: process.env.SECRET_KEY
+  secretKey: process.env.SECRET_KEY,
+  mongoUri: process.env.MONGO_URI
 }
