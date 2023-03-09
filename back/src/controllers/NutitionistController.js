@@ -20,10 +20,21 @@ const NutritionistController = {
   },
   createNutritionist: async (req, res, next) => {
     try {
-      const nutritionist = await Nutritionist.create(req.body)
+      const nutritionist = new Nutritionist(req.body).create()
       buildResponse(res, 201, 'Nutritionist created', nutritionist)
+    } catch (err) {
+      next(err)
+    }
+  },
+  updateNutritionist: async (req, res, next) => {
+    try {
+      const { params: { id }, body: data } = req
+      const result = await Nutritionist.update(id, data)
+      buildResponse(res, 200, 'Nutritionist updated', nutritionist)
     } catch (err) {
       next(err)
     }
   }
 }
+
+export default NutritionistController
