@@ -11,6 +11,7 @@ const nutritionistSchema = new mongoose.Schema({
   },
   email: {
     type: String,
+    unique: true,
     required: true
   },
   dni: {
@@ -27,6 +28,7 @@ const nutritionistSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
+    unique: true,
     required: false
   },
   createdAt: {
@@ -43,6 +45,6 @@ const nutritionistSchema = new mongoose.Schema({
   }
 })
 
-const modelNutritionist = mongoose.model('nutritionist', nutritionistSchema)
+const schemaNutritionist = mongoose.model('nutritionist', nutritionistSchema)
 
-export default modelNutritionist
+export default schemaNutritionist
