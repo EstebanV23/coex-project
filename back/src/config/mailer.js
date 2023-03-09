@@ -2,17 +2,19 @@ import { createTransport } from 'nodemailer'
 import configEnvironment from './configEnvironment.js'
 
 // async..await is not allowed in global scope, must use a wrapper
-async function sendMail (token, name) {
+async function sendMail (email, token, name) {
   // create reusable transporter object using the default SMTP transport
   const transporter = createTransport({
     host: 'smtp.gmail.com',
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: configEnvironment.mailUser, // generated ethereal user
-      pass: configEnvironment.mailPass // generated ethereal password
+      user: configEnvironment.mailUser,
+      pass: configEnvironment.mailPass
     }
   })
+
+  console.log({ email })
 
   // send mail with defined transport object
   await transporter.sendMail({

@@ -1,18 +1,18 @@
-const response = {
-  success: (res, data, msg = 'Process success', status = 200) => {
+const buildResponse = {
+  success: (res, status = 200, msg = 'Process success', data) => {
     res.status(status).json({
       msg,
       data
     })
   },
-  failed: (res, errorMessage = 'The process has error', status = 400) => {
+  failed: (res, status = 400, errorMessage = 'The process has error') => {
     res.status(status).json({
       error: errorMessage
     })
   },
-  custom: (res, data, status) => {
+  custom: (res, status, data) => {
     res.status(status).json(data)
   }
 }
 
-export default response
+export default buildResponse

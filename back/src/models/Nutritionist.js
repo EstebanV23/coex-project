@@ -1,4 +1,6 @@
-import schemaNutritionist from '../schemas/collectionSchema/nutritionistSchema'
+import schemaNutritionist from '../schemas/collectionSchema/nutritionistSchema.js'
+import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
 
 class Nutritionist {
   name
@@ -32,8 +34,8 @@ class Nutritionist {
 
   async create () {
     const nutritionist = schemaNutritionist(this.buildData())
-    await nutritionist.save()
-    return nutritionist
+    const newNutritionist = await nutritionist.save()
+    return newNutritionist
   }
 
   static async getAll () {
@@ -47,12 +49,19 @@ class Nutritionist {
   }
 
   static async update (id, data) {
-    const newNutritionist = await schemaNutritionist.updateOne({ _id: id }, { $set: data })
+    const newNutritionist = await schemaNutritionist.updateOne({ _id: mongoose.Types.ObjectId(id) }, { $set: data })
     return newNutritionist
   }
 
   static async delete (id) {
     await schemaNutritionist.deleteOne({ _id: id })
+  }
+
+  static login (email, password) {
+    const nutritionist = this.getByEmail(email)
+    if (!nutritionist) return
+    const isPasswordCorrect = bcrypt.compare(password, nutritionist.password)
+    if (isPasswordCorrect) { return nutritionist }
   }
 
   buildData () {
