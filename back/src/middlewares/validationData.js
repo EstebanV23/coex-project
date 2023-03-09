@@ -1,7 +1,7 @@
 /**
   * @param {Object} schema - Joi schema
 */
-function validateRegister (schema, property) {
+function validateData (schema, property) {
   return (req, res, next) => {
     const data = req[property]
     const validate = schema.validate(data, { abortEarly: false })
@@ -11,4 +11,4 @@ function validateRegister (schema, property) {
   }
 }
 
-export { validateRegister }
+export default validateData

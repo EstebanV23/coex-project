@@ -1,4 +1,4 @@
-import schemaNutritionist from '../schemas/collectionSchema/nutritionistSchema'
+import schemaNutritionist from '../schemas/collectionSchema/nutritionistSchema.js'
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 
@@ -34,8 +34,8 @@ class Nutritionist {
 
   async create () {
     const nutritionist = schemaNutritionist(this.buildData())
-    await nutritionist.save()
-    return nutritionist
+    const newNutritionist = await nutritionist.save()
+    return newNutritionist
   }
 
   static async getAll () {

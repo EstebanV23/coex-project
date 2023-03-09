@@ -5,6 +5,7 @@ import environmentVars from './src/config/configEnvironment.js'
 import authRouter from './src/routes/authentication/authRoute.js'
 import mongoDb from './src/database/mongo.js'
 import testRouter from './src/test/routerTest.js'
+import handlerException from './src/middlewares/handlerException.js'
 
 // Inicialización del proyecto
 const app = express()
@@ -19,6 +20,7 @@ mongoDb()
 // Rutas para los endpoints
 app.use('/auth', authRouter)
 app.use('/test', testRouter)
+app.use(handlerException)
 
 // Configuración del puerto para levantar el servidor
 app.listen(environmentVars.port, () => {

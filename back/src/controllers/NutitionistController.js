@@ -1,7 +1,7 @@
 import Nutritionist from '../models/Nutritionist.js'
 import buildResponse from '../helpers/buildResponse.js'
-import sendMail from '../helpers/mailer.js'
-import { generateToken } from '../helpers/JWT.js'
+import sendMail from '../config/mailer.js'
+import { generateToken } from '../config/JWT.js'
 
 const NutritionistController = {
   getNutritionists: async (req, res, next) => {
