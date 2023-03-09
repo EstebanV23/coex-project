@@ -5,5 +5,7 @@ config()
 export default {
   port: process.env.PORT || 3000,
   secretKey: process.env.SECRET_KEY,
-  mongoUri: process.env.MONGO_URI
+  mongoUri: process.env.MONGO_URI,
+  mailUser: process.env.MAIL_USER,
+  mailPass: process.env.MAIL_PASS
 }
