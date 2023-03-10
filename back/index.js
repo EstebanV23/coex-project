@@ -1,11 +1,10 @@
 // Importacines de dependencias
 import express from 'express'
 import cors from 'cors'
-import environmentVars from './src/config/configEnvironment.js'
 import authRouter from './src/routes/authentication/authRoute.js'
 import mongoDb from './src/database/mongo.js'
-import testRouter from './src/test/routerTest.js'
 import handlerException from './src/middlewares/handlerException.js'
+import configEnvironment from './src/config/configEnvironment.js'
 
 // Inicialización del proyecto
 const app = express()
@@ -19,10 +18,12 @@ mongoDb()
 
 // Rutas para los endpoints
 app.use('/auth', authRouter)
-app.use('/test', testRouter)
 app.use(handlerException)
+app.use((req, res) => {
+  res.status(404).send('<H1>404 Not Found</H1>')
+})
 
 // Configuración del puerto para levantar el servidor
-app.listen(environmentVars.port, () => {
-  console.log(`Server running on port http://localhost:${environmentVars.port}`)
+app.listen(configEnvironment.port, () => {
+  console.log(`Server running on ${configEnvironment.uriApp}`)
 })
