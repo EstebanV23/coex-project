@@ -1,6 +1,7 @@
 import schemaNutritionist from '../schemas/collectionSchema/nutritionistSchema.js'
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
+import encryptPassword from '../helpers/encryptPassword.js'
 
 class Nutritionist {
   name
@@ -67,14 +68,14 @@ class Nutritionist {
     }
   }
 
-  buildData () {
+  async buildData () {
     return {
       name: this.name,
       surname: this.surname,
       email: this.email,
       dni: this.dni,
       phone: this.phone,
-      password: this.password,
+      password: await encryptPassword(this.password),
       verify: this.verify,
       createdAt: this.createdAt,
       verificationDate: this.verificationDate,
