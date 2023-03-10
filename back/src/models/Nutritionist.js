@@ -17,7 +17,7 @@ class Nutritionist {
 
   constructor ({
     name, surname, email,
-    dni, phone = null, password,
+    dni, phone, password,
     verify = false, createdAt = new Date(), verificationDate = null,
     lastConnection = null
   }) {
@@ -34,7 +34,7 @@ class Nutritionist {
   }
 
   async create () {
-    const nutritionist = schemaNutritionist(this.buildData())
+    const nutritionist = schemaNutritionist(await this.buildData())
     const newNutritionist = await nutritionist.save()
     return newNutritionist
   }
