@@ -27,7 +27,6 @@ const nutritionistRegister = Joi.object(
 const nutritionistLogin = Joi.object(
   {
     email: Joi.string()
-      .pattern(/^[a-z0-9.-_]+@[a-z]+\.[a-z]{2,3}$/)
       .required(),
     password: Joi.string()
       .required()

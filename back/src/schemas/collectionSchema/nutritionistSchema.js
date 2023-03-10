@@ -16,6 +16,7 @@ const nutritionistSchema = new mongoose.Schema({
   },
   dni: {
     type: String,
+    unique: true,
     required: true
   },
   password: {
@@ -28,7 +29,6 @@ const nutritionistSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    unique: true,
     required: false
   },
   createdAt: {

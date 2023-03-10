@@ -2,7 +2,6 @@ import Nutritionist from '../models/Nutritionist.js'
 import buildResponse from '../helpers/buildResponse.js'
 import sendMail from '../config/mailer.js'
 import { generateToken } from '../config/JWT.js'
-import encryptPassword from '../helpers/encryptPassword.js'
 
 const NutritionistController = {
   getNutritionists: async (req, res, next) => {
@@ -25,8 +24,6 @@ const NutritionistController = {
 
   createNutritionist: async (req, res, next) => {
     try {
-      const { password } = req.body
-      req.body.password = await encryptPassword(password, 10)
       const nutritionist = await new Nutritionist(req.body).create()
       const { _id: id, email, name } = nutritionist
       sendMail(email, generateToken({ id }), name)
@@ -66,7 +63,7 @@ const NutritionistController = {
       }
       await Nutritionist.update(nutritionist._id, { lastConnection: new Date() })
       const { _id: id, name, surname } = nutritionist
-      const token = generateToken({ id, name, surname })
+      const token = generateToken({ id, name, surname, email })
       buildResponse.success(res, 200, 'Nutritionist logged', token)
     } catch (err) {
       next(err)
