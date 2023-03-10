@@ -14,15 +14,13 @@ async function sendMail (email, token, name) {
     }
   })
 
-  console.log({ email })
-
   // send mail with defined transport object
   await transporter.sendMail({
     from: `"MiAnthro " ${configEnvironment.mailUser}`, // sender address
-    to: 'cagexor450@maazios.com', // list of receivers
+    to: email, // list of receivers
     subject: `MiAnthro te da la bienvenida ${name}, verifícate`, // Subject line
     text: `Si no puedes visualizar, por favor dale click en el siguiente enlace: ${configEnvironment.uriApp}/test/validate/${token}`, // plain text body
-    html: `<a href="${configEnvironment.uriApp}/test/validate/${token}">Verifica tu cuenta</a>` // html body
+    html: `<a href="${configEnvironment.uriApp}/auth/validate/${token}">Verifica tu cuenta</a>` // html body
   })
 }
 

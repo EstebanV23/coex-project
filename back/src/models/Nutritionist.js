@@ -49,7 +49,7 @@ class Nutritionist {
   }
 
   static async update (id, data) {
-    const newNutritionist = await schemaNutritionist.updateOne({ _id: mongoose.Types.ObjectId(id) }, { $set: data })
+    const newNutritionist = await schemaNutritionist.updateOne({ _id: new mongoose.Types.ObjectId(id) }, { $set: data })
     return newNutritionist
   }
 
@@ -57,11 +57,14 @@ class Nutritionist {
     await schemaNutritionist.deleteOne({ _id: id })
   }
 
-  static login (email, password) {
-    const nutritionist = this.getByEmail(email)
+  static async login (email, password) {
+    const nutritionist = await this.getByEmail(email)
     if (!nutritionist) return
-    const isPasswordCorrect = bcrypt.compare(password, nutritionist.password)
-    if (isPasswordCorrect) { return nutritionist }
+    const isPasswordCorrect = await bcrypt.compare(password, nutritionist.password)
+    if (isPasswordCorrect) {
+      delete nutritionist.password
+      return nutritionist
+    }
   }
 
   buildData () {

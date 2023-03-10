@@ -9,5 +9,5 @@ const authRouter = express.Router()
 authRouter
   .post('/signin', validateData(nutritionistLogin, 'body'), NutritionistController.loginNutritionist)
   .post('/signup', validateData(nutritionistRegister, 'body'), NutritionistController.createNutritionist)
-  .get('/validate/:token', handlerJwtVerify, NutritionistController.updateVerify)
+  .get('/validate/:token', handlerJwtVerify('params'), NutritionistController.updateVerify)
 export default authRouter

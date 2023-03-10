@@ -5,7 +5,8 @@ function handlerJwtVerify (property) {
     try {
       const { token } = req[property]
       const decoded = verifyToken(token)
-      req.user = decoded.data
+      console.log({ decoded })
+      req.user = decoded
       next()
     } catch (error) {
       return res.status(401).json({ message: 'Expired or invalid token' })
