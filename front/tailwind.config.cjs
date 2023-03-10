@@ -1,13 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
     extend: {
       fontFamily: {
-        'work': ['Work Sans']
+        work: ['Work Sans']
       },
       colors: {
         'primary-blue': {
@@ -54,7 +54,7 @@ module.exports = {
           800: '#C8B029',
           900: '#9A871F'
         },
-        'error': {
+        error: {
           DEFAULT: '#E17373',
           100: '#FEF9F9',
           200: '#F7D8D8',
@@ -65,9 +65,9 @@ module.exports = {
           700: '#BC2828',
           800: '#8D1E1E',
           900: '#5F1414'
-        },
+        }
       }
-    },
+    }
   },
-  plugins: [],
+  plugins: []
 }
