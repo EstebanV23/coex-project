@@ -33,4 +33,18 @@ const nutritionistLogin = Joi.object(
   }
 )
 
-export { nutritionistRegister, nutritionistLogin }
+const nutritionistForgotPassword = Joi.object(
+  {
+    email: Joi.string()
+      .required()
+  }
+)
+
+const nutritionistResetPassword = Joi.object(
+  {
+    password: Joi.string()
+      .required()
+  }
+)
+
+export { nutritionistRegister, nutritionistLogin, nutritionistForgotPassword, nutritionistResetPassword }

@@ -50,7 +50,14 @@ class Nutritionist {
   }
 
   static async update (id, data) {
+    if (data.password) data.password = await encryptPassword(data.password)
     const newNutritionist = await schemaNutritionist.updateOne({ _id: new mongoose.Types.ObjectId(id) }, { $set: data })
+    return newNutritionist
+  }
+
+  static async updateByEmail (email, data) {
+    if (data.password) data.password = await encryptPassword(data.password)
+    const newNutritionist = await schemaNutritionist.updateOne({ email }, { $set: data })
     return newNutritionist
   }
 

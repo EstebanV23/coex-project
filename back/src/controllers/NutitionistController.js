@@ -3,9 +3,10 @@ import buildResponse from '../helpers/buildResponse.js'
 import { generateToken } from '../config/JWT.js'
 import templateHtmlVerify from '../helpers/templateHtmlVerify.js'
 import Mailer from '../models/Mailer.js'
+import templateHtmlForgotPassword from '../helpers/templateHtmlFogotPassword.js'
 
 const NutritionistController = {
-  getNutritionists: async (req, res, next) => {
+  getNutritionists: async (_, res, next) => {
     try {
       const nutritionists = await Nutritionist.getAll()
       buildResponse.success(res, 200, 'Nutritionists', nutritionists)
@@ -80,6 +81,38 @@ const NutritionistController = {
       buildResponse.success(res, 200, 'Nutritionist verified', nutritionist)
     } catch (err) {
       next(err)
+    }
+  },
+
+  forgotPassword: async (req, res, next) => {
+    try {
+      const { email } = req.body
+      const nutritionist = await Nutritionist.getByEmail(email)
+      if (!nutritionist) {
+        throw new Error('Nutritionist not found', 404)
+      }
+      const token = generateToken({ email }, '20m')
+      const { name } = nutritionist
+      const template = templateHtmlForgotPassword({ email, name, token })
+      await new Mailer(template).sendMail()
+      buildResponse.success(res, 200, 'Token generate', { email })
+    } catch (error) {
+      next(error)
+    }
+  },
+
+  resetPassword: async (req, res, next) => {
+    try {
+      const { email } = req.user
+      const { password } = req.body
+      const nutritionist = await Nutritionist.getByEmail(email)
+      if (!nutritionist) {
+        throw new Error('Nutritionist not found', 404)
+      }
+      Nutritionist.updateByEmail(email, { password })
+      buildResponse.success(res, 200, 'Password updated', { email })
+    } catch (error) {
+      next(error)
     }
   }
 }
