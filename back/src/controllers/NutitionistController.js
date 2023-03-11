@@ -1,7 +1,8 @@
 import Nutritionist from '../models/Nutritionist.js'
 import buildResponse from '../helpers/buildResponse.js'
-import sendMail from '../config/mailer.js'
 import { generateToken } from '../config/JWT.js'
+import templateHtmlVerify from '../helpers/templateHtmlVerify.js'
+import Mailer from '../models/Mailer.js'
 
 const NutritionistController = {
   getNutritionists: async (req, res, next) => {
@@ -26,7 +27,9 @@ const NutritionistController = {
     try {
       const nutritionist = await new Nutritionist(req.body).create()
       const { _id: id, email, name } = nutritionist
-      sendMail(email, generateToken({ id }), name)
+      const token = generateToken({ id })
+      const template = templateHtmlVerify({ email, token, name })
+      await new Mailer(template).sendMail()
       buildResponse.success(res, 201, 'Nutritionist created', { email })
     } catch (err) {
       next(err)
