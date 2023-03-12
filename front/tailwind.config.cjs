@@ -9,6 +9,9 @@ module.exports = {
       fontFamily: {
         work: ['Work Sans']
       },
+      screens: {
+        med: '1110px'
+      },
       colors: {
         'primary-blue': {
           DEFAULT: '#68A7AD',

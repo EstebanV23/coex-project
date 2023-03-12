@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { NavLink, Route, Routes, useNavigate, useSearchParams } from 'react-router-dom'
+import Navbar from './components/Navbar'
 
 function Home () {
   return (
@@ -70,6 +71,7 @@ function RestartPassword () {
 function App () {
   return (
     <>
+      <Navbar />
       <h1 className='font-work text-2xl font-bold text-center'>Project</h1>
       <div className='flex gap-4 p-6 justify-center text-cyan-500'>
         <NavLink to='/forgot-password'>Olvidó su contraseña?</NavLink>
