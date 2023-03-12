@@ -5,7 +5,6 @@ function handlerJwtVerify (property) {
     try {
       const { token } = req[property]
       const decoded = verifyToken(token)
-      console.log({ decoded })
       req.user = decoded
       next()
     } catch (error) {
