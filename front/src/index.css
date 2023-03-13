@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&display=swap');
 
-:root {
-  --primaryFont: 'Work Sans', system-ui, sans-serif;
-  --colorBluePrimary: #68A7AD;
-  --colorBlueSecondary: #4A7C7E;
-  -o-animation:  alternate;
-  --colorYellowPrimary: #F2C94C;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
