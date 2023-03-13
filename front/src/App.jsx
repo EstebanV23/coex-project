@@ -13,7 +13,6 @@ function ForgotPassword () {
   const [email, setEmail] = useState('')
 
   const sendForm = (event, email) => {
-    console.log('Entro')
     event.preventDefault()
     console.log(email)
     fetch('http://localhost:5000/auth/forgot-password', {
@@ -29,7 +28,6 @@ function ForgotPassword () {
         data.error ? alert('Error') : navigate('/')
       })
   }
-  console.log({ email })
   return (
     <form className='flex flex-col border-2 w-1/3 m-auto justify-center gap-3 items-center p-10' onSubmit={(e) => sendForm(e, email)}>
       <label htmlFor='email'>Email</label>
