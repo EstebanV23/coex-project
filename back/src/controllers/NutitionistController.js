@@ -1,9 +1,9 @@
 import Nutritionist from '../models/Nutritionist.js'
 import buildResponse from '../helpers/buildResponse.js'
 import { generateToken } from '../config/JWT.js'
-import templateHtmlVerify from '../helpers/templateHtmlVerify.js'
+import templateEmailVerify from '../helpers/templateEmailVerify.js'
 import Mailer from '../models/Mailer.js'
-import templateHtmlForgotPassword from '../helpers/templateHtmlFogotPassword.js'
+import templateEmailForgotPassword from '../helpers/templateEmailForgotPassword.js'
 
 const NutritionistController = {
   getNutritionists: async (_, res, next) => {
@@ -29,7 +29,7 @@ const NutritionistController = {
       const nutritionist = await new Nutritionist(req.body).create()
       const { _id: id, email, name } = nutritionist
       const token = generateToken({ id })
-      const template = templateHtmlVerify({ email, token, name })
+      const template = templateEmailVerify({ email, token, name })
       await new Mailer(template).sendMail()
       buildResponse.success(res, 201, 'Nutritionist created', { email })
     } catch (err) {
@@ -67,8 +67,9 @@ const NutritionistController = {
       }
       await Nutritionist.update(nutritionist._id, { lastConnection: new Date() })
       const { _id: id, name, surname } = nutritionist
-      const token = generateToken({ id, name, surname, email })
-      buildResponse.success(res, 200, 'Nutritionist logged', token)
+      const token = generateToken(id)
+      const dataNutritionist = { id, name, surname, email, token }
+      buildResponse.success(res, 200, 'Nutritionist logged', dataNutritionist)
     } catch (err) {
       next(err)
     }
@@ -93,7 +94,7 @@ const NutritionistController = {
       }
       const token = generateToken({ email }, '20m')
       const { name } = nutritionist
-      const template = templateHtmlForgotPassword({ email, name, token })
+      const template = templateEmailForgotPassword({ email, name, token })
       await new Mailer(template).sendMail()
       buildResponse.success(res, 200, 'Token generate', { email })
     } catch (error) {
