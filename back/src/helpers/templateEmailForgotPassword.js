@@ -1,6 +1,6 @@
 import configEnvironment from '../config/configEnvironment.js'
 
-function templateHtmlForgotPassword ({ email, name, token }) {
+function templateEmailForgotPassword ({ email, name, token }) {
   return {
     from: `"MiAnthro " ${configEnvironment.mailUser}`, // sender address
     to: email, // list of receivers
@@ -10,4 +10,4 @@ function templateHtmlForgotPassword ({ email, name, token }) {
   }
 }
 
-export default templateHtmlForgotPassword
+export default templateEmailForgotPassword

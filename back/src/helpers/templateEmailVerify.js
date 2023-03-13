@@ -1,6 +1,6 @@
 import configEnvironment from '../config/configEnvironment.js'
 
-function templateHtmlVerify ({ email, name, token }) {
+function templateEmailVerify ({ email, name, token }) {
   return {
     from: `"MiAnthro " ${configEnvironment.mailUser}`, // sender address
     to: email, // list of receivers
@@ -10,4 +10,4 @@ function templateHtmlVerify ({ email, name, token }) {
   }
 }
 
-export default templateHtmlVerify
+export default templateEmailVerify
