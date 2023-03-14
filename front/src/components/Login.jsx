@@ -3,10 +3,12 @@ import { NavLink } from 'react-router-dom'
 
 export default function Login () {
   const URL = 'http://localhost:5000/auth/signin'
+
   const [login, setlogin] = useState({
     email: '',
     password: ''
   })
+
   const loginChange = ({ target }) => {
     const { name, value } = target
     setlogin({
@@ -14,6 +16,7 @@ export default function Login () {
       [name]: value
     })
   }
+
   const submitLogin = () => {
     console.log(login)
     const options = {
@@ -27,6 +30,7 @@ export default function Login () {
       .then((response) => console.log(response))
       .catch((err) => console.error(err))
   }
+
   return (
     <div className='flex justify-center items-center h-screen  bg-[#99c3c8]'>
       <div className='bg-white h-2/3 rounded-xl  w-11/12 lg:w-1/2 '>
