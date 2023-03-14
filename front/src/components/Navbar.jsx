@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { IconMenu2, IconX } from '@tabler/icons-react'
-import LogedNavbar from './LogedNavbar'
 import { useState } from 'react'
+import LogedNavbar from './LogedNavbar'
 import ContentNavbar from './ContentNavbar'
 
 export default function Navbar () {
@@ -10,14 +10,22 @@ export default function Navbar () {
   return (
     <>
       <div className='flex items-center justify-between px-16 py-1 bg-primary-blue h-16 font-work'>
-        <NavLink to='/'><img src='logo.svg' className='h-10' alt='' /></NavLink>
+        <NavLink to='/'>
+          <img src='logo.svg' className='h-10' alt='' />
+        </NavLink>
         <ContentNavbar hideShow={hidden}>
           {logged
             ? <LogedNavbar />
-            : <button>Cerrar sesion</button>}
-          <IconX className='block md:hidden absolute right-10 top-10 cursor-pointer text-white' onClick={() => setHidden(true)} size={30} />
+            : <button>Ingresar</button>}
+          <IconX size={30} color='white' className='block md:hidden absolute right-10 top-10 cursor-pointer text-white' onClick={() => setHidden(true)} />
         </ContentNavbar>
-        <IconMenu2 size={30} color='white' className='block md:hidden cursor-pointer' onClick={() => setHidden(false)} />
+        <IconMenu2
+          size={30}
+          color='white'
+          className='block md:hidden cursor-pointer'
+          onClick={() => setHidden(false)}
+        />
+
       </div>
     </>
   )
