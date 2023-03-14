@@ -20,7 +20,7 @@ mongoDb()
 app.use('/auth', authRouter)
 app.use(handlerException)
 app.use((req, res) => {
-  res.status(404).send('<H1>404 Not Found</H1>')
+  res.status(405).send('<h2>The server correct!</h2>')
 })
 
 // Configuración del puerto para levantar el servidor
