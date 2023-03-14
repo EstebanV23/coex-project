@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function Login() {
-  const URL = "http://localhost:5000/signin";
+  const URL = "http://localhost:5000/auth/signin";
   const [login, setlogin] = useState({
     email: "",
     password: "",
