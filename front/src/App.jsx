@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Login from './components/Login'
+import Footer from './components/Footer'
 function Home () {
   return (
     <h1 className='font-work text-2xl font-bold text-center'>Here is home</h1>
@@ -114,6 +115,8 @@ function App () {
         <Route path='/new-password/' element={<RestartPassword />} />
         <Route path='/login' element={<Login />} />
       </Routes>
+      <Footer />
+
     </>
   )
 }
