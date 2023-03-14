@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
 export default function Login () {
   const URL = 'http://localhost:5000/auth/signin'
@@ -70,6 +71,7 @@ export default function Login () {
               value={login.password}
               onChange={loginChange}
             />
+            <NavLink to='/forgot-password'>Olvidó su contraseña?</NavLink>
             <button
               className='bg-[#66a7ad] text-white h-8 w-10/12 rounded-md   hover:bg-[#3A676B]'
               onClick={submitLogin}
