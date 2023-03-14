@@ -4,6 +4,7 @@ import Login from './components/Login'
 import RestartPassword from './components/RestartPassword'
 import EmailForgotPassword from './components/EmailForgotPassword'
 import Home from './components/Home'
+import Footer from './components/Footer'
 
 function App () {
   return (
@@ -15,6 +16,7 @@ function App () {
         <Route path='/new-password/' element={<RestartPassword />} />
         <Route path='/login' element={<Login />} />
       </Routes>
+      <Footer />
 
     </>
   )
