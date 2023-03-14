@@ -28,8 +28,8 @@ function stringAvatar (name) {
   }
 }
 
-export default function MyAvatar ({ fullName }) {
+export default function MyAvatar (props) {
   return (
-    <Avatar {...stringAvatar(fullName)} />
+    <Avatar {...stringAvatar(props.fullName)} {...props} />
   )
 }

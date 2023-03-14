@@ -18,6 +18,7 @@ export default function Navbar() {
           className="block lg:hidden cursor-pointer"
           onClick={() => setHidden(false)}
         />
+
       </div>
     </>
   );
