@@ -1,4 +1,4 @@
-export function Input ({ label, ...props }) {
+export default function Input ({ label, ...props }) {
   return (
     <div className='input'>
       <label>{label}</label>
