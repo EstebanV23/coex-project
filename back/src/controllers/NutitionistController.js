@@ -66,9 +66,9 @@ const NutritionistController = {
         throw new Error(ERROR_MESSAGE, 401)
       }
       await Nutritionist.update(nutritionist._id, { lastConnection: new Date() })
-      const { _id: id, name, surname } = nutritionist
-      const token = generateToken(id)
-      const dataNutritionist = { id, name, surname, email, token }
+      const { _id: id, name, surname, verify } = nutritionist
+      const token = generateToken({ id })
+      const dataNutritionist = { id, name, surname, email, verify, token }
       buildResponse.success(res, 200, 'Nutritionist logged', dataNutritionist)
     } catch (err) {
       next(err)
