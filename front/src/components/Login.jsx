@@ -59,7 +59,8 @@ export default function Login () {
             value={login.password}
             onChange={loginChange}
           />
-          <NavLink to='/forgot-password' className='font-semibold text-xl hover:text-primary-blue-500 transition-colors duration-200'>Olvidó su contraseña?</NavLink>
+          <NavLink to='/forgot-password' className='text-xl text-primary-blue-500'>Olvidó su contraseña?</NavLink>
+          <NavLink to='/register' className='text-xl text-primary-blue-500 '>Aún no tienes una cuenta?</NavLink>
 
           <button
             className='bg-primary-blue text-white h-14 w-10/12 rounded-xl text-2xl font-bold hover:bg-primary-blue-600'
