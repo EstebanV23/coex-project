@@ -1,24 +1,32 @@
 import { NavLink } from 'react-router-dom'
-import { IconMenu2 } from '@tabler/icons-react'
-
 import { useState } from 'react'
+import LogedNavbar from './LogedNavbar'
+import ContentNavbar from './ContentNavbar'
+import { useNavbarStore } from '../stores/useNavbarStore'
+import { GiHamburgerMenu } from 'react-icons/gi'
+import { IoCloseSharp } from 'react-icons/io5'
 
 export default function Navbar () {
-  const [hidden, setHidden] = useState(true)
+  const { toggleHidden, hidden } = useNavbarStore(reduce => reduce)
+  const [logged, setLogged] = useState(true)
   return (
     <>
-      <div className='flex items-center justify-between px-16 py-1 bg-primary-blue h-16 font-work'>
+      <div className='flex items-center justify-between px-2 sm:px-8 md:px-12 py-1 bg-primary-blue h-16 font-work'>
         <NavLink to='/'>
           <img src='logo.svg' className='h-10' alt='' />
         </NavLink>
-
-        <IconMenu2
+        <ContentNavbar hideShow={hidden}>
+          {logged
+            ? <LogedNavbar />
+            : <button>Ingresar</button>}
+          <IoCloseSharp size={30} className='block md:hidden absolute right-10 top-10 cursor-pointer text-white' onClick={toggleHidden} />
+        </ContentNavbar>
+        <GiHamburgerMenu
           size={30}
           color='white'
-          className='block lg:hidden cursor-pointer'
-          onClick={() => setHidden(false)}
+          className='block md:hidden cursor-pointer'
+          onClick={toggleHidden}
         />
-
       </div>
     </>
   )
