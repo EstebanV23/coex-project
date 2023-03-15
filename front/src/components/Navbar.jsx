@@ -3,9 +3,10 @@ import { IconMenu2, IconX } from '@tabler/icons-react'
 import { useState } from 'react'
 import LogedNavbar from './LogedNavbar'
 import ContentNavbar from './ContentNavbar'
+import { useHiddenNavbar } from '../stores/useHiddenNavbar'
 
 export default function Navbar () {
-  const [hidden, setHidden] = useState(true)
+  const { toggleHidden, hidden } = useHiddenNavbar(reduce => reduce)
   const [logged, setLogged] = useState(true)
   return (
     <>
@@ -17,13 +18,13 @@ export default function Navbar () {
           {logged
             ? <LogedNavbar />
             : <button>Ingresar</button>}
-          <IconX size={30} color='white' className='block md:hidden absolute right-10 top-10 cursor-pointer text-white' onClick={() => setHidden(true)} />
+          <IconX size={30} color='white' className='block md:hidden absolute right-10 top-10 cursor-pointer text-white' onClick={toggleHidden} />
         </ContentNavbar>
         <IconMenu2
           size={30}
           color='white'
           className='block md:hidden cursor-pointer'
-          onClick={() => setHidden(false)}
+          onClick={toggleHidden}
         />
 
       </div>
