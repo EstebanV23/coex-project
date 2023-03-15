@@ -9,12 +9,14 @@ function App () {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/forgot-password' element={<EmailForgotPassword />} />
-        <Route path='/new-password/' element={<RestartPassword />} />
-        <Route path='/login' element={<Login />} />
-      </Routes>
+      <div className='bg-primary-blue-300'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/forgot-password' element={<EmailForgotPassword />} />
+          <Route path='/new-password/' element={<RestartPassword />} />
+          <Route path='/login' element={<Login />} />
+        </Routes>
+      </div>
     </>
   )
 }
