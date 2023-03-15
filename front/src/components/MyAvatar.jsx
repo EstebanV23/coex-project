@@ -30,9 +30,6 @@ function stringAvatar (name) {
 
 export default function MyAvatar ({ fullName, ...props }) {
   return (
-    <Avatar
-      {...stringAvatar(fullName)}
-      {...props}
-    />
+    <Avatar {...stringAvatar(fullName)} {...props} />
   )
 }
