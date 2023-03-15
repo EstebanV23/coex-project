@@ -1,31 +1,32 @@
-import { IconAccessible, IconFileInvoice, IconHome, IconUser } from '@tabler/icons-react'
+import { IoHome } from 'react-icons/io5'
+import { BsPersonHeart, BsFillFileEarmarkArrowUpFill, BsPeopleFill } from 'react-icons/bs'
 
 export default [
   {
     id: 'link1',
     name: 'Inicio',
-    icon: <IconHome stroke='2' size={25} />,
+    icon: <IoHome stroke='2' size={25} />,
     path: '/',
     verify: true
   },
   {
     id: 'link2',
     name: 'Valoración unitaria',
-    icon: <IconUser stroke='2' size={25} />,
+    icon: <BsPersonHeart stroke='2' size={25} />,
     path: '/valoracion',
     verify: true
   },
   {
     id: 'link3',
     name: 'Subir archivo',
-    icon: <IconFileInvoice stroke='2' size={25} />,
+    icon: <BsFillFileEarmarkArrowUpFill stroke='2' size={25} />,
     path: '/archivo',
     verify: false
   },
   {
     id: 'link4',
     name: 'Unidades',
-    icon: <IconAccessible stroke='2' size={25} />,
+    icon: <BsPeopleFill stroke='2' size={25} />,
     path: '/unidades',
     verify: false
   }

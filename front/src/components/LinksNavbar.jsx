@@ -10,7 +10,6 @@ export default function LinksNavbar () {
       key={link.id}
       to={link.path}
       className={({ isActive }) => { return isActive ? stylesActive : stylesDefault }}
-      onClick={() => console.log('click')}
     >
       {({ isActive }) => isActive ? <>{link.icon} <p>{link.name}</p></> : link.icon}
     </NavLink>

@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 export const useUserStore = create((set, get) => ({
   id: null,
-  name: 'Birto es gay',
+  name: null,
   surname: null,
   email: null,
   token: null,
