@@ -1,80 +1,99 @@
-import { useState } from "react";
-
-export default function Login() {
-  const URL = "http://localhost:5000/auth/signin";
-  const [login, setlogin] = useState({
-    email: "",
-    password: "",
-  });
-  const loginChange = ({ target }) => {
-    const { name, value } = target;
-    setlogin({
-      ...login,
-      [name]: value,
-    });
-  };
-  const submitLogin = () => {
-    console.log(login);
-    const options = {
-      method: "POST",
-      headers: { "Content-type": "application/json;charset=UTF-8" },
-      body: `{"email":"${login.email}", "password":"${login.password}"}`,
-    };
-    console.log(options.body);
-    fetch(`${URL}`, options)
-      .then((response) => response.json())
-      .then((response) => console.log(response))
-      .catch((err) => console.error(err));
-  };
+import { Formik } from 'formik'
+import { useState } from 'react'
+export default function Login () {
+  const URL = 'http://localhost:5000/auth/signin'
+  const [loginChange, setLoginChange] = useState({})
   return (
-    <div className="flex justify-center items-center h-screen  bg-[#99c3c8]">
-      <div className="bg-white h-2/3 rounded-xl  w-11/12 lg:w-1/2 ">
-        <div className="container_title flex justify-center items-center mt-10">
-          <img src="logoFlor.svg" className="h-10" />
-          <strong>
-            <h1 className="text-center text-6xl font-work mt-2">mianthro</h1>
-          </strong>
-        </div>
+    <Formik
+      initialValues={{
+        email: '',
+        password: ''
+      }}
+      validate={(values) => {
+        const errores = {}
+        if (!values.email) {
+          errores.email = '*campo obligatorio'
+        }
+        if (!values.password) {
+          errores.password = '*campo obligatorio'
+        }
+        return errores
+      }}
+      onSubmit={(values) => {
+        const options = {
+          method: 'POST',
+          headers: { 'Content-type': 'application/json;charset=UTF-8' },
+          body: `{"email":"${values.email}", "password":"${values.password}"}`
+        }
+        fetch(`${URL}`, options)
+          .then(response => response.json())
+          .then(response => console.log(response))
+          .catch(err => console.error(err))
+      }}
+    >
+      {({ errors, values, handleSubmit, handleChange, handleBlur, touched }) => (
+        <form className='flex justify-center items-center h-screen  bg-[#99c3c8]' onSubmit={handleSubmit}>
+          <div className='bg-white h-2/3 rounded-xl  w-11/12 lg:w-1/2 '>
+            <div className='container_title flex justify-center items-center mt-10'>
+              <img src='logoFlor.svg' className='h-10' />
+              <strong>
+                <h1 className='text-center text-6xl font-work mt-2'>mianthro</h1>
+              </strong>
+            </div>
 
-        <h1 className="text-center text-2xl mt-10">Iniciar sesión</h1>
+            <h1 className='text-center text-2xl mt-10'>Iniciar sesión</h1>
 
-        <div className="flex justify-end items-start w-full h-5/6 mt-10">
-          <div className="grid w-5/6">
-            <label htmlFor="" className="">
-              Correo electronico
-            </label>
-            <input
-              type="email"
-              placeholder="micorreo@ejemplo.com"
-              required
-              className="w-10/12 h-8 mb-6 border-2 border-gray-500 rounded "
-              value={login.email}
-              name="email"
-              onChange={loginChange}
-            />
+            <div className='flex justify-end items-start w-full h-5/6 mt-10'>
+              <div className='grid w-5/6'>
+                <div className='mb-6'>
+                  <label htmlFor='' className=''>
+                    Correo electronico
+                  </label>
+                  <input
+                    type='email'
+                    placeholder='micorreo@ejemplo.com'
+                    required
+                    className='w-10/12 h-8  border-2 border-gray-500 rounded '
+                    name='email'
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {touched.email && errors.email ? <div className='text-error-700'>{errors.email}</div> : null}
 
-            <label htmlFor="" className="">
-              Contraseña
-            </label>
-            <input
-              type="password"
-              id=""
-              placeholder="************"
-              required
-              className="w-10/12 h-8 mb-6  border-2 border-gray-500 rounded"
-              name="password"
-              value={login.password}
-              onChange={loginChange}
-            />
-            <button
-              className="bg-[#66a7ad] text-white h-8 w-10/12 rounded-md   hover:bg-[#3A676B]"
-              onClick={submitLogin}
-            >
-              Iniciar sesión
-            </button>
+                </div>
+
+                <div className='mb-6'>
+                  <label htmlFor='' className=''>
+                    Contraseña <br />
+                  </label>
+
+                  <input
+                    type='password'
+                    id=''
+                    placeholder='************'
+                    required
+                    className='w-10/12 h-8  border-2 border-gray-500 rounded'
+                    name='password'
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {touched.password && errors.password ? <div className='text-error-700'>{errors.password}</div> : null}
+                </div>
+
+                <button
+                  className='bg-[#66a7ad] text-white h-8 w-10/12 rounded-md   hover:bg-[#3A676B]'
+                >
+                  Iniciar sesión
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-  );
+        </form>
+      )}
+
+    </Formik>
+
+  )
 }
