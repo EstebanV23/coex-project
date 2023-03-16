@@ -20,15 +20,21 @@ export default function Login () {
         return errores
       }}
       onSubmit={(values) => {
+        console.log(values)
+
         const options = {
           method: 'POST',
           headers: { 'Content-type': 'application/json;charset=UTF-8' },
-          body: `{"email":"${values.email}", "password":"${values.password}"}`
+          body: `{"email":"${values.email}","password":"${values.password}"}`
         }
-        fetch(`${URL}`, options)
+
+        console.log(options.body)
+
+        fetch('http://localhost:5000/auth/signin', options)
           .then(response => response.json())
-          .then(response => console.log(response))
-          .catch(err => console.error(err))
+          .then(response => setLoginChange(loginChange))
+        console.log(options.body)
+        console.log(loginChange)
       }}
     >
       {({ errors, values, handleSubmit, handleChange, handleBlur, touched }) => (
@@ -83,6 +89,7 @@ export default function Login () {
                 </div>
 
                 <button
+                  type='submit'
                   className='bg-[#66a7ad] text-white h-8 w-10/12 rounded-md   hover:bg-[#3A676B]'
                 >
                   Iniciar sesión

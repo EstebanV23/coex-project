@@ -4,6 +4,7 @@ import Login from './components/Login'
 import RestartPassword from './components/RestartPassword'
 import EmailForgotPassword from './components/EmailForgotPassword'
 import Home from './components/Home'
+import Register from './components/Register'
 
 function App () {
   return (
@@ -15,6 +16,7 @@ function App () {
           <Route path='/forgot-password' element={<EmailForgotPassword />} />
           <Route path='/new-password/' element={<RestartPassword />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
         </Routes>
       </div>
     </>
