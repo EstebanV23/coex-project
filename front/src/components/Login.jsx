@@ -56,7 +56,7 @@ export default function Login () {
                     Correo electronico
                   </label>
                   <input
-                    type='email'
+                    type='text'
                     placeholder='micorreo@ejemplo.com'
                     required
                     className='w-10/12 h-8  border-2 border-gray-500 rounded '

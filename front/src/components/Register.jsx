@@ -17,8 +17,7 @@ export default function Register () {
             <div className='grid  md:grid-cols-2  place-items-center w-full'>
 
               <div className='w-11/12 grid place-items-center md:mb-6'>
-                <label htmlFor=''>Nombres: <br /></label>
-                <input type='text' className='w-10/12 h-8 border-2 border-gray-500 rounded ' />
+                <in
               </div>
               <div className='w-11/12 grid place-items-center md:mb-6 '>
                 <label htmlFor=''>Apellidos: <br /></label>
@@ -47,7 +46,7 @@ export default function Register () {
                 <input type='password' className='w-10/12 h-8 border-2 border-gray-500 rounded' />
               </div>
 
-              <div className='w-full grid place-items-center md:col-start-1 md:col-end-3 mt-10'>
+              <div className='w-full grid place-items-center md:col-start-1 md:col-end-3 mt-20'>
                 <button className='text_input bg-[#66a7ad] text-white h-10 w-10/12 rounded-md   hover:bg-[#3A676B]'>Registrarse</button>
               </div>
 
