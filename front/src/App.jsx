@@ -6,6 +6,7 @@ import EmailForgotPassword from './components/EmailForgotPassword'
 import Home from './components/Home'
 import { useNavbarStore } from './stores/useNavbarStore'
 import { shallow } from 'zustand/shallow'
+import Profile from './components/Profile'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -18,6 +19,7 @@ function App () {
           <Route path='/forgot-password' element={<EmailForgotPassword />} />
           <Route path='/new-password/' element={<RestartPassword />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
       </div>
     </>
