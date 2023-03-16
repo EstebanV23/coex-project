@@ -13,9 +13,9 @@ export default function Navbar () {
     <>
       <div className='flex items-center justify-between px-2 sm:px-8 md:px-20 py-1 bg-primary-blue h-16 font-work'>
         <NavLink to='/'>
-          <img src='logo.svg' className='h-8 md:10' alt='' />
+          <img src='/logo.svg' className='h-8 md:10' alt='' />
         </NavLink>
-        <ContentNavbar hideShow={hidden}>
+        <ContentNavbar>
           {isLogged
             ? <LogedNavbar />
             : <button>Ingresar</button>}

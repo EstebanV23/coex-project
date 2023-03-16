@@ -1,5 +1,3 @@
-import Avatar from '@mui/material/Avatar'
-
 function stringToColor (string) {
   let hash = 0
 
@@ -20,16 +18,13 @@ function stringToColor (string) {
 }
 
 function stringAvatar (name) {
-  return {
-    sx: {
-      bgcolor: stringToColor(name)
-    },
-    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`
-  }
+  return `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`
 }
 
-export default function MyAvatar ({ fullName, ...props }) {
+export default function MyAvatar ({ fullName, size, ...props }) {
   return (
-    <Avatar {...stringAvatar(fullName)} {...props} />
+    <div {...props} className={`${props.className} flex items-center justify-center rounded-full w-fit p-1 aspect-square`} style={{ backgroundColor: stringToColor(fullName) }}>
+      {stringAvatar(fullName)}
+    </div>
   )
 }
