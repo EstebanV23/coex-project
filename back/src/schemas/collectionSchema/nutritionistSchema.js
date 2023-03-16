@@ -23,7 +23,7 @@ const nutritionistSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  verify: {
+  isVerified: {
     type: Boolean,
     required: false
   },

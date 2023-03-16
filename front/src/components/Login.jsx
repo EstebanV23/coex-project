@@ -1,38 +1,46 @@
-import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import { EmailIcon, PasswordIcon, LogoIcon } from './Icons'
+import { useEffect, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+
 import Input from './Input'
+import { EmailIcon, PasswordIcon, LogoIcon } from './Icons'
+import useUser from '../hooks/useUser'
 
 export default function Login () {
   const URL = 'http://localhost:5000/auth/signin'
 
-  const [login, setlogin] = useState({
-    email: '',
-    password: ''
-  })
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { isLogged, login } = useUser()
+  const navigate = useNavigate()
 
-  const loginChange = ({ target }) => {
-    const { name, value } = target
-    setlogin({
-      ...login,
-      [name]: value
-    })
-  }
+  useEffect(() => {
+    if (isLogged) navigate('/')
+  }, [isLogged])
 
-  const submitLogin = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    login()
+
     const options = {
       method: 'POST',
       headers: { 'Content-type': 'application/json;charset=UTF-8' },
-      body: `{"email":"${login.email}", "password":"${login.password}"}`
+      body: JSON.stringify({ email, password })
     }
+
     fetch(`${URL}`, options)
-      .then(response => response.json())
-      .then(response => console.log(response))
+      .then(res => res.json())
+      .then(res => {
+        const user = res.data
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user))
+        }
+        return res
+      })
       .catch(err => console.error(err))
   }
 
   return (
-    <div className='bg-white rounded-[40px] p-16  w-11/12 lg:w-1/2 '>
+    <div className='bg-white rounded-[40px] p-16 w-11/12 lg:w-1/2 '>
 
       <div className='flex justify-center items-center'>
         <LogoIcon fill='black' className='w-[700px] h-[200px]' />
@@ -47,8 +55,8 @@ export default function Login () {
             type='email'
             name='email'
             placeholder='Tucorreo@ejemplo.com'
-            value={login.email}
-            onChange={loginChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <Input
@@ -56,15 +64,15 @@ export default function Login () {
             type='password'
             name='password'
             placeholder='************'
-            value={login.password}
-            onChange={loginChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
-          <NavLink to='/forgot-password' className='text-xl text-primary-blue-500 hover:text-slate-700 ease-in-out duration-200'>Olvidó su contraseña?</NavLink>
-          <NavLink to='/register' className='text-xl text-primary-blue-500 hover:text-slate-700 ease-in-out duration-200'>Aún no tienes una cuenta?</NavLink>
+          <NavLink to='/forgot-password' className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'>Olvidó su contraseña?</NavLink>
+          <NavLink to='/register' className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'>Aún no tienes una cuenta?</NavLink>
 
           <button
             className='bg-primary-blue text-white h-14 w-10/12 rounded-xl text-2xl font-bold hover:bg-primary-blue-600 ease-in-out duration-200'
-            onClick={submitLogin}
+            onClick={handleSubmit}
           >
             Iniciar sesión
           </button>
