@@ -20,21 +20,14 @@ export default function Login () {
         return errores
       }}
       onSubmit={(values) => {
-        console.log(values)
-
         const options = {
           method: 'POST',
           headers: { 'Content-type': 'application/json;charset=UTF-8' },
           body: `{"email":"${values.email}","password":"${values.password}"}`
         }
-
-        console.log(options.body)
-
         fetch('http://localhost:5000/auth/signin', options)
           .then(response => response.json())
-          .then(response => setLoginChange(loginChange))
-        console.log(options.body)
-        console.log(loginChange)
+          .then(response => console.log(response  ))
       }}
     >
       {({ errors, values, handleSubmit, handleChange, handleBlur, touched }) => (
