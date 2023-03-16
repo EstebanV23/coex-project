@@ -9,6 +9,7 @@ import { shallow } from 'zustand/shallow'
 import Profile from './components/Profile'
 import InfoProfile from './components/InfoProfile'
 import EditProfile from './components/EditProfile'
+import Register from './components/Register'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -25,6 +26,7 @@ function App () {
             <Route index element={<InfoProfile />} />
             <Route path='edit' element={<EditProfile />} />
           </Route>
+          <Route path='/register' element={<Register />} />
         </Routes>
       </div>
     </>
