@@ -7,6 +7,7 @@ import Home from './components/Home'
 import { useNavbarStore } from './stores/useNavbarStore'
 import { shallow } from 'zustand/shallow'
 import Register from './components/Register'
+import Footer from './components/Footer'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
