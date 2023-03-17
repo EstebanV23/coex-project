@@ -1,106 +1,83 @@
-import { Formik } from 'formik'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+
+import Input from './Input'
+import { EmailIcon, PasswordIcon, LogoIcon } from './Icons'
+import useUser from '../hooks/useUser'
+
 export default function Login () {
   const URL = 'http://localhost:5000/auth/signin'
-  const [loginChange, setLoginChange] = useState({})
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { isLogged, login } = useUser()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isLogged) navigate('/')
+  }, [isLogged])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    login()
+
+    const options = {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json;charset=UTF-8' },
+      body: JSON.stringify({ email, password })
+    }
+
+    fetch(`${URL}`, options)
+      .then(res => res.json())
+      .then(res => {
+        const user = res.data
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user))
+        }
+        return res
+      })
+      .catch(err => console.error(err))
+  }
+
   return (
-    <Formik
-      initialValues={{
-        email: '',
-        password: ''
-      }}
-      validate={(values) => {
-        const errores = {}
-        if (!values.email) {
-          errores.email = '*campo obligatorio'
-        }
-        if (!values.password) {
-          errores.password = '*campo obligatorio'
-        }
-        return errores
-      }}
-      onSubmit={(values) => {
-        console.log(values)
+    <div className='bg-white rounded-[40px] p-16 w-11/12 lg:w-1/2 '>
 
-        const options = {
-          method: 'POST',
-          headers: { 'Content-type': 'application/json;charset=UTF-8' },
-          body: `{"email":"${values.email}","password":"${values.password}"}`
-        }
+      <div className='flex justify-center items-center'>
+        <LogoIcon fill='black' className='w-[700px] h-[200px]' />
+      </div>
 
-        console.log(options.body)
+      <h1 className='text-center text-4xl font-bold mt-10'>Iniciar sesión</h1>
 
-        fetch('http://localhost:5000/auth/signin', options)
-          .then(response => response.json())
-          .then(response => setLoginChange(loginChange))
-        console.log(options.body)
-        console.log(loginChange)
-      }}
-    >
-      {({ errors, values, handleSubmit, handleChange, handleBlur, touched }) => (
-        <form className='flex justify-center items-center h-screen  bg-[#99c3c8]' onSubmit={handleSubmit}>
-          <div className='bg-white h-2/3 rounded-xl  w-11/12 lg:w-1/2 '>
-            <div className='container_title flex justify-center items-center mt-10'>
-              <img src='logoFlor.svg' className='h-10' />
-              <strong>
-                <h1 className='text-center text-6xl font-work mt-2'>mianthro</h1>
-              </strong>
-            </div>
+      <div className='flex justify-center mt-10'>
+        <div className='flex flex-col w-full gap-4 items-center'>
+          <Input
+            icon={<EmailIcon />}
+            type='email'
+            name='email'
+            placeholder='Tucorreo@ejemplo.com'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-            <h1 className='text-center text-2xl mt-10'>Iniciar sesión</h1>
+          <Input
+            icon={<PasswordIcon />}
+            type='password'
+            name='password'
+            placeholder='************'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <NavLink to='/forgot-password' className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'>Olvidó su contraseña?</NavLink>
+          <NavLink to='/register' className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'>Aún no tienes una cuenta?</NavLink>
 
-            <div className='flex justify-end items-start w-full h-5/6 mt-10'>
-              <div className='grid w-5/6'>
-                <div className='mb-6'>
-                  <label htmlFor='' className=''>
-                    Correo electronico
-                  </label>
-                  <input
-                    type='text'
-                    placeholder='micorreo@ejemplo.com'
-                    required
-                    className='w-10/12 h-8  border-2 border-gray-500 rounded '
-                    name='email'
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                  {touched.email && errors.email ? <div className='text-error-700'>{errors.email}</div> : null}
-
-                </div>
-
-                <div className='mb-6'>
-                  <label htmlFor='' className=''>
-                    Contraseña <br />
-                  </label>
-
-                  <input
-                    type='password'
-                    id=''
-                    placeholder='************'
-                    required
-                    className='w-10/12 h-8  border-2 border-gray-500 rounded'
-                    name='password'
-                    value={values.password}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                  {touched.password && errors.password ? <div className='text-error-700'>{errors.password}</div> : null}
-                </div>
-
-                <button
-                  type='submit'
-                  className='bg-[#66a7ad] text-white h-8 w-10/12 rounded-md   hover:bg-[#3A676B]'
-                >
-                  Iniciar sesión
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
-      )}
-
-    </Formik>
-
+          <button
+            className='bg-primary-blue text-white h-14 w-10/12 rounded-xl text-2xl font-bold hover:bg-primary-blue-600 ease-in-out duration-200'
+            onClick={handleSubmit}
+          >
+            Iniciar sesión
+          </button>
+        </div>
+      </div>
+    </div>
   )
 }
