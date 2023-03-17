@@ -7,7 +7,6 @@ class Nutritionist {
   name
   surname
   email
-  dni
   phone
   password
   isVerified
@@ -17,14 +16,12 @@ class Nutritionist {
 
   constructor ({
     name, surname, email,
-    dni, phone, password,
-    isVerified = false, createdAt = new Date(), verificationDate = null,
-    lastConnection = null
+    phone, password, isVerified = false, createdAt = new Date(),
+    verificationDate = null, lastConnection = null
   }) {
     this.name = name
     this.surname = surname
     this.email = email
-    this.dni = dni
     this.phone = phone
     this.password = password
     this.isVerified = isVerified
@@ -80,7 +77,6 @@ class Nutritionist {
       name: this.name,
       surname: this.surname,
       email: this.email,
-      dni: this.dni,
       phone: this.phone,
       password: await encryptPassword(this.password),
       isVerified: this.isVerified,
