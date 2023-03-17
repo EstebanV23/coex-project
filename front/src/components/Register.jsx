@@ -42,6 +42,24 @@ export default function Register () {
         }
         return errorsValidate
       }}
+      onSubmit={(values) => {
+        const { name, surname, email, dni, phone, password } = values
+        const options = {
+          method: 'POST',
+          headers: { 'Content-type': 'application/json;charset=UTF-8' },
+          body: JSON.stringify({
+            name,
+            surname,
+            email,
+            password,
+            dni,
+            phone
+          })
+        }
+        fetch('http://localhost:5000/auth/signup', options)
+          .then(response => response.json())
+          .then(response => console.log(response))
+      }}
     >
       {({ errors, values, handleSubmit, handleChange, handleBlur, touched }) => (
         <div className='flex justify-center items-center h-screen '>
@@ -53,7 +71,6 @@ export default function Register () {
               </strong>
             </div>
             <strong><h1 className='text-center text-3xl font-work mt-10 '>Registro</h1></strong>
-
             <div className=' flex flex-wrap gap-6 w-full p-10'>
 
               <div className='flex flex-col md:flex-row gap-6 px-6 w-full'>
