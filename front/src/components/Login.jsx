@@ -8,9 +8,9 @@ import useUser from '../hooks/useUser'
 export default function Login () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { isLogged, login } = useUser()
+  const { isLoginLoading, hasLoginError, isLogged, login } = useUser()
   const navigate = useNavigate()
-  console.log(email, password)
+
   useEffect(() => {
     if (isLogged) navigate('/')
   }, [isLogged])
@@ -30,7 +30,7 @@ export default function Login () {
       <h1 className='text-center text-4xl font-bold mt-10'>Iniciar sesión</h1>
 
       <div className='flex justify-center mt-10'>
-        <div className='flex flex-col w-full gap-4 items-center'>
+        <form onSubmit={handleSubmit} className='flex flex-col w-full gap-4 items-center'>
           <Input
             icon={<EmailIcon />}
             type='email'
@@ -57,7 +57,7 @@ export default function Login () {
           >
             Iniciar sesión
           </button>
-        </div>
+        </form>
       </div>
     </div>
   )

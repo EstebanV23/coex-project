@@ -27,7 +27,7 @@ export const useUserStore = create((set, get) => ({
       email: user.email,
       phone: user.phone,
       token: user.token,
-      isVerified: user.verify
+      isVerified: user.isVerified
     }
   )
 }))

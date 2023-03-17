@@ -1,4 +1,4 @@
-export default function Input ({ icon, error, touch, ...props }) {
+export default function Input ({ icon, error = '', touch = '', ...props }) {
   const condition = error[props.name] && touch[props.name]
 
   return (
