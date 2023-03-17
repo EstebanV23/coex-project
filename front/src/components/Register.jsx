@@ -70,9 +70,21 @@ export default function Register () {
                 <h1 className='text-center text-6xl font-work mt-2'>mianthro</h1>
               </strong>
             </div>
-            <strong><h1 className='text-center text-3xl font-work mt-10 '>Registro</h1></strong>
-            <div className=' flex flex-wrap gap-6 w-full p-10'>
+            <strong><h1 className='text-center text-3xl font-work mt-10 md:mb-10'>Registro</h1></strong>
 
+            <div className='grid  md:grid-cols-2  place-items-center w-full'>
+              <div className='w-11/12 grid place-items-center md:mb-6 '>
+                <label htmlFor=''>Apellidos: <br /></label>
+                <input type='text' className='w-10/12 h-8 border-2 border-gray-500 rounded' />
+              </div>
+              <div className='w-11/12 grid place-items-center md:mb-6'>
+                <label htmlFor=''>Telefono <br /></label>
+                <input type='text' className='w-10/12 h-8 border-2 border-gray-500 rounded' />
+              </div>
+              <div className='w-11/12 grid place-items-center md:mb-6'>
+                <label htmlFor=''>Cedula <br /></label>
+                <input type='number' className=' w-10/12 h-8 border-2 border-gray-500 rounded' />
+              </div>
               <div className='flex flex-col md:flex-row gap-6 px-6 w-full'>
                 <Input
                   icon={<BsPersonFill size={22} />} type='text' placeholder='Nombres' name='name' onChange={handleChange}
@@ -88,11 +100,9 @@ export default function Register () {
                   icon={<AiTwotonePhone size={22} />} type='text' placeholder='Telefono' name='phone' onChange={handleChange}
                   onBlur={handleBlur} value={values.phone} error={errors} touch={touched}
                 />
-
-                <Input
-                  icon={<BsPersonFill size={22} />} type='text' placeholder='Cedula' name='dni' onChange={handleChange}
-                  onBlur={handleBlur} value={values.dni} error={errors} touch={touched}
-                />
+              <div className='w-11/12 grid place-items-center'>
+                <label htmlFor=''>Contraseña: <br /></label>
+                <input type='password' className='w-10/12 h-8 bgstorder-2 border-gray-500 rounded ' />
               </div>
               <div className='w-full px-6'>
                 <Input

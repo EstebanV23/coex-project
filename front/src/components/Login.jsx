@@ -6,38 +6,18 @@ import { EmailIcon, PasswordIcon, LogoIcon } from './Icons'
 import useUser from '../hooks/useUser'
 
 export default function Login () {
-  const URL = 'http://localhost:5000/auth/signin'
-
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { isLogged, login } = useUser()
   const navigate = useNavigate()
-
+  console.log(email, password)
   useEffect(() => {
     if (isLogged) navigate('/')
   }, [isLogged])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    login()
-
-    const options = {
-      method: 'POST',
-      headers: { 'Content-type': 'application/json;charset=UTF-8' },
-      body: JSON.stringify({ email, password })
-    }
-
-    fetch(`${URL}`, options)
-      .then(res => res.json())
-      .then(res => {
-        const user = res.data
-        if (user) {
-          localStorage.setItem('user', JSON.stringify(user))
-        }
-        return res
-      })
-      .catch(err => console.error(err))
+    login({ email, password })
   }
 
   return (
