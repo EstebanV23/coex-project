@@ -39,6 +39,12 @@ export default function Login () {
       {({ errors }) => (
         <div className='flex justify-center mt-10'>
           <form onSubmit={handleSubmit} className='flex flex-col w-full gap-4 items-center'>
+            <div className='container_title flex justify-center items-center mt-10'>
+              <img src='logoFlor.svg' className='h-10' />
+              <strong>
+                <h1 className='text-center text-6xl font-work mt-2'>mianthro</h1>
+              </strong>
+            </div>
             <Input
               icon={<EmailIcon />}
               type='email'
