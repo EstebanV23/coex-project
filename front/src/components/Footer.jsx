@@ -1,7 +1,23 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-// import Modal from './ModalContact'
+import Swal from 'sweetalert2'
+
 export default function Footer () {
+  async function modal () {
+    const { value: email } = await Swal.fire(
+      {
+        title: 'Contacto',
+        input: 'email',
+        inputLabel: 'Email',
+        inputPlaceholder: 'miemail@exaple.com'
+      }
+    )
+
+    if (email) {
+      Swal.fire(`tu email ha sido enviado: ${email}`)
+      // aqui va el fetch
+    }
+  }
   return (
     <>
       <div className='mt-10 md:mt-0 h-full '>
@@ -41,6 +57,11 @@ export default function Footer () {
         <div className='w-80 text-justify'>
           <h3 className='text-xl font-bold text-white mb-2.5'>Contacto</h3>
           <p>¿Quieres contactar con nosotros para futuros trabajos? Dejanos tu correo electronico y estaremos contactando contigo las proximas horas.</p>
+          <div>
+            <button onClick={modal} className='bg-blue-500 mt-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full'>
+              Contactar
+            </button>
+          </div>
         </div>
       </div>
     </>
