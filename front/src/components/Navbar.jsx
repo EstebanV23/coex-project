@@ -5,6 +5,7 @@ import { useNavbarStore } from '../stores/useNavbarStore'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { IoCloseSharp } from 'react-icons/io5'
 import useUser from '../hooks/useUser'
+import Button from './Button'
 
 export default function Navbar () {
   const { toggleHidden, hidden } = useNavbarStore(reduce => reduce)
@@ -18,7 +19,7 @@ export default function Navbar () {
         <ContentNavbar>
           {isLogged
             ? <LogedNavbar />
-            : <button>Ingresar</button>}
+            : <Button>Ingresar</Button>}
           <IoCloseSharp size={30} className='block md:hidden absolute right-10 top-10 cursor-pointer text-white' onClick={toggleHidden} />
         </ContentNavbar>
         <GiHamburgerMenu

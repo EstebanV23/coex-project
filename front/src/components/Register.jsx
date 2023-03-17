@@ -17,7 +17,7 @@ export default function Register () {
             <div className='grid  md:grid-cols-2  place-items-center w-full'>
 
               <div className='w-11/12 grid place-items-center md:mb-6'>
-                <in
+                
               </div>
               <div className='w-11/12 grid place-items-center md:mb-6 '>
                 <label htmlFor=''>Apellidos: <br /></label>
