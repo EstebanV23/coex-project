@@ -1,5 +1,3 @@
-import { NavLink } from 'react-router-dom'
-
-export default function Button ({ children, to, ...props }) {
-  return <NavLink to={to} className={`py-3 transition-all px-6 text-white border w-fit self-center border-white rounded-xl font-semibold hover:bg-white hover:text-primary-blue-400 border-b-4 hover:border-b-0 ${props.className}`}>{children}</NavLink>
+export default function Button ({ children, ...props }) {
+  return <button className={`py-1 transition-all w-full border self-center rounded-xl font-semibold border-b-4 hover:border-b-0 ${props.className}`}>{children}</button>
 }
