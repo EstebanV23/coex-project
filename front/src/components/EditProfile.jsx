@@ -22,25 +22,26 @@ export default function EditProfile () {
         initialValues={{ name, surname, email }}
         validate={(values) => {
           const errors = {}
-          if (!/[a-zA-Z]{1,3}/.test(values.name)) {
+          if (!/[a-zA-Z]{3}/.test(values.name)) {
             errors.name = 'El nombre es requerido'
           }
 
-          if (!/[a-zA-Z]{1,3}/.test(values.surname)) {
-            errors.name = 'El nombre es requerido'
+          if (!/[a-zA-Z]{3}/.test(values.surname)) {
+            errors.surname = 'El nombre es requerido'
           }
 
-          if (!/[a-zA-Z]{1,3}/.test(values.email)) {
-            errors.name = 'El nombre es requerido'
+          if (!/[a-zA-Z]{3}/.test(values.email)) {
+            errors.email = 'El nombre es requerido'
           }
           return errors
         }}
       >
         {
-          ({ errors }) =>
+          ({ errors, touched }) =>
             <form action='' className='flex flex-col gap-3'>
               <div className='flex flex-col gap-3 md:flex-row'>
                 <Input
+                  touch={touched}
                   id='name'
                   icon={<BsPersonFill size={23} />}
                   error={errors}
@@ -48,20 +49,20 @@ export default function EditProfile () {
                   autoComplete='off'
                 />
                 <Input
+                  touch={touched}
                   id='surname'
                   icon={<BsPersonFill size={23} />}
                   error={errors}
                   name='surname'
-                  type='text'
                   autoComplete='off'
                 />
               </div>
               <Input
+                touch={touched}
                 id='email'
                 icon={<BsPersonFill size={23} />}
                 error={errors}
                 name='email'
-                type='text'
                 autoComplete='off'
               />
               <Button className='text-primary-blue border-primary-blue hover:text-white hover:bg-primary-blue'>Enviar</Button>
