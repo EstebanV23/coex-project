@@ -15,7 +15,7 @@ export default function Footer () {
           <img src='' alt='' />
 
           <div className='my-5 w-[200px] h-[20px] sm:w-[300px] sm:h-[30px]'>
-            <img src='logoAzul.svg' />
+            <img src='/logoAzul.svg' />
           </div>
         </div>
 
