@@ -15,7 +15,6 @@ export default function Register () {
         email: '',
         password: '',
         secondPassword: ''
-
       }}
       validate={(values) => {
         const errorsValidate = {}
