@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import Input from './Input'
 import { EmailIcon, PasswordIcon, LogoIcon } from './Icons'
 import useUser from '../hooks/useUser'
+import { Formik } from 'formik'
 
 export default function Login () {
   const [email, setEmail] = useState('')
@@ -21,44 +22,63 @@ export default function Login () {
   }
 
   return (
-    <div className='bg-white rounded-[40px] p-16 w-11/12 lg:w-1/2 '>
+    <Formik
+      initialValues={{
+        email: '',
+        password: ''
+      }}
+      validate={(values) => {
+        const errores = {}
+        if (!values.email) {
+          errores.email = '*campo obligatorio'
+        }
+        if (!values.password) {
+          errores.password = '*campo obligatorio'
+        }
+        return errores
+      }}
+      onSubmit={(values) => {
+        const options = {
+          method: 'POST',
+          headers: { 'Content-type': 'application/json;charset=UTF-8' },
+          body: `{"email":"${values.email}","password":"${values.password}"}`
+        }
+        fetch('http://localhost:5000/auth/signin', options)
+          .then(response => response.json())
+          .then(response => console.log(response))
+      }}
+    >
+      {({ errors, values, handleSubmit, handleChange, handleBlur, touched }) => (
+        <form className='flex justify-center items-center h-screen  bg-[#99c3c8]' onSubmit={handleSubmit}>
+          <div className='bg-white h-2/3 rounded-xl  w-11/12 lg:w-1/2 '>
+            <div className='container_title flex justify-center items-center mt-10'>
+              <img src='logoFlor.svg' className='h-10' />
+              <strong>
+                <h1 className='text-center text-6xl font-work mt-2'>mianthro</h1>
+              </strong>
+            </div>
 
-      <div className='flex justify-center items-center'>
-        <LogoIcon fill='black' className='w-[700px] h-[200px]' />
-      </div>
+            <Input
+              icon={<PasswordIcon />}
+              type='password'
+              name='password'
+              placeholder='************'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <NavLink to='/forgot-password' className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'>Olvidó su contraseña?</NavLink>
+            <NavLink to='/register' className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'>Aún no tienes una cuenta?</NavLink>
 
-      <h1 className='text-center text-4xl font-bold mt-10'>Iniciar sesión</h1>
+            <button
+              className='bg-primary-blue text-white h-14 w-10/12 rounded-xl text-2xl font-bold hover:bg-primary-blue-600 ease-in-out duration-200'
+              onClick={handleSubmit}
+            >
+              Iniciar sesión
+            </button>
+          </div>
+        </form>
+      )}
 
-      <div className='flex justify-center mt-10'>
-        <div className='flex flex-col w-full gap-4 items-center'>
-          <Input
-            icon={<EmailIcon />}
-            type='email'
-            name='email'
-            placeholder='Tucorreo@ejemplo.com'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-
-          <Input
-            icon={<PasswordIcon />}
-            type='password'
-            name='password'
-            placeholder='************'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <NavLink to='/forgot-password' className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'>Olvidó su contraseña?</NavLink>
-          <NavLink to='/register' className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'>Aún no tienes una cuenta?</NavLink>
-
-          <button
-            className='bg-primary-blue text-white h-14 w-10/12 rounded-xl text-2xl font-bold hover:bg-primary-blue-600 ease-in-out duration-200'
-            onClick={handleSubmit}
-          >
-            Iniciar sesión
-          </button>
-        </div>
-      </div>
-    </div>
+    </Formik>
   )
 }
