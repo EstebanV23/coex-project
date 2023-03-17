@@ -7,7 +7,7 @@ import Home from './components/Home'
 import { useNavbarStore } from './stores/useNavbarStore'
 import { shallow } from 'zustand/shallow'
 import Register from './components/Register'
-import SelectUnit from './components/Select'
+import UnitVal from './components/UnitVal'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -21,7 +21,7 @@ function App () {
           <Route path='/new-password/' element={<RestartPassword />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/pruebas' element={<SelectUnit />} />
+          <Route path='/pruebas' element={<UnitVal />} />
         </Routes>
       </div>
     </>
