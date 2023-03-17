@@ -35,13 +35,15 @@ export default function EditProfile () {
           }
           return errors
         }}
+        onSubmit={(values) => {
+          console.log('hola')
+        }}
       >
         {
-          ({ errors, touched }) =>
-            <form action='' className='flex flex-col gap-3'>
+          ({ errors, handleSubmit }) =>
+            <form action='' className='flex flex-col gap-3' onSubmit={handleSubmit}>
               <div className='flex flex-col gap-3 md:flex-row'>
                 <Input
-                  touch={touched}
                   id='name'
                   icon={<BsPersonFill size={23} />}
                   error={errors}
@@ -49,7 +51,6 @@ export default function EditProfile () {
                   autoComplete='off'
                 />
                 <Input
-                  touch={touched}
                   id='surname'
                   icon={<BsPersonFill size={23} />}
                   error={errors}
@@ -58,14 +59,13 @@ export default function EditProfile () {
                 />
               </div>
               <Input
-                touch={touched}
                 id='email'
                 icon={<BsPersonFill size={23} />}
                 error={errors}
                 name='email'
                 autoComplete='off'
               />
-              <Button className='text-primary-blue border-primary-blue hover:text-white hover:bg-primary-blue'>Enviar</Button>
+              <Button type='submit' className='text-primary-blue border-primary-blue hover:text-white hover:bg-primary-blue'>Enviar</Button>
             </form>
         }
       </Formik>
