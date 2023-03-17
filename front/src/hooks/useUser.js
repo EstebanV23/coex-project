@@ -8,23 +8,23 @@ export default function useUser () {
   const { error, setError } = useState(false)
 
   const login = useCallback(({ email, password }) => {
-    setLoading(true)
+    // setLoading(true)
     loginService({ email, password })
       .then(user => {
-        setLoading(false)
-        console.log(user)
+        // setLoading(false)
         setUser(user)
-        console.log(token)
+        localStorage.setItem('user', JSON.stringify(user))
       })
       .catch(err => {
-        setLoading(false)
-        setError(true)
-        console.log(err)
+        // setLoading(false)
+        // setError(true)
+        console.error(err)
       })
   }, [setUser])
 
   const logout = useCallback(() => {
     restarUser()
+    localStorage.removeItem('user')
   }, [restarUser])
 
   return {

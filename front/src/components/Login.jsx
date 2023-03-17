@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { Formik } from 'formik'
 
 import Input from './Input'
-import { EmailIcon, PasswordIcon } from './Icons'
+import { EmailIcon, PasswordIcon, LogoIcon } from './Icons'
 import useUser from '../hooks/useUser'
 import { regex } from '../constants/regex'
 
@@ -37,14 +37,10 @@ export default function Login () {
       onSubmit={handleSubmit}
     >
       {({ errors }) => (
-        <div className='flex justify-center mt-10'>
+        <div className='bg-white h-2/3 rounded-xl  w-11/12 lg:w-1/2 '>
+          <LogoIcon fill='black' />
+          <h1 className='text-center'>Login</h1>
           <form onSubmit={handleSubmit} className='flex flex-col w-full gap-4 items-center'>
-            <div className='container_title flex justify-center items-center mt-10'>
-              <img src='logoFlor.svg' className='h-10' />
-              <strong>
-                <h1 className='text-center text-6xl font-work mt-2'>mianthro</h1>
-              </strong>
-            </div>
             <Input
               icon={<EmailIcon />}
               type='email'
