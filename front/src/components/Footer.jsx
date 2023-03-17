@@ -5,7 +5,7 @@ export default function Footer () {
   return (
     <>
       <div className=' h-full '>
-        <img src='wave.svg' width='100%' height='100%' />
+        <img src='/wave.svg' width='100%' height='100%' />
       </div>
       <div className='w-full h-fit flex flex-wrap 2xl:justify-around md:justify-start sm:justify-start justify-center gap-10 p-7 font-light text-gray-500 text-base bg-black bottom-0'>
 
