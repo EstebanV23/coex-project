@@ -7,9 +7,17 @@ export const useUserStore = create((set, get) => ({
   email: null,
   token: null,
   isVerified: false,
-  loginUser: async ({ user }) => {
-
-  },
-  restarUser: () => set({ id: null, name: null, surname: null, email: null, isVerified: false })
+  setToken: (token) => set({ token }),
+  restarUser: () => set({ id: null, name: null, surname: null, email: null, isVerified: false }),
+  setUser: (user) => set(
+    {
+      id: user.id,
+      name: user.name,
+      surname: user.surname,
+      email: user.email,
+      token: user.token,
+      isVerified: user.verify
+    }
+  )
 
 }))

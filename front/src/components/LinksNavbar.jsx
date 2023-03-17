@@ -6,14 +6,10 @@ export default function LinksNavbar () {
   const stylesActive = `${stylesDefault.replace('text-white', 'text-primary-blue')} bg-white font-bolder`
 
   return linksRouters.map(link => {
-    const handleClick = (e) => {
-      !link.verify && e.preventDefault()
-    }
     return (
       <NavLink
         key={link.id}
         to={link.path}
-        onClick={handleClick}
         className={link.verify ? ({ isActive }) => { return isActive ? stylesActive : stylesDefault } : `${stylesDefault} opacity-50`}
       >
         {({ isActive }) => isActive ? <>{link.icon} <p>{link.name}</p></> : link.icon}

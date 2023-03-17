@@ -71,7 +71,6 @@ export default function Register () {
               </strong>
             </div>
             <strong><h1 className='text-center text-3xl font-work mt-10 '>Registro</h1></strong>
-
             <div className=' flex flex-wrap gap-6 w-full p-10'>
 
               <div className='flex flex-col md:flex-row gap-6 px-6 w-full'>
