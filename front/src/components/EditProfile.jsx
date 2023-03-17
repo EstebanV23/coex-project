@@ -1,3 +1,4 @@
+import { Formik } from 'formik'
 import { useEffect } from 'react'
 import { shallow } from 'zustand/shallow'
 import { useProfileStore } from '../stores/useProfileStore'
@@ -8,6 +9,8 @@ export default function EditProfile () {
     hiddenProfileTrue()
   }, [])
   return (
-    <h1>Soy edit profile</h1>
+    <Formik>
+      {() => {}}
+    </Formik>
   )
 }
