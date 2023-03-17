@@ -1,4 +1,5 @@
 import { Formik } from 'formik'
+import SelectUnit from './Select'
 
 export default function UnitVal () {
   return (
@@ -15,9 +16,6 @@ export default function UnitVal () {
         }
         if (!values.talla) {
           errores.talla = '*campo obligatorio'
-        }
-        if (!values.genero) {
-          errores.genero = '*campo obligatorio'
         }
         return errores
       }}
@@ -57,7 +55,7 @@ export default function UnitVal () {
 
                 <div className='mb-6'>
                   <label htmlFor='' className=''>
-                    Talla <br />
+                    Talla
                   </label>
                   <input
                     type='number'
@@ -71,6 +69,10 @@ export default function UnitVal () {
                     onBlur={handleBlur}
                   />
                   {touched.talla && errors.talla ? <div className='text-error-700'>{errors.talla}</div> : null}
+                </div>
+                <div className='mb-6'>
+                  <label htmlFor=''>Género</label>
+                  <SelectUnit />
                 </div>
                 <button
                   type='submit'
