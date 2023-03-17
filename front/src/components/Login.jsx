@@ -10,14 +10,14 @@ export default function Login () {
   const [password, setPassword] = useState('')
   const { isLogged, login } = useUser()
   const navigate = useNavigate()
-
+  console.log(email, password)
   useEffect(() => {
     if (isLogged) navigate('/')
   }, [isLogged])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    login(email, password)
+    login({ email, password })
   }
 
   return (

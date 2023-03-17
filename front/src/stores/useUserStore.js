@@ -8,7 +8,6 @@ export const useUserStore = create((set, get) => ({
   phone: null,
   token: null,
   isVerified: false,
-  setToken: (token) => set({ token }),
   restarUser: () => set(
     {
       id: null,

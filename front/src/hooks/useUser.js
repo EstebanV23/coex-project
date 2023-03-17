@@ -1,18 +1,20 @@
 import { useCallback } from 'react'
 import { useUserStore } from '../stores/useUserStore'
-import loginService from '../services/login'
+import loginService from '../services/loginService'
 
 export default function useUser () {
-  const { token, setToken, restarUser } = useUserStore(store => store)
+  const { token, restarUser, setUser } = useUserStore(store => store)
 
-  const login = useCallback((email, password) => {
-    loginService(email, password)
-      .then(data => {
-        setToken(token)
-      }).catch(err => {
-        
+  const login = useCallback(({ email, password }) => {
+    loginService({ email, password })
+      .then(user => {
+        console.log(token)
+        setUser(user)
       })
-  }, [setToken])
+      .catch(err => {
+        console.log(err)
+      })
+  }, [setUser])
 
   const logout = useCallback(() => {
     restarUser()
