@@ -66,9 +66,9 @@ const NutritionistController = {
         throw new Error(ERROR_MESSAGE, 401)
       }
       await Nutritionist.update(nutritionist._id, { lastConnection: new Date() })
-      const { _id: id, name, surname, verify } = nutritionist
+      const { _id: id, name, surname, isVerified } = nutritionist
       const token = generateToken({ id })
-      const dataNutritionist = { id, name, surname, email, verify, token }
+      const dataNutritionist = { id, name, surname, email, isVerified, token }
       buildResponse.success(res, 200, 'Nutritionist logged', dataNutritionist)
     } catch (err) {
       next(err)
@@ -78,7 +78,7 @@ const NutritionistController = {
   updateVerify: async (req, res, next) => {
     try {
       const { id } = req.user
-      const nutritionist = await Nutritionist.update(id, { verify: true, verificationDate: new Date() })
+      const nutritionist = await Nutritionist.update(id, { isVerified: true, verificationDate: new Date() })
       buildResponse.success(res, 200, 'Nutritionist verified', nutritionist)
     } catch (err) {
       next(err)

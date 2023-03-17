@@ -6,6 +6,9 @@ import EmailForgotPassword from './components/EmailForgotPassword'
 import Home from './components/Home'
 import { useNavbarStore } from './stores/useNavbarStore'
 import { shallow } from 'zustand/shallow'
+import Profile from './components/Profile'
+import InfoProfile from './components/InfoProfile'
+import EditProfile from './components/EditProfile'
 import Register from './components/Register'
 
 function App () {
@@ -19,6 +22,10 @@ function App () {
           <Route path='/forgot-password' element={<EmailForgotPassword />} />
           <Route path='/new-password/' element={<RestartPassword />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/profile' element={<Profile />}>
+            <Route index element={<InfoProfile />} />
+            <Route path='edit' element={<EditProfile />} />
+          </Route>
           <Route path='/register' element={<Register />} />
         </Routes>
       </div>
