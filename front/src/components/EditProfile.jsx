@@ -22,15 +22,15 @@ export default function EditProfile () {
         initialValues={{ name, surname, email }}
         validate={(values) => {
           const errors = {}
-          if (!/[a-zA-Z]{2,3}/.test(values.name)) {
+          if (!/[a-zA-Z]{1,3}/.test(values.name)) {
             errors.name = 'El nombre es requerido'
           }
 
-          if (!/[a-zA-Z]{2,3}/.test(values.surname)) {
+          if (!/[a-zA-Z]{1,3}/.test(values.surname)) {
             errors.name = 'El nombre es requerido'
           }
 
-          if (!/[a-zA-Z]{2,3}/.test(values.email)) {
+          if (!/[a-zA-Z]{1,3}/.test(values.email)) {
             errors.name = 'El nombre es requerido'
           }
           return errors
@@ -45,7 +45,6 @@ export default function EditProfile () {
                   icon={<BsPersonFill size={23} />}
                   error={errors}
                   name='name'
-                  type='text'
                   autoComplete='off'
                 />
                 <Input
