@@ -10,6 +10,7 @@ import Profile from './components/Profile'
 import InfoProfile from './components/InfoProfile'
 import EditProfile from './components/EditProfile'
 import Register from './components/Register'
+import Footer from './components/Footer'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -29,6 +30,7 @@ function App () {
           <Route path='/register' element={<Register />} />
         </Routes>
       </div>
+      <Footer />
     </>
   )
 }
