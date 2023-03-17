@@ -1,6 +1,6 @@
 import { ErrorMessage, Field } from 'formik'
 
-export default function Input ({ icon, error, touch, ...props }) {
+export default function Input ({ icon, error, ...props }) {
   return (
     <div className='w-full'>
       <div className='flex h-10 flex-row-reverse overflow-clip rounded-lg'>
