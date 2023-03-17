@@ -14,7 +14,7 @@ const nutritionistRegister = Joi.object(
       .pattern(/^[a-z0-9.-_]+@[a-z]+\.[a-z]{2,3}$/)
       .required(),
     password: Joi.string()
-      .pattern(/^(?=.*[!@#$%^&*?])(?=.*[0-9])(?=.*[A-Z]).{8,}$/)
+      .pattern(/^(?=.*[0-9])(?=.*[A-Z]).{8,}$/)
       .required(),
     phone: Joi.string()
       .pattern(/^(\+\d{12}|\d{10})$/)
