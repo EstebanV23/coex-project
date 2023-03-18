@@ -1,11 +1,15 @@
 import { useCallback, useState } from 'react'
 import { useUserStore } from '../stores/useUserStore'
 import loginService from '../services/loginService'
+import { useNavbarStore } from '../stores/useNavbarStore'
+import { useNavigate } from 'react-router-dom'
 
 export default function useUser () {
-  const { token, restarUser, setUser } = useUserStore(store => store)
+  const { token, restarUser, setUser, isVerified } = useUserStore(store => store)
+  const { hiddenTrue } = useNavbarStore(store => store)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+  const navigate = useNavigate()
 
   const login = useCallback(({ email, password }) => {
     setLoading(true)
@@ -13,7 +17,6 @@ export default function useUser () {
       .then(user => {
         setLoading(false)
         setUser(user)
-        localStorage.setItem('user', JSON.stringify(user))
       })
       .catch(() => {
         setLoading(false)
@@ -23,6 +26,8 @@ export default function useUser () {
 
   const logout = useCallback(() => {
     restarUser()
+    hiddenTrue()
+    navigate('/login')
     localStorage.removeItem('user')
   }, [restarUser])
 
@@ -30,6 +35,7 @@ export default function useUser () {
     isLogged: Boolean(token),
     isLoginLoading: loading,
     hasLoginError: error,
+    isVerified,
     login,
     logout
   }

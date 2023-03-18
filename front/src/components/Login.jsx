@@ -7,6 +7,8 @@ import { EmailIcon, PasswordIcon, LogoIcon } from './Icons'
 import useUser from '../hooks/useUser'
 import { regex } from '../constants/regex'
 import Loading from './Loading'
+import { useNavbarStore } from '../stores/useNavbarStore'
+import { shallow } from 'zustand/shallow'
 
 const validateInputs = values => {
   const errors = {}
@@ -16,12 +18,12 @@ const validateInputs = values => {
 }
 
 export default function Login () {
-  const { isLoginLoading, hasLoginError, isLogged, login } = useUser()
-  const navigate = useNavigate()
+  const { isLoginLoading, hasLoginError, login } = useUser()
+  const { hiddenTrue } = useNavbarStore(store => store, shallow)
 
   useEffect(() => {
-    if (isLogged) navigate('/')
-  }, [isLogged])
+    hiddenTrue()
+  }, [])
 
   const handleSubmit = values => {
     return login(values)
@@ -39,7 +41,7 @@ export default function Login () {
         onSubmit={handleSubmit}
       >
         {({ errors, values, handleChange }) => (
-          <div className='bg-white sm:rounded-3xl w-full sm:max-w-3xl lg:w-3xl m-auto px-2 sm:px-10 py-12'>
+          <div className='bg-white rounded-3xl w-[95%] sm:max-w-3xl lg:w-3xl m-auto px-2 sm:px-10 py-12'>
             <div className='flex flex-col justify-center items-center'>
               <LogoIcon fill='black' />
               <h1 className='text-4xl font-work mt-6 font-bold'>Login</h1>
@@ -61,13 +63,14 @@ export default function Login () {
                 name='password'
                 error={errors}
                 placeholder='************'
+                autoComplete='off'
                 value={values.password}
                 onChange={handleChange}
               />
 
               {hasLoginError && <p className='text-red-500 text-lg font-semibold text-center'>El correo o la contraseña son incorrectos</p>}
 
-              <div className='flex flex-col text-center gap-3'>
+              <div className='flex flex-col sm:flex-row justify-between w-full text-center gap-3'>
                 <NavLink
                   to='/forgot-password'
                   className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'

@@ -12,7 +12,3 @@ export default function LinksProfile () {
     ))
   )
 }
-
-export const Hola = () => {
-  return <div className='after:content afterL' />
-}

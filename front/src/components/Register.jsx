@@ -5,116 +5,113 @@ import { AiTwotonePhone } from 'react-icons/ai'
 import { TbPassword } from 'react-icons/tb'
 import { regex } from '../constants/regex'
 import { LogoIcon } from './Icons'
+import Button from './Button'
+import { Link, useNavigate } from 'react-router-dom'
+import registerService from '../services/registerService'
+import { useState } from 'react'
+import LoadingComponents from './LoadingComponents'
+import sweetAlert from '../constants/sweetAlert'
+
 export default function Register () {
+  const [loading, setLoading] = useState(false)
+  const [emailDuplicate, setEmailDuplicate] = useState(false)
+  const navigate = useNavigate()
+
   return (
-    <Formik
-      initialValues={{
-        name: '',
-        surname: '',
-        dni: '',
-        phone: '',
-        email: '',
-        password: '',
-        secondPassword: ''
-      }}
-      validate={(values) => {
-        const errorsValidate = {}
-        if (!regex.name.test(values.name) || !values.name) {
-          errorsValidate.name = '*nombre invalido'
-        }
-        if (!regex.name.test(values.surname) || !values.surname) {
-          errorsValidate.surname = '*apellido invalido'
-        }
-        if (!regex.dni.test(values.dni) || !values.dni) {
-          errorsValidate.dni = '*cedula invalida'
-        }
-        if (!regex.phone.test(values.phone) || !values.phone) {
-          errorsValidate.phone = '*telefono invalido'
-        }
-        if (!regex.email.test(values.email) || !values.email) {
-          errorsValidate.email = '*email invalido'
-        }
-        if (!regex.password.test(values.password) || !values.password) {
-          errorsValidate.password = '*contraseña invalida'
-        }
-        if (values.password !== values.secondPassword || !values.secondPassword) {
-          errorsValidate.secondPassword = '*la contraseñas no coinciden'
-        }
-        return errorsValidate
-      }}
-      onSubmit={(values) => {
-        const { name, surname, email, dni, phone, password } = values
-        const options = {
-          method: 'POST',
-          headers: { 'Content-type': 'application/json;charset=UTF-8' },
-          body: JSON.stringify({
-            name,
-            surname,
-            email,
-            password,
-            dni,
-            phone
-          })
-        }
-        fetch('http://localhost:5000/auth/signup', options)
-          .then(response => response.json())
-          .then(response => console.log(response))
-      }}
-    >
-      {({ errors, values, handleSubmit, handleChange, handleBlur, touched }) => (
-        <div className='flex justify-center items-center h-screen '>
-          <form className='bg-white h-fit rounded-xl w-[90%] md:max-w-3xl lg:w-3xl ' onSubmit={handleSubmit}>
-            <div className='flex flex-col justify-center items-center mt-10'>
-              <LogoIcon fill='black' />
-              <h1 className='text-3xl font-work mt-10 font-bold'>Registro</h1>
-            </div>
-            <div className=' flex flex-wrap gap-6 w-full p-10'>
+    <>
+      <Formik
+        initialValues={{
+          name: '',
+          surname: '',
+          dni: '',
+          phone: '',
+          email: '',
+          password: '',
+          secondPassword: ''
+        }}
+        validate={(values) => {
+          const errorsValidate = {}
+          if (!regex.name.test(values.name)) {
+            errorsValidate.name = '*Los nombres solo permiten letras'
+          }
+          if (!regex.name.test(values.surname)) {
+            errorsValidate.surname = '*Los apellido solo permiten letras'
+          }
+          if (!regex.phone.test(values.phone)) {
+            errorsValidate.phone = '*El teléfono debe contener 10 digitos'
+          }
+          if (!regex.email.test(values.email)) {
+            errorsValidate.email = '*El email debe tener un dóminio válido Ej: ejemplo@dominio.com'
+          }
+          if (!regex.password.test(values.password)) {
+            errorsValidate.password = '*La contraseña debe ser de 8 caracteres, con al menos una letra mayúscula, una letra minúscula y un número'
+          }
+          if (values.password !== values.secondPassword) {
+            errorsValidate.secondPassword = '*Las contraseñas no coinciden'
+          }
+          return errorsValidate
+        }}
+        onSubmit={async (values) => {
+          setLoading(true)
+          setEmailDuplicate(false)
+          const { name, surname, email, phone, password } = values
+          const response = await registerService({ name, surname, email, phone, password })
+          setLoading(false)
+          if (response === undefined) {
+            setEmailDuplicate(true)
+            return
+          }
 
-              <div className='flex flex-col md:flex-row gap-6 px-6 w-full'>
-                <Input
-                  icon={<BsPersonFill size={22} />} type='text' placeholder='Nombres' name='name' onChange={handleChange}
-                  onBlur={handleBlur} value={values.name} error={errors} touch={touched}
-                />
-                <Input
-                  icon={<BsPersonFill size={22} />} type='text' placeholder='Apellidos' name='surname' onChange={handleChange}
-                  onBlur={handleBlur} value={values.surname} error={errors} touch={touched}
-                />
+          sweetAlert('Registro exitoso', `A tu correo ${email} se ha enviado un link para verificar tu cuenta`)
+          navigate('/login')
+        }}
+      >
+        {({ errors, handleSubmit }) => (
+          <div className='flex justify-center items-center'>
+            <form className='bg-white h-fit p-3 rounded-xl w-[95%] sm:p-6 md:p-12 md:max-w-3xl lg:w-3xl' onSubmit={handleSubmit}>
+              <div className='flex flex-col gap-0 sm:gap-4 mb-5 justify-center items-center'>
+                <LogoIcon fill='black' />
+                <h1 className='text-3xl font-work font-bold'>Registro</h1>
               </div>
-              <div className='flex flex-col md:flex-row gap-6 px-6 w-full'>
-                <Input
-                  icon={<AiTwotonePhone size={22} />} type='text' placeholder='Telefono' name='phone' onChange={handleChange}
-                  onBlur={handleBlur} value={values.phone} error={errors} touch={touched}
-                />
+              <div className=' flex flex-wrap gap-6 w-full'>
 
-                <Input
-                  icon={<BsPersonFill size={22} />} type='text' placeholder='Cedula' name='dni' onChange={handleChange}
-                  onBlur={handleBlur} value={values.dni} error={errors} touch={touched}
-                />
-              </div>
-              <div className='w-full px-6'>
-                <Input
-                  icon={<BsPersonFill size={22} />} type='text' placeholder='Correo electronico' name='email' onChange={handleChange}
-                  onBlur={handleBlur} value={values.email} error={errors} touch={touched}
-                />
-              </div>
-              <div className='flex flex-col md:flex-row gap-6 px-6 w-full'>
-                <Input
-                  icon={<TbPassword size={22} />} type='password' placeholder='Contraseña' name='password' onChange={handleChange}
-                  onBlur={handleBlur} value={values.password} error={errors} touch={touched}
-                />
+                <div className='flex flex-col md:flex-row gap-6 w-full'>
+                  <Input
+                    disabled={loading} icon={<BsPersonFill size={22} />} type='text' placeholder='Nombres' name='name' error={errors}
+                  />
+                  <Input
+                    disabled={loading} icon={<BsPersonFill size={22} />} type='text' placeholder='Apellidos' name='surname' error={errors}
+                  />
+                </div>
+                <div className='flex flex-col md:flex-row gap-6 w-full'>
+                  <Input
+                    disabled={loading} icon={<AiTwotonePhone size={22} />} type='text' placeholder='Telefono' name='phone' error={errors}
+                  />
+                  <Input
+                    disabled={loading} icon={<BsPersonFill size={22} />} type='text' placeholder='Correo electrónico' name='email' error={errors}
+                  />
+                </div>
+                <div className='flex flex-col md:flex-row gap-6 w-full'>
+                  <Input
+                    disabled={loading} autoComplete='off' icon={<TbPassword size={22} />} type='password' placeholder='Contraseña' name='password' error={errors}
+                  />
 
-                <Input
-                  icon={<TbPassword size={22} />} type='password' placeholder='Repetir contraseña' name='secondPassword' onChange={handleChange}
-                  onBlur={handleBlur} value={values.secondPassword} error={errors} touch={touched}
-                />
+                  <Input
+                    disabled={loading} autoComplete='off' icon={<TbPassword size={22} />} type='password' placeholder='Repetir contraseña' name='secondPassword' error={errors}
+                  />
+                </div>
+                <div className='flex flex-col items-start justify-between w-full'>
+                  <Link to='/login' className='text-primary-blue text-xl'>Ya tienes una cuenta?</Link>
+                  {emailDuplicate && <p className='text-error text-xl'>Este correo ya se encuentra registrado</p>}
+                </div>
+                <Button disabled={loading} type='submit' className='py-2 transition-all duration-500 text-xl text-primary-blue font-bold hover:bg-primary-blue hover:text-white border-primary-blue'>{loading ? <LoadingComponents size={27} /> : 'Registrarse'}</Button>
               </div>
-              <button className='bg-primary-blue pt- text-white h-14 w-full rounded-xl text-2xl font-bold hover:bg-primary-blue-600 ease-in-out duration-200'>Registrarse</button>
-            </div>
-          </form>
-        </div>
+            </form>
+          </div>
 
-      )}
-    </Formik>
+        )}
+      </Formik>
+    </>
 
   )
 }
