@@ -24,7 +24,7 @@ function App () {
   return (
     <>
       <Navbar />
-      <div className='bg-primary-blue-300' onClick={hiddenTrue}>
+      <div className='bg-primary-blue-300 py-10' onClick={hiddenTrue}>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/forgot-password' element={<EmailForgotPassword />} />

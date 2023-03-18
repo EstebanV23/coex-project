@@ -4,21 +4,20 @@ import loginService from '../services/loginService'
 
 export default function useUser () {
   const { token, restarUser, setUser } = useUserStore(store => store)
-  const { loading, setLoading } = useState(false)
-  const { error, setError } = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
   const login = useCallback(({ email, password }) => {
-    // setLoading(true)
+    setLoading(true)
     loginService({ email, password })
       .then(user => {
-        // setLoading(false)
+        setLoading(false)
         setUser(user)
         localStorage.setItem('user', JSON.stringify(user))
       })
-      .catch(err => {
-        // setLoading(false)
-        // setError(true)
-        console.error(err)
+      .catch(() => {
+        setLoading(false)
+        setError(true)
       })
   }, [setUser])
 

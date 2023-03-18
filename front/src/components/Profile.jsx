@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import { shallow } from 'zustand/shallow'
 import { useNavbarStore } from '../stores/useNavbarStore'
 import { useUserStore } from '../stores/useUserStore'
-import LoadingAnimation from './LoadingAnimation'
+import Loading from './Loading'
 import MyAvatar from './MyAvatar'
 import { IoChevronBack } from 'react-icons/io5'
 import { useProfileStore } from '../stores/useProfileStore'
@@ -23,7 +23,7 @@ export default function Profile () {
   if (loading) {
     return (
       <div className='h-screen'>
-        <LoadingAnimation />
+        <Loading />
       </div>
     )
   }
