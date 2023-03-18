@@ -27,12 +27,6 @@ export default function Login () {
     return login(values)
   }
 
-  const handleError = () => {
-    setInterval(() => {
-      return <p className='text-red-500 text-lg font-semibold text-center'>El correo o la contraseña son incorrectos</p>
-    }, 3000)
-  }
-
   return (
     <>
       {isLoginLoading && <Loading />}
