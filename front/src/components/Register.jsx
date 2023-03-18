@@ -4,6 +4,7 @@ import { BsPersonFill } from 'react-icons/bs'
 import { AiTwotonePhone } from 'react-icons/ai'
 import { TbPassword } from 'react-icons/tb'
 import { regex } from '../constants/regex'
+import { LogoIcon } from './Icons'
 export default function Register () {
   return (
     <Formik
@@ -15,7 +16,6 @@ export default function Register () {
         email: '',
         password: '',
         secondPassword: ''
-
       }}
       validate={(values) => {
         const errorsValidate = {}
@@ -64,13 +64,10 @@ export default function Register () {
       {({ errors, values, handleSubmit, handleChange, handleBlur, touched }) => (
         <div className='flex justify-center items-center h-screen '>
           <form className='bg-white h-fit rounded-xl w-[90%] md:max-w-3xl lg:w-3xl ' onSubmit={handleSubmit}>
-            <div className='container_title flex justify-center items-center mt-10'>
-              <img src='logoFlor.svg' className='h-10' />
-              <strong>
-                <h1 className='text-center text-6xl font-work mt-2'>mianthro</h1>
-              </strong>
+            <div className='flex flex-col justify-center items-center mt-10'>
+              <LogoIcon fill='black' />
+              <h1 className='text-3xl font-work mt-10 font-bold'>Registro</h1>
             </div>
-            <strong><h1 className='text-center text-3xl font-work mt-10 '>Registro</h1></strong>
             <div className=' flex flex-wrap gap-6 w-full p-10'>
 
               <div className='flex flex-col md:flex-row gap-6 px-6 w-full'>
@@ -111,10 +108,7 @@ export default function Register () {
                   onBlur={handleBlur} value={values.secondPassword} error={errors} touch={touched}
                 />
               </div>
-              <div className='w-full px-6 mt-6'>
-                <button className=' w-full px-6 bg-[#66a7ad] text-white h-10 rounded-md   hover:bg-[#3A676B]'>Registrarse</button>
-              </div>
-
+              <button className='bg-primary-blue pt- text-white h-14 w-full rounded-xl text-2xl font-bold hover:bg-primary-blue-600 ease-in-out duration-200'>Registrarse</button>
             </div>
           </form>
         </div>

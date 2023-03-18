@@ -1,84 +1,101 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { Formik, Form } from 'formik'
 
 import Input from './Input'
 import { EmailIcon, PasswordIcon, LogoIcon } from './Icons'
 import useUser from '../hooks/useUser'
-import { Formik } from 'formik'
+import { regex } from '../constants/regex'
+import Loading from './Loading'
+
+const validateInputs = values => {
+  const errors = {}
+  if (!regex.email.test(values.email)) errors.email = 'El correo debe ser válido. Ej: correo@dominio.com'
+  if (!values.password) errors.password = 'La contraseña es requerida'
+  return errors
+}
 
 export default function Login () {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const { isLogged, login } = useUser()
+  const { isLoginLoading, hasLoginError, isLogged, login } = useUser()
   const navigate = useNavigate()
-  console.log(email, password)
+
   useEffect(() => {
     if (isLogged) navigate('/')
   }, [isLogged])
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    login({ email, password })
+  const handleSubmit = values => {
+    return login(values)
+  }
+
+  const handleError = () => {
+    setInterval(() => {
+      return <p className='text-red-500 text-lg font-semibold text-center'>El correo o la contraseña son incorrectos</p>
+    }, 3000)
   }
 
   return (
-    <Formik
-      initialValues={{
-        email: '',
-        password: ''
-      }}
-      validate={(values) => {
-        const errores = {}
-        if (!values.email) {
-          errores.email = '*campo obligatorio'
-        }
-        if (!values.password) {
-          errores.password = '*campo obligatorio'
-        }
-        return errores
-      }}
-      onSubmit={(values) => {
-        const options = {
-          method: 'POST',
-          headers: { 'Content-type': 'application/json;charset=UTF-8' },
-          body: `{"email":"${values.email}","password":"${values.password}"}`
-        }
-        fetch('http://localhost:5000/auth/signin', options)
-          .then(response => response.json())
-          .then(response => console.log(response))
-      }}
-    >
-      {({ errors, values, handleSubmit, handleChange, handleBlur, touched }) => (
-        <form className='flex justify-center items-center h-screen  bg-[#99c3c8]' onSubmit={handleSubmit}>
-          <div className='bg-white h-2/3 rounded-xl  w-11/12 lg:w-1/2 '>
-            <div className='container_title flex justify-center items-center mt-10'>
-              <img src='logoFlor.svg' className='h-10' />
-              <strong>
-                <h1 className='text-center text-6xl font-work mt-2'>mianthro</h1>
-              </strong>
+    <>
+      {isLoginLoading && <Loading />}
+      <Formik
+        initialValues={{
+          email: '',
+          password: ''
+        }}
+        validate={validateInputs}
+        onSubmit={handleSubmit}
+      >
+        {({ errors, values, handleChange }) => (
+          <div className='bg-white sm:rounded-3xl w-full sm:max-w-3xl lg:w-3xl m-auto px-2 sm:px-10 py-12'>
+            <div className='flex flex-col justify-center items-center'>
+              <LogoIcon fill='black' />
+              <h1 className='text-4xl font-work mt-6 font-bold'>Login</h1>
             </div>
+            <Form className='flex flex-col w-full gap-8 items-center pt-8'>
+              <Input
+                icon={<EmailIcon />}
+                type='email'
+                name='email'
+                error={errors}
+                placeholder='Tucorreo@ejemplo.com'
+                value={values.email}
+                onChange={handleChange}
+              />
 
-            <Input
-              icon={<PasswordIcon />}
-              type='password'
-              name='password'
-              placeholder='************'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <NavLink to='/forgot-password' className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'>Olvidó su contraseña?</NavLink>
-            <NavLink to='/register' className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'>Aún no tienes una cuenta?</NavLink>
+              <Input
+                icon={<PasswordIcon />}
+                type='password'
+                name='password'
+                error={errors}
+                placeholder='************'
+                value={values.password}
+                onChange={handleChange}
+              />
 
-            <button
-              className='bg-primary-blue text-white h-14 w-10/12 rounded-xl text-2xl font-bold hover:bg-primary-blue-600 ease-in-out duration-200'
-              onClick={handleSubmit}
-            >
-              Iniciar sesión
-            </button>
+              {hasLoginError && <p className='text-red-500 text-lg font-semibold text-center'>El correo o la contraseña son incorrectos</p>}
+
+              <div className='flex flex-col text-center gap-3'>
+                <NavLink
+                  to='/forgot-password'
+                  className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'
+                >Olvidó su contraseña?
+                </NavLink>
+                <NavLink
+                  to='/register'
+                  className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'
+                >Aún no tienes una cuenta?
+                </NavLink>
+              </div>
+
+              <button
+                type='submit'
+                className='bg-primary-blue text-white h-14 w-full rounded-xl text-2xl font-bold hover:bg-primary-blue-600 ease-in-out duration-200'
+              >
+                Iniciar sesión
+              </button>
+            </Form>
           </div>
-        </form>
-      )}
-
-    </Formik>
+        )}
+      </Formik>
+    </>
   )
 }

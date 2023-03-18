@@ -11,13 +11,20 @@ import InfoProfile from './components/InfoProfile'
 import EditProfile from './components/EditProfile'
 import Register from './components/Register'
 import Footer from './components/Footer'
+import { useUserStore } from './stores/useUserStore'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
+  const { setUser } = useUserStore(store => store, shallow)
+
+  if (localStorage.getItem('user')) {
+    setUser(JSON.parse(localStorage.getItem('user')))
+  }
+
   return (
     <>
       <Navbar />
-      <div className='bg-primary-blue-300' onClick={hiddenTrue}>
+      <div className='bg-primary-blue-300 py-10' onClick={hiddenTrue}>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/forgot-password' element={<EmailForgotPassword />} />
