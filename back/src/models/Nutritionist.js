@@ -16,7 +16,7 @@ class Nutritionist {
 
   constructor ({
     name, surname, email,
-    phone, password, isVerified = false, createdAt = new Date(),
+    phone = '', password, isVerified = false, createdAt = new Date(),
     verificationDate = null, lastConnection = null
   }) {
     this.name = name
