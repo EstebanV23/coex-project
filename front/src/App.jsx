@@ -11,6 +11,7 @@ import InfoProfile from './components/InfoProfile'
 import EditProfile from './components/EditProfile'
 import Register from './components/Register'
 import Footer from './components/Footer'
+import File from './components/File'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -28,6 +29,7 @@ function App () {
             <Route path='edit' element={<EditProfile />} />
           </Route>
           <Route path='/register' element={<Register />} />
+          <Route path='/archivo' element={<File />} />
         </Routes>
       </div>
       <Footer />
