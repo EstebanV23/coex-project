@@ -10,17 +10,18 @@
   },
   "dependencies": {
     "@mui/material": "^5.11.12",
+    "@sweetalert2/theme-material-ui": "^5.0.15",
     "bootstrap-icons": "^1.10.3",
     "formik": "^2.2.9",
+    "handsontable": "^12.3.1",
     "jsonwebtoken": "9.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "react-router-dom": "6.9.0",
-    "zustand": "4.3.6",
-    "@sweetalert2/theme-material-ui": "^5.0.15",
     "sweetalert": "^2.1.2",
-    "sweetalert2": "^11.7.3"
+    "sweetalert2": "^11.7.3",
+    "zustand": "4.3.6"
   },
   "devDependencies": {
     "@types/react": "18.0.27",
