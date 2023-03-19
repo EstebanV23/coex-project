@@ -9,12 +9,7 @@ import Profile from './components/Profile'
 import InfoProfile from './components/InfoProfile'
 import EditProfile from './components/EditProfile'
 import Footer from './components/Footer'
-import { useUserStore } from './stores/useUserStore'
-import Protected from './components/Protected'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
-import ChangePassword from './components/ChangePassword'
-import { useEffect } from 'react'
+import File from './components/File'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -40,7 +35,8 @@ function App () {
             <Route path='edit' element={<Protected><EditProfile /></Protected>} />
             <Route path='change-password' element={<Protected><ChangePassword /></Protected>} />
           </Route>
-          <Route path='/register' element={<Protected restrictLogged><RegisterPage /></Protected>} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/archivo' element={<File />} />
         </Routes>
       </div>
       <Footer />
