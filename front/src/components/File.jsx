@@ -13,7 +13,6 @@ export default function File () {
       onSubmit={() => {
         const f = new FormData()
         f.append('file', fileData[0])
-        console.log(f)
         const options = {
           method: 'POST',
           body: f
