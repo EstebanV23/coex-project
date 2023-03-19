@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@handsontable/react": "^12.3.1",
     "@mui/material": "^5.11.12",
     "@sweetalert2/theme-material-ui": "^5.0.15",
     "bootstrap-icons": "^1.10.3",

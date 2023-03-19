@@ -15,6 +15,8 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import ChangePassword from './components/ChangePassword'
 import { useEffect } from 'react'
+import File from './components/File'
+import ViwerExcel from './components/ViwerExcel'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -41,8 +43,10 @@ function App () {
             <Route path='change-password' element={<Protected><ChangePassword /></Protected>} />
           </Route>
           <Route path='/register' element={<Protected restrictLogged><RegisterPage /></Protected>} />
+          <Route path='/archivo' element={<File />} />
         </Routes>
       </div>
+      <ViwerExcel />
       <Footer />
     </>
   )
