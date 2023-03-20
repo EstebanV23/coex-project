@@ -74,6 +74,24 @@ export default function UnitVal () {
                   <label htmlFor=''>Género</label>
                   <SelectUnit />
                 </div>
+                <div className='mb-6'>
+                  <label htmlFor='' className=''>
+                    Valoracón
+                  </label>
+                  <input
+                    type='text'
+                    id=''
+                    placeholder='5'
+                    required
+                    disabled
+                    className='w-10/12 h-8  border-2 border-gray-500 rounded'
+                    name='talla'
+                    value={values.valoracion}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {touched.valoracion && errors.valoracion ? <div className='text-error-700'>{errors.valoracion}</div> : null}
+                </div>
                 <button
                   type='submit'
                   className='bg-[#66a7ad] text-white h-8 w-10/12 rounded-md   hover:bg-[#3A676B]'
