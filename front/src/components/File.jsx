@@ -25,10 +25,10 @@ export default function File () {
     >
       {({ errors, values, handleSubmit, handleChange, handleBlur }) => (
         <div className='h-fit'>
-          <form onSubmit={handleSubmit}>
-            <strong> <h1 className='text-center text-white text-5xl'>Subir archivo</h1></strong>
-            <input type='file' name='file' id='file' required onChange={() => Change(event.target.files)} />
-            <button type='submit' className='w-1/3 px-6 bg-[#66a7ad] text-white h-10 rounded-md   hover:bg-[#3A676B'>cargar archivo</button>
+          <form onSubmit={handleSubmit} className='text-center'>
+            <strong> <h1 className='text-center text-white text-5xl mb-10'>Subir archivo</h1></strong>
+            <input type='file' name='file' id='file' required onChange={() => Change(event.target.files)} /><br />
+            <button type='submit' className='w-1/3 px-6 bg-[#66a7ad] text-white h-10 rounded-md   hover:bg-[#3A676B mt-10'>cargar archivo</button>
           </form>
 
         </div>
