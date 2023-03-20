@@ -17,8 +17,9 @@ const NutritionistController = {
 
   getNutritionist: async (req, res, next) => {
     try {
-      const nutritionist = await Nutritionist.getByEmail(req.params.email)
-      buildResponse.success(res, 200, 'Nutritionist', nutritionist)
+      const nutritionist = await Nutritionist.getByEmail(req.body.email)
+      const { email } = nutritionist
+      buildResponse.success(res, 200, 'Nutritionist', email)
     } catch (err) {
       next(err)
     }
@@ -40,9 +41,13 @@ const NutritionistController = {
   updateNutritionist: async (req, res, next) => {
     try {
       const { params: { id }, body: data } = req
-      const nutritionist = await Nutritionist.update(id, data)
-      buildResponse.success(res, 200, 'Nutritionist updated', nutritionist)
+      await Nutritionist.update(id, data)
+      const nutritionist = await Nutritionist.getByEmail(data.email)
+      const { email, name, surname, phone, isVerified } = nutritionist
+      buildResponse.success(res, 200, 'Nutritionist updated', { email, name, surname, phone, isVerified, id })
     } catch (err) {
+      err.status = 403
+      err.message = 'Data invalid'
       next(err)
     }
   },

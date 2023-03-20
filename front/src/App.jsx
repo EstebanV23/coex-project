@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Login from './components/Login'
 import RestartPassword from './components/RestartPassword'
 import EmailForgotPassword from './components/EmailForgotPassword'
 import Home from './components/Home'
@@ -9,12 +8,25 @@ import { shallow } from 'zustand/shallow'
 import Profile from './components/Profile'
 import InfoProfile from './components/InfoProfile'
 import EditProfile from './components/EditProfile'
-import Register from './components/Register'
 import Footer from './components/Footer'
+import { useUserStore } from './stores/useUserStore'
+import Protected from './components/Protected'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
+import ChangePassword from './components/ChangePassword'
+import { useEffect } from 'react'
 import File from './components/File'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
+  const { setUser } = useUserStore(store => store, shallow)
+
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      setUser(JSON.parse(localStorage.getItem('user')))
+    }
+  }, [])
+
   return (
     <>
       <Navbar />
@@ -23,12 +35,13 @@ function App () {
           <Route path='/' element={<Home />} />
           <Route path='/forgot-password' element={<EmailForgotPassword />} />
           <Route path='/new-password/' element={<RestartPassword />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/login' element={<Protected restrictLogged><LoginPage /></Protected>} />
           <Route path='/profile' element={<Profile />}>
-            <Route index element={<InfoProfile />} />
-            <Route path='edit' element={<EditProfile />} />
+            <Route index element={<Protected><InfoProfile /></Protected>} />
+            <Route path='edit' element={<Protected><EditProfile /></Protected>} />
+            <Route path='change-password' element={<Protected><ChangePassword /></Protected>} />
           </Route>
-          <Route path='/register' element={<Register />} />
+          <Route path='/register' element={<Protected restrictLogged><RegisterPage /></Protected>} />
           <Route path='/archivo' element={<File />} />
         </Routes>
       </div>

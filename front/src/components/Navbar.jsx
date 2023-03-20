@@ -19,7 +19,7 @@ export default function Navbar () {
         <ContentNavbar>
           {isLogged
             ? <LogedNavbar />
-            : <LinkButton to='login'>Ingresar</LinkButton>}
+            : <LinkButton to='login' className='text-white hover:text-primary-blue hover:bg-white duration-500'>Ingresar</LinkButton>}
           <IoCloseSharp size={30} className='block md:hidden absolute right-10 top-10 cursor-pointer text-white' onClick={toggleHidden} />
         </ContentNavbar>
         <GiHamburgerMenu
