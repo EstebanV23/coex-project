@@ -4,6 +4,7 @@ import { generateToken } from '../config/JWT.js'
 import templateEmailVerify from '../helpers/templateEmailVerify.js'
 import Mailer from '../models/Mailer.js'
 import templateEmailForgotPassword from '../helpers/templateEmailForgotPassword.js'
+import encryptPassword from '../helpers/encryptPassword.js'
 
 const NutritionistController = {
   getNutritionists: async (_, res, next) => {
@@ -17,8 +18,9 @@ const NutritionistController = {
 
   getNutritionist: async (req, res, next) => {
     try {
-      const nutritionist = await Nutritionist.getByEmail(req.params.email)
-      buildResponse.success(res, 200, 'Nutritionist', nutritionist)
+      const nutritionist = await Nutritionist.getByEmail(req.body.email)
+      const { email } = nutritionist
+      buildResponse.success(res, 200, 'Nutritionist', email)
     } catch (err) {
       next(err)
     }
@@ -40,9 +42,13 @@ const NutritionistController = {
   updateNutritionist: async (req, res, next) => {
     try {
       const { params: { id }, body: data } = req
-      const nutritionist = await Nutritionist.update(id, data)
-      buildResponse.success(res, 200, 'Nutritionist updated', nutritionist)
+      await Nutritionist.update(id, data)
+      const nutritionist = await Nutritionist.getByEmail(data.email)
+      const { email, name, surname, phone, isVerified } = nutritionist
+      buildResponse.success(res, 200, 'Nutritionist updated', { email, name, surname, phone, isVerified, id })
     } catch (err) {
+      err.status = 403
+      err.message = 'Data invalid'
       next(err)
     }
   },
@@ -66,9 +72,9 @@ const NutritionistController = {
         throw new Error(ERROR_MESSAGE, 401)
       }
       await Nutritionist.update(nutritionist._id, { lastConnection: new Date() })
-      const { _id: id, name, surname, verify } = nutritionist
+      const { _id: id, name, surname, isVerified, phone } = nutritionist
       const token = generateToken({ id })
-      const dataNutritionist = { id, name, surname, email, verify, token }
+      const dataNutritionist = { id, name, surname, email, phone, isVerified, token }
       buildResponse.success(res, 200, 'Nutritionist logged', dataNutritionist)
     } catch (err) {
       next(err)
@@ -78,7 +84,7 @@ const NutritionistController = {
   updateVerify: async (req, res, next) => {
     try {
       const { id } = req.user
-      const nutritionist = await Nutritionist.update(id, { verify: true, verificationDate: new Date() })
+      const nutritionist = await Nutritionist.update(id, { isVerified: true, verificationDate: new Date() })
       buildResponse.success(res, 200, 'Nutritionist verified', nutritionist)
     } catch (err) {
       next(err)
@@ -114,6 +120,21 @@ const NutritionistController = {
       buildResponse.success(res, 200, 'Password updated', { email })
     } catch (error) {
       next(error)
+    }
+  },
+
+  changePassword: async (req, res, next) => {
+    const ERROR_MESSAGE = 'Password incorrect'
+    try {
+      const { email, oldPassword, password } = req.body
+      const nutritionist = await Nutritionist.login(email, oldPassword)
+      if (!nutritionist) {
+        throw new Error(ERROR_MESSAGE, 401)
+      }
+      Nutritionist.updateByEmail(email, { password })
+      buildResponse.success(res, 200, 'Update success', {})
+    } catch (err) {
+      next(err)
     }
   }
 }

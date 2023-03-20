@@ -14,16 +14,11 @@ const nutritionistSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
-  dni: {
-    type: String,
-    unique: true,
-    required: true
-  },
   password: {
     type: String,
     required: true
   },
-  verify: {
+  isVerified: {
     type: Boolean,
     required: false
   },

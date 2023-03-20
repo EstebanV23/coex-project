@@ -1,12 +1,14 @@
 import express from 'express'
 import NutritionistController from '../../controllers/NutitionistController.js'
+import handlerAuthorizationJWT from '../../middlewares/handlerAuthorizationJWT.js'
 import handlerJwtVerify from '../../middlewares/handlerJwtValidate.js'
 import validateData from '../../middlewares/validationData.js'
 import {
   nutritionistLogin,
   nutritionistRegister,
-  nutritionistForgotPassword,
-  nutritionistResetPassword
+  nutritionistEmail,
+  nutritionistResetPassword,
+  nutritionistChangePassword
 } from '../../schemas/requestSchema/nutritionistRequest.js'
 
 const authRouter = express.Router()
@@ -29,7 +31,7 @@ authRouter
   )
   .post(
     '/forgot-password',
-    validateData(nutritionistForgotPassword, 'body'),
+    validateData(nutritionistEmail, 'body'),
     NutritionistController.forgotPassword
   )
   .post(
@@ -37,5 +39,21 @@ authRouter
     handlerJwtVerify('params'),
     validateData(nutritionistResetPassword, 'body'),
     NutritionistController.resetPassword
+  )
+  .post(
+    '/nutritionist-email',
+    validateData(nutritionistEmail, 'body'),
+    NutritionistController.getNutritionist
+  )
+  .patch(
+    '/change-password',
+    handlerAuthorizationJWT,
+    validateData(nutritionistChangePassword, 'body'),
+    NutritionistController.changePassword
+  )
+  .patch(
+    '/update-nutritionist/:id',
+    handlerAuthorizationJWT,
+    NutritionistController.updateNutritionist
   )
 export default authRouter
