@@ -42,7 +42,7 @@ export default function ViwerExcel ({ json }) {
   /// /NOTA: se debe tener cuidado con los nombre de las propedades.... busca en documentacion..XD tambien mirar a ver si dejamos lo de la licencia asi.
   /// // https://handsontable.com/docs/javascript-data-grid/license-key/ esta es la documentacion para lo de la licencia
   return (
-    <div className='flex flex-col items-center my-10 justify-center w-full'>
+    <div className='flex flex-col items-center mt-10 justify-center w-full'>
 
       {usuarios && (
         <HotTable
