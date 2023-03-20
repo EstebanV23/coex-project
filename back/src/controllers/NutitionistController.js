@@ -4,6 +4,7 @@ import { generateToken } from '../config/JWT.js'
 import templateEmailVerify from '../helpers/templateEmailVerify.js'
 import Mailer from '../models/Mailer.js'
 import templateEmailForgotPassword from '../helpers/templateEmailForgotPassword.js'
+import encryptPassword from '../helpers/encryptPassword.js'
 
 const NutritionistController = {
   getNutritionists: async (_, res, next) => {
@@ -119,6 +120,21 @@ const NutritionistController = {
       buildResponse.success(res, 200, 'Password updated', { email })
     } catch (error) {
       next(error)
+    }
+  },
+
+  changePassword: async (req, res, next) => {
+    const ERROR_MESSAGE = 'Password incorrect'
+    try {
+      const { email, oldPassword, password } = req.body
+      const nutritionist = await Nutritionist.login(email, oldPassword)
+      if (!nutritionist) {
+        throw new Error(ERROR_MESSAGE, 401)
+      }
+      Nutritionist.updateByEmail(email, { password })
+      buildResponse.success(res, 200, 'Update success', {})
+    } catch (err) {
+      next(err)
     }
   }
 }

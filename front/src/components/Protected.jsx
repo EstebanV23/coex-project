@@ -1,17 +1,11 @@
-import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import useUser from '../hooks/useUser'
 
 export default function Protected ({ children, verified = false, restrictLogged = false }) {
   const { isLogged, isVerified } = useUser()
-  const navigate = useNavigate()
-  if (restrictLogged && isLogged) {
-    navigate('/')
-    return
-  }
+  if (restrictLogged && isLogged) return <Navigate to='/' />
 
-  if ((!restrictLogged && !isLogged) || (verified && !isVerified)) {
-    navigate('/login')
-    return
-  }
+  if ((!restrictLogged && !isLogged) || (verified && !isVerified)) return <Navigate to='/login' />
+
   return children
 }

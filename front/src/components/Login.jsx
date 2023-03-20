@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 
@@ -9,10 +9,11 @@ import { regex } from '../constants/regex'
 import Loading from './Loading'
 import { useNavbarStore } from '../stores/useNavbarStore'
 import { shallow } from 'zustand/shallow'
+import EyePassword from './EyePassword'
 
 const validateInputs = values => {
   const errors = {}
-  if (!regex.email.test(values.email)) errors.email = 'El correo debe ser válido. Ej: correo@dominio.com'
+  if (!regex.email.exp.test(values.email)) errors.email = regex.email.msg
   if (!values.password) errors.password = 'La contraseña es requerida'
   return errors
 }
@@ -20,6 +21,7 @@ const validateInputs = values => {
 export default function Login () {
   const { isLoginLoading, hasLoginError, login } = useUser()
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
+  const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
     hiddenTrue()
@@ -53,20 +55,19 @@ export default function Login () {
                 name='email'
                 error={errors}
                 placeholder='Tucorreo@ejemplo.com'
-                value={values.email}
-                onChange={handleChange}
               />
 
-              <Input
-                icon={<PasswordIcon />}
-                type='password'
-                name='password'
-                error={errors}
-                placeholder='************'
-                autoComplete='off'
-                value={values.password}
-                onChange={handleChange}
-              />
+              <div className='relative w-full'>
+                <Input
+                  icon={<PasswordIcon />}
+                  type={showPassword ? 'text' : 'password'}
+                  name='password'
+                  error={errors}
+                  placeholder='************'
+                  autoComplete='off'
+                />
+                <EyePassword size={23} state={showPassword} setState={setShowPassword} />
+              </div>
 
               {hasLoginError && <p className='text-red-500 text-lg font-semibold text-center'>El correo o la contraseña son incorrectos</p>}
 
