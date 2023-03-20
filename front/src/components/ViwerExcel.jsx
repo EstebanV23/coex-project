@@ -47,7 +47,7 @@ export default function ViwerExcel ({ json }) {
       {usuarios && (
         <HotTable
           ref={hotTableComponent}
-          data={obJson}
+          data={json}
           licenseKey='non-commercial-and-evaluation'
           colHeaders
           rowHeaders

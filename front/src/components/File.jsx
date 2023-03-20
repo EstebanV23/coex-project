@@ -1,12 +1,12 @@
 import { Formik } from 'formik'
 import { useState } from 'react'
-import ViwerExcel from 'Viwerexcel'
+import ViwerExcel from './ViwerExcel'
 export default function File () {
   const [fileData, setFileData] = useState(null)
   function Change (e) {
     setFileData(e)
   }
-  const data = {}
+  const [data, setData] = useState(null)
   return (
     <Formik
       initialValues={{
@@ -15,14 +15,13 @@ export default function File () {
       onSubmit={() => {
         const f = new FormData()
         f.append('file', fileData[0])
-        console.log(f)
         const options = {
           method: 'POST',
           body: f
         }
         fetch('https://mianthroapi.onrender.com/multi/mitoken', options)
           .then(response => response.json())
-          .then(response => data => response)
+          .then(response => { setData(response) })
       }}
     >
       {({ errors, values, handleSubmit, handleChange, handleBlur }) => (
@@ -32,7 +31,9 @@ export default function File () {
             <input type='file' name='file' id='file' required onChange={() => Change(event.target.files)} />
             <button type='submit' className='w-1/3 px-6 bg-[#66a7ad] text-white h-10 rounded-md   hover:bg-[#3A676B'>cargar archivo</button>
           </form>
-          <ViwerExcel json={data} />
+
+          {data && <ViwerExcel json={data} />}
+
         </div>
       )}
 
