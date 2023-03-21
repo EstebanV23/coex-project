@@ -38,7 +38,7 @@ export default function ValoracionUnica () {
             <option name='nina' id='nina'>nina</option>
           </select>
           <button type='submit'>valoracion</button>
-
+          {valoracion && <h1>{valoracion}</h1>}
         </form>
 
       )}
