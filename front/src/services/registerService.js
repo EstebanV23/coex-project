@@ -1,5 +1,6 @@
 import { configEnviroment } from '../config/configEnviroment'
 import getNutritionistEmailService from './getNutritionistEmailService'
+
 export default async function registerService (body) {
   const dataEmail = await getNutritionistEmailService({ email: body.email })
   if (!(Object.values(dataEmail.data).length === 0)) return

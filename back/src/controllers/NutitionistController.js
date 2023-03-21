@@ -4,6 +4,7 @@ import { generateToken } from '../config/JWT.js'
 import templateEmailVerify from '../helpers/templateEmailVerify.js'
 import Mailer from '../models/Mailer.js'
 import templateEmailForgotPassword from '../helpers/templateEmailForgotPassword.js'
+import encryptPassword from '../helpers/encryptPassword.js'
 
 const NutritionistController = {
   getNutritionists: async (_, res, next) => {

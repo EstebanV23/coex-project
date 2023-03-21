@@ -1,4 +1,6 @@
-const URL = 'http://localhost:5000/auth/signin'
+import { configEnviroment } from '../config/configEnviroment'
+
+const URL = `${configEnviroment.URL_BACKEND}auth/signin`
 
 export default async function loginService ({ email, password }) {
   const res = await fetch(URL, {
