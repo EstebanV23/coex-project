@@ -1,16 +1,12 @@
 import { Formik } from 'formik'
-import { regex } from '../constants/regex'
 import Button from './Button'
 import { LogoIcon } from './Icons'
 import Input from './Input'
 import SelectUnit from './Select'
 import { GiBodyHeight, FaWeight, GrBaby } from 'react-icons/gi'
-import { useState } from 'react'
 import Navbar from './Navbar'
 
 export default function UnitVal () {
-  const loading = useState(false)
-
   return (
     <>
       <Navbar />
@@ -32,23 +28,23 @@ export default function UnitVal () {
 
                 <div className='flex flex-col md:flex-row gap-6 w-full'>
                   <Input
-                    disabled={loading} icon={<GiBodyHeight size={22} />} type='text' placeholder='Talla' name='height' error={errors}
+                    icon={<GiBodyHeight size={22} />} type='text' placeholder='Talla' name='height' error={errors}
                   />
                   <Input
-                    disabled={loading} icon={<FaWeight size={22} />} type='text' placeholder='Peso' name='weight' error={errors}
+                    icon={<FaWeight size={22} />} type='text' placeholder='Peso' name='weight' error={errors}
                   />
                 </div>
                 <div className='flex flex-col md:flex-row gap-6 w-full'>
                   <SelectUnit
-                    disabled={loading} icon={<GrBaby size={22} />} type='text' placeholder='Género' name='gender' error={errors}
+                    icon={<GrBaby size={22} />} type='text' placeholder='Género' name='gender' error={errors}
                   />
                 </div>
                 <div className='flex flex-col md:flex-row gap-6 w-full'>
                   <Input
-                    disabled={loading} type='text' placeholder='Valoración' name='valoracion' error={errors}
+                    type='text' placeholder='Valoración' name='valoracion' error={errors}
                   />
                 </div>
-                <Button disabled={loading} type='submit' className='py-2 transition-all duration-500 text-xl text-primary-blue font-bold hover:bg-primary-blue hover:text-white border-primary-blue'>Valorar</Button>
+                <Button type='submit' className='py-2 transition-all duration-500 text-xl text-primary-blue font-bold hover:bg-primary-blue hover:text-white border-primary-blue'>Valorar</Button>
 
               </div>
             </form>
