@@ -32,5 +32,6 @@ export const useUserStore = create((set, get) => ({
         isVerified: user.isVerified
       }
     )
-  }
+  },
+  setVerified: () => set({ isVerified: true })
 }))

@@ -8,7 +8,9 @@ function handlerJwtVerify (property) {
       req.user = decoded
       next()
     } catch (error) {
-      return res.status(401).json({ message: 'Expired or invalid token' })
+      error.message = 'Expired or invalid token'
+      error.status = 401
+      next(error)
     }
   }
 }
