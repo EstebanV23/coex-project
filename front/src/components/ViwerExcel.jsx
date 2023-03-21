@@ -54,6 +54,7 @@ export default function ViwerExcel ({ json }) {
           columnSorting
           mergeCells
           readOnly={false}
+
         >
           <HotColumn data='nombre' title='Nombre' readOnly />
           <HotColumn data='peso' title='Peso' readOnly />
@@ -62,7 +63,7 @@ export default function ViwerExcel ({ json }) {
           <HotColumn data='valoracion' title='Valoracion' readOnly />
         </HotTable>
       )}
-      <button onClick={() => descargarArchivo()}>Descargar Archivo</button>
+      <button onClick={() => descargarArchivo()} className='w-1/3 px-6 bg-[#66a7ad] text-white h-10 rounded-md   hover:bg-[#3A676B mt-10'>Descargar Archivo</button>
     </div>
   )
 }
