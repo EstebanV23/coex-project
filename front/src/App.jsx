@@ -16,6 +16,8 @@ import { useEffect } from 'react'
 import EmailForgotPage from './pages/EmailForgotPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
 import VerifyPage from './pages/VerifyPage'
+import File from './components/File'
+import ValoracionUnica from './components/ValoracionUnica'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -43,6 +45,8 @@ function App () {
           </Route>
           <Route path='/register' element={<Protected restrictLogged><RegisterPage /></Protected>} />
           <Route path='/verify' element={<VerifyPage />} />
+          <Route path='/archivo' element={<File />} />
+          <Route path='/valoracion' element={<ValoracionUnica />} />
         </Routes>
       </div>
       <Footer />
