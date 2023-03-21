@@ -41,6 +41,7 @@ function App () {
             <Route path='change-password' element={<Protected><ChangePassword /></Protected>} />
           </Route>
           <Route path='/register' element={<Protected restrictLogged><RegisterPage /></Protected>} />
+          {/* <Route path='/valoracion' element={<UnitVal />} /> */}
         </Routes>
       </div>
       <Footer />
