@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 
 import Input from './Input'
@@ -42,7 +42,7 @@ export default function Login () {
         validate={validateInputs}
         onSubmit={handleSubmit}
       >
-        {({ errors, values, handleChange }) => (
+        {({ errors }) => (
           <div className='bg-white rounded-3xl w-[95%] sm:max-w-3xl lg:w-3xl m-auto px-2 sm:px-10 py-12'>
             <div className='flex flex-col justify-center items-center'>
               <LogoIcon fill='black' />
