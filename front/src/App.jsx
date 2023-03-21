@@ -15,6 +15,7 @@ import ChangePassword from './components/ChangePassword'
 import { useEffect } from 'react'
 import EmailForgotPage from './pages/EmailForgotPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
+import VerifyPage from './pages/VerifyPage'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -41,6 +42,7 @@ function App () {
             <Route path='change-password' element={<Protected><ChangePassword /></Protected>} />
           </Route>
           <Route path='/register' element={<Protected restrictLogged><RegisterPage /></Protected>} />
+          <Route path='/verify' element={<VerifyPage />} />
         </Routes>
       </div>
       <Footer />
