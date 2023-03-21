@@ -34,7 +34,7 @@ function App () {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/forgot-password' element={<Protected restrictLogged><EmailForgotPage /></Protected>} />
-          <Route path='/new-password/' element={<Protected restrictedLogged><ResetPasswordPage /></Protected>} />
+          <Route path='/new-password/' element={<ResetPasswordPage />} />
           <Route path='/login' element={<Protected restrictLogged><LoginPage /></Protected>} />
           <Route path='/profile' element={<Profile />}>
             <Route index element={<Protected><InfoProfile /></Protected>} />

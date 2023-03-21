@@ -5,7 +5,7 @@ export default async function changePasswordService (oldPassword, password, emai
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      Autorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify({ oldPassword, password, email })
   })
