@@ -17,7 +17,6 @@ export default function EditProfile () {
   const { id, name, surname, email: emailOld, phone, token, setUser } = useUserStore(store => store)
   const [errorEdit, setErrorEdit] = useState(false)
 
-  const { name: nameRegex, email: emailRegex, phone: phoneRegex } = regex
   useEffect(() => {
     hiddenProfileTrue()
   }, [])
@@ -28,21 +27,10 @@ export default function EditProfile () {
         initialValues={{ name, surname, email: emailOld, phone }}
         validate={(values) => {
           const errors = {}
-          if (!nameRegex.test(values.name)) {
-            errors.name = 'El nombre es solo debe tener letras'
-          }
-
-          if (!nameRegex.test(values.surname)) {
-            errors.surname = 'El apellido es solo debe tener letras'
-          }
-
-          if (!emailRegex.test(values.email)) {
-            errors.email = 'El debe contener un dominio válido ej: @dominio.com'
-          }
-
-          if (!phoneRegex.test(values.phone)) {
-            errors.phone = 'El telefono debe ser de 10 digitos'
-          }
+          if (!regex.name.exp.test(values.name)) errors.name = regex.name.msg
+          if (!regex.name.exp.test(values.surname)) errors.surname = regex.name.msg.replace('nombres', 'apellidos')
+          if (!regex.phone.exp.test(values.phone)) errors.phone = regex.phone.msg
+          if (!regex.email.exp.test(values.email)) errors.email = regex.email.msg
           return errors
         }}
         onSubmit={async (values) => {

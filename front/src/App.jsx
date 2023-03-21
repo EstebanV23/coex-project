@@ -1,7 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import RestartPassword from './components/RestartPassword'
-import EmailForgotPassword from './components/EmailForgotPassword'
 import Home from './components/Home'
 import { useNavbarStore } from './stores/useNavbarStore'
 import { shallow } from 'zustand/shallow'
@@ -15,6 +13,8 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import ChangePassword from './components/ChangePassword'
 import { useEffect } from 'react'
+import EmailForgotPage from './pages/EmailForgotPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
 import File from './components/File'
 
 function App () {
@@ -30,11 +30,11 @@ function App () {
   return (
     <>
       <Navbar />
-      <div className='bg-primary-blue-300' onClick={hiddenTrue}>
+      <div className='bg-primary-blue-300 min-h-[45vh]' onClick={hiddenTrue}>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/forgot-password' element={<EmailForgotPassword />} />
-          <Route path='/new-password/' element={<RestartPassword />} />
+          <Route path='/forgot-password' element={<Protected restrictLogged><EmailForgotPage /></Protected>} />
+          <Route path='/new-password/' element={<Protected restrictedLogged><ResetPasswordPage /></Protected>} />
           <Route path='/login' element={<Protected restrictLogged><LoginPage /></Protected>} />
           <Route path='/profile' element={<Profile />}>
             <Route index element={<Protected><InfoProfile /></Protected>} />

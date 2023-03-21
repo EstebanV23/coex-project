@@ -5,6 +5,7 @@ import { AiTwotonePhone } from 'react-icons/ai'
 import { TbPassword } from 'react-icons/tb'
 import { regex } from '../constants/regex'
 import { LogoIcon } from './Icons'
+import { MdOutlineAlternateEmail } from 'react-icons/md'
 import Button from './Button'
 import { Link, useNavigate } from 'react-router-dom'
 import registerService from '../services/registerService'
@@ -31,20 +32,20 @@ export default function Register () {
         }}
         validate={(values) => {
           const errorsValidate = {}
-          if (!regex.name.test(values.name)) {
-            errorsValidate.name = '*Los nombres solo permiten letras'
+          if (!regex.name.exp.test(values.name)) {
+            errorsValidate.name = regex.name.msg
           }
-          if (!regex.name.test(values.surname)) {
-            errorsValidate.surname = '*Los apellido solo permiten letras'
+          if (!regex.name.exp.test(values.surname)) {
+            errorsValidate.surname = regex.name.msg.replace('nombres', 'apellidos')
           }
-          if (!regex.phone.test(values.phone)) {
-            errorsValidate.phone = '*El teléfono debe contener 10 digitos'
+          if (!regex.phone.exp.test(values.phone)) {
+            errorsValidate.phone = regex.phone.msg
           }
-          if (!regex.email.test(values.email)) {
-            errorsValidate.email = '*El email debe tener un dóminio válido Ej: ejemplo@dominio.com'
+          if (!regex.email.exp.test(values.email)) {
+            errorsValidate.email = regex.email.msg
           }
-          if (!regex.password.test(values.password)) {
-            errorsValidate.password = '*La contraseña debe ser de 8 caracteres, con al menos una letra mayúscula, una letra minúscula y un número'
+          if (!regex.password.exp.test(values.password)) {
+            errorsValidate.password = regex.password.msg
           }
           if (values.password !== values.secondPassword) {
             errorsValidate.secondPassword = '*Las contraseñas no coinciden'
@@ -88,7 +89,7 @@ export default function Register () {
                     disabled={loading} icon={<AiTwotonePhone size={22} />} type='text' placeholder='Telefono' name='phone' error={errors}
                   />
                   <Input
-                    disabled={loading} icon={<BsPersonFill size={22} />} type='text' placeholder='Correo electrónico' name='email' error={errors}
+                    disabled={loading} icon={<MdOutlineAlternateEmail size={22} />} type='text' placeholder='Correo electrónico' name='email' error={errors}
                   />
                 </div>
                 <div className='flex flex-col md:flex-row gap-6 w-full'>

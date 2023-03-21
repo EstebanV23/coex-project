@@ -5,62 +5,87 @@ import { useUserStore } from '../stores/useUserStore'
 import sweetAlert from '../constants/sweetAlert'
 import { TbPassword } from 'react-icons/tb'
 import Button from './Button'
+import { useState } from 'react'
+import EyePassword from './EyePassword'
+import changePasswordService from '../services/changePasswordService'
 
 export default function ChangePassword () {
-  const { password: passwordRegex } = regex
-  const { id, token } = useUserStore(store => store)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showPasswordOld, setShowPasswordOld] = useState(false)
+  const { email, token } = useUserStore(store => store)
+
   return (
     <div>
       <h2 className='text-3xl font-bold text-center mb-3'>Cambio de contraseña</h2>
       <Formik
         initialValues={{
           oldPassword: '',
-          newPassword: '',
-          newPasswordConfirm: ''
+          password: '',
+          passwordConfirm: ''
         }}
         validate={(values) => {
           const errors = {}
-          if (!passwordRegex.test(values.oldPassword)) {
-            errors.oldPassword = 'La contraseña debe tener al menos 8 caracteres, con una mayúscula, minúscula y un número'
+          if (!regex.password.exp.test(values.oldPassword)) {
+            errors.oldPassword = regex.password.msg
           }
 
-          if (!passwordRegex.test(values.newPassword)) {
-            errors.newPassword = 'La contraseña debe tener al menos 8 caracteres, con una mayúscula, minúscula y un número'
+          if (!regex.password.exp.test(values.password)) {
+            errors.password = regex.password.msg
           }
 
-          if (values.newPassword !== values.newPasswordConfirm) {
-            errors.newPasswordConfirm = 'Las contraseñas no coinciden'
+          if (values.password === values.oldPassword) {
+            errors.password = 'La nueva contraseña no puede ser igual a la antigua'
+          }
+
+          if (values.password !== values.passwordConfirm) {
+            errors.passwordConfirm = 'Las contraseñas no coinciden'
           }
           return errors
         }}
-        onSubmit={async (values) => {
-          sweetAlert('Editado correctamente', 'Tus datos han sido editados correctamente')
+        onSubmit={async (values, { resetForm }) => {
+          const { oldPassword, password } = values
+          const response = await changePasswordService(oldPassword, password, email, token)
+          if (response.error) {
+            sweetAlert('Tu antigua contraseña no es la correcta', 'Ha ocurrido un error al cambiar tu contraseña, por favor, vuelve a intentarlo', 'error')
+            return
+          }
+          sweetAlert('Cambio de contraseña exitoso', 'Tu contraseña ha sido cambiada con éxito')
+          resetForm({ values: { oldPassword: '', password: '', passwordConfirm: '' } })
         }}
       >
         {
           ({ errors, handleSubmit }) =>
             <form action='' className='flex flex-col gap-3' onSubmit={handleSubmit}>
+              <div className='relative'>
+                <Input
+                  id='oldPassword'
+                  icon={<TbPassword size={23} />}
+                  error={errors}
+                  name='oldPassword'
+                  autoComplete='off'
+                  placeholder='Antigua contraseña'
+                  type={showPasswordOld ? 'text' : 'password'}
+                />
+                <EyePassword setState={setShowPasswordOld} state={showPasswordOld} />
+              </div>
+              <div className='relative'>
+                <Input
+                  id='password'
+                  icon={<TbPassword size={23} />}
+                  error={errors}
+                  type={showPassword ? 'text' : 'password'}
+                  name='password'
+                  autoComplete='off'
+                  placeholder='Nueva contraseña'
+                />
+                <EyePassword setState={setShowPassword} state={showPassword} />
+              </div>
               <Input
-                id='oldPassword'
+                id='passwordConfirm'
                 icon={<TbPassword size={23} />}
                 error={errors}
-                name='oldPassword'
-                autoComplete='off'
-                placeholder='Antigua contraseña'
-              />
-              <Input
-                id='newPassword'
-                icon={<TbPassword size={23} />}
-                error={errors}
-                name='newPassword'
-                autoComplete='off'
-                placeholder='Nueva contraseña'
-              />
-              <Input
-                id='confirmPassword'
-                icon={<TbPassword size={23} />}
-                error={errors}
-                name='confirmPassword'
+                type={showPassword ? 'text' : 'password'}
+                name='passwordConfirm'
                 autoComplete='off'
                 placeholder='Repite tu nueva contraseña'
               />
