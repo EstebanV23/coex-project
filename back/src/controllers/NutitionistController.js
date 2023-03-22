@@ -22,7 +22,7 @@ const NutritionistController = {
       const { email } = nutritionist
       buildResponse.success(res, 200, 'Nutritionist', email)
     } catch (err) {
-      next(err)
+      buildResponse.success(res, 200, 'Nutritionist', {})
     }
   },
 

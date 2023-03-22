@@ -31,26 +31,26 @@ export default function Register () {
           secondPassword: ''
         }}
         validate={(values) => {
-          const errorsValidate = {}
+          const errors = {}
           if (!regex.name.exp.test(values.name)) {
-            errorsValidate.name = regex.name.msg
+            errors.name = regex.name.msg
           }
           if (!regex.name.exp.test(values.surname)) {
-            errorsValidate.surname = regex.name.msg.replace('nombres', 'apellidos')
+            errors.surname = regex.name.msg.replace('nombres', 'apellidos')
           }
           if (!regex.phone.exp.test(values.phone)) {
-            errorsValidate.phone = regex.phone.msg
+            errors.phone = regex.phone.msg
           }
           if (!regex.email.exp.test(values.email)) {
-            errorsValidate.email = regex.email.msg
+            errors.email = regex.email.msg
           }
           if (!regex.password.exp.test(values.password)) {
-            errorsValidate.password = regex.password.msg
+            errors.password = regex.password.msg
           }
           if (values.password !== values.secondPassword) {
-            errorsValidate.secondPassword = '*Las contraseñas no coinciden'
+            errors.secondPassword = '*Las contraseñas no coinciden'
           }
-          return errorsValidate
+          return errors
         }}
         onSubmit={async (values) => {
           setLoading(true)
