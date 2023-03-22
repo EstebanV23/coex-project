@@ -15,18 +15,18 @@ export default function Navbar () {
     <>
       <div className='flex items-center justify-between px-2 sm:px-8 md:px-20 py-1 bg-primary-blue h-16 font-work'>
         <NavLink to='/'>
-          <img src='/logo.svg' className='h-8 md:10' alt='' />
+          <img src='/logo.svg' className='h-8 md:h-10' alt='logo_empresa' />
         </NavLink>
         <ContentNavbar>
           {isLogged
             ? <LogedNavbar />
-            : <LinkButton to='login' className='text-white hover:text-primary-blue hover:bg-white duration-500'>Ingresar</LinkButton>}
-          <IoCloseSharp size={30} className='block md:hidden absolute right-10 top-10 cursor-pointer text-white' onClick={toggleHidden} />
+            : <LinkButton to='login' className='text-white self-center hover:text-primary-blue hover:bg-white duration-500'>Ingresar</LinkButton>}
+          <IoCloseSharp size={30} className='block lg:hidden absolute right-10 top-10 cursor-pointer text-white' onClick={toggleHidden} />
         </ContentNavbar>
         <GiHamburgerMenu
           size={30}
           color='white'
-          className='block md:hidden cursor-pointer'
+          className='block lg:hidden cursor-pointer'
           onClick={toggleHidden}
         />
       </div>
