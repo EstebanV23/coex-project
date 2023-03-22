@@ -43,7 +43,7 @@ export default function UnitVal () {
     >
       {({ errors, values, handleSubmit, handleChange, handleBlur }) => (
 
-        <div className='flex justify-center items-center'>
+        <div className='flex justify-center p-10 items-center'>
           <form className='bg-white h-fit p-3 rounded-xl w-[95%] sm:p-6 md:p-12 md:max-w-3xl lg:w-3xl' onSubmit={handleSubmit}>
             <div className='flex flex-col gap-0 sm:gap-4 mb-5 justify-center items-center'>
               <LogoIcon fill='black' />
