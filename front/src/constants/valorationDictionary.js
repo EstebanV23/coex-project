@@ -1,6 +1,6 @@
 export const valoracionDiccionario = {
   0: 'Peso adecuado para la talla',
-  1: 'Riesgo de desnitrición',
+  1: 'Riesgo de desnutrición',
   2: 'Desnutrición aguda moderada',
   3: 'Desnutricion aguda severa',
   4: 'Obesidad',
