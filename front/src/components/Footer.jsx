@@ -1,25 +1,24 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import sendDataContact from './../services/modalEmailService'
-import { WaveUp } from './Icons'
+import { LogoIcon } from './Icons'
+
 export default function Footer () {
   return (
     <>
-      <div className='w-full h-fit flex flex-wrap 2xl:justify-around md:justify-start sm:justify-start justify-center gap-10 p-7 font-light text-gray-500 text-base bg-black bottom-0'>
-        <WaveUp fill='#68A7AD' />
+      <img src='/wave.svg' />
+      <div className='w-full h-fit flex flex-wrap justify-around gap-10 p-5 font-light text-gray-400 text-base bg-black bottom-0'>
 
-        <div className='w-80 text-left'>
-          <h3 className='text-xl font-bold text-white mb-2.5'>Nosotros</h3>
+        <div className='w-80'>
+          <h3 className='text-xl text-center font-bold text-white mb-2.5'>Nosotros</h3>
           <p>Somos un grupo de desarrolladores que ha implementado esta herramienta para la ayuda de nutricionistas.</p>
-          <img src='' alt='' />
-
           <div className='my-5 w-[200px] h-[20px] sm:w-[300px] sm:h-[30px]'>
-            <img src='/logoAzul.svg' />
+            <LogoIcon fill='#68A7AD' />
           </div>
         </div>
 
-        <div className='w-80 text-left '>
-          <h3 className='text-xl font-bold text-white mb-2.5'>Navegacion</h3>
+        <div className='text-center'>
+          <h3 className='text-xl text-center font-bold text-white mb-2.5'>Navegacion</h3>
           <div className='flex flex-col  '>
             <NavLink to='/' preventScrollReset>
               <p>Inicio</p>
@@ -37,8 +36,8 @@ export default function Footer () {
 
         </div>
 
-        <div className='w-80 text-justify'>
-          <h3 className='text-xl font-bold text-white mb-2.5'>Contacto</h3>
+        <div className='w-80 flex flex-col items-center'>
+          <h3 className='text-xl text-center font-bold text-white mb-2.5'>Contacto</h3>
           <p>¿Quieres contactar con nosotros para futuros trabajos? Dejanos tu correo electronico y estaremos contactando contigo las proximas horas.</p>
           <button onClick={sendDataContact} className='bg-blue-500 mt-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full'>Contactar</button>
         </div>
