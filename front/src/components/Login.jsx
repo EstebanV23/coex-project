@@ -43,7 +43,7 @@ export default function Login () {
         onSubmit={handleSubmit}
       >
         {({ errors }) => (
-          <div className='bg-white rounded-3xl w-[95%] sm:max-w-3xl lg:w-3xl m-auto px-2 sm:px-10 py-12'>
+          <div className='bg-white rounded-3xl w-[95%] sm:max-w-3xl m-auto px-2 sm:px-10 py-12'>
             <div className='flex flex-col justify-center items-center'>
               <LogoIcon fill='black' />
               <h1 className='text-4xl font-work mt-6 font-bold'>Login</h1>
@@ -54,7 +54,6 @@ export default function Login () {
                 type='email'
                 name='email'
                 error={errors}
-                placeholder='Tucorreo@ejemplo.com'
               />
 
               <div className='relative w-full'>
@@ -63,7 +62,6 @@ export default function Login () {
                   type={showPassword ? 'text' : 'password'}
                   name='password'
                   error={errors}
-                  placeholder='************'
                   autoComplete='off'
                 />
                 <EyePassword size={23} state={showPassword} setState={setShowPassword} />
