@@ -1,6 +1,5 @@
 import { Formik } from 'formik'
 import Button from './Button'
-import { LogoIcon } from './Icons'
 import Input from './Input'
 import { GiBodyHeight } from 'react-icons/gi'
 import { FaWeight, FaBaby } from 'react-icons/fa'
