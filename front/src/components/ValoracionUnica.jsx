@@ -9,8 +9,15 @@ import { valoracionDiccionario } from '../constants/valorationDictionary'
 import { useNavbarStore } from '../stores/useNavbarStore'
 import { shallow } from 'zustand/shallow'
 import LoadingComponents from './LoadingComponents'
+import { regex } from '../constants/regex'
 
-export default function UnitVal () {
+const validateInputs = values => {
+  const errors = {}
+  if (!regex.peso.exp.test(values.peso)) errors.peso = regex.peso.msg
+  return errors
+}
+
+export default function ValoracionUnica () {
   const [loading, setLoading] = useState(false)
   const [valoracion, setValoracion] = useState(null)
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -57,13 +64,13 @@ export default function UnitVal () {
 
               <div className='flex flex-col md:flex-row gap-6 w-full'>
                 <Input
-                  disabled={loading} icon={<GiBodyHeight size={22} />} type='text' placeholder='Talla' name='talla' error={errors}
+                  required disabled={loading} icon={<GiBodyHeight size={22} />} type='number' placeholder='Talla' name='talla' error={errors}
                 />
                 <Input
-                  disabled={loading} icon={<FaWeight size={22} />} type='text' placeholder='Peso' name='peso' error={errors}
+                  required disabled={loading} icon={<FaWeight size={22} />} type='number' placeholder='Peso' name='peso' error={errors}
                 />
               </div>
-              <Input disabled={loading} name='genero' icon={<FaBaby size={22} />} as='select'>
+              <Input required disabled={loading} name='genero' icon={<FaBaby size={22} />} as='select'>
                 <option value=''>Género</option>
                 <option name='nino' id='nino'>Niño</option>
                 <option name='nina' id='nina'>Niña</option>
