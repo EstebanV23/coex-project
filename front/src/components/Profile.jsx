@@ -6,7 +6,7 @@ import { useUserStore } from '../stores/useUserStore'
 import { IoChevronBack } from 'react-icons/io5'
 import { useProfileStore } from '../stores/useProfileStore'
 import LinksProfile from './LinksProfile'
-import { Wave } from './Icons'
+import { WaveUp } from './Icons'
 import Avatar from './Avatar'
 
 export default function Profile () {
@@ -35,7 +35,7 @@ export default function Profile () {
       <div className='py-14 px-2 w-full sm:max-w-4xl m-auto sm:pr-8 md:pr-20'>
         <Outlet />
       </div>
-      <Wave fill='#9dc6ca' height='20' className='absolute bottom-0' />
+      <WaveUp fill='#9dc6ca' />
     </div>
   )
 }
