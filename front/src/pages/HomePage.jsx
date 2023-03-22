@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import HomeCards from '../components/HomeCards'
 import HomePresentation from '../components/HomePresentation'
 import { useNavbarStore } from '../stores/useNavbarStore'
 export default function HomePage () {
@@ -9,6 +10,7 @@ export default function HomePage () {
   return (
     <>
       <HomePresentation />
+      <HomeCards />
     </>
   )
 }

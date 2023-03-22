@@ -12,10 +12,12 @@ import registerService from '../services/registerService'
 import { useState } from 'react'
 import LoadingComponents from './LoadingComponents'
 import sweetAlert from '../constants/sweetAlert'
+import EyePassword from './EyePassword'
 
 export default function Register () {
   const [loading, setLoading] = useState(false)
   const [emailDuplicate, setEmailDuplicate] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
 
   return (
@@ -71,7 +73,6 @@ export default function Register () {
           <div className='flex justify-center items-center'>
             <form className='bg-white h-fit p-3 rounded-xl w-[95%] sm:p-6 md:p-12 md:max-w-3xl lg:w-3xl' onSubmit={handleSubmit}>
               <div className='flex flex-col gap-0 sm:gap-4 mb-5 justify-center items-center'>
-                <LogoIcon fill='black' />
                 <h1 className='text-3xl font-work font-bold'>Registro</h1>
               </div>
               <div className=' flex flex-wrap gap-6 w-full'>
@@ -93,12 +94,16 @@ export default function Register () {
                   />
                 </div>
                 <div className='flex flex-col md:flex-row gap-6 w-full'>
-                  <Input
-                    disabled={loading} autoComplete='off' icon={<TbPassword size={22} />} type='password' placeholder='Contraseña' name='password' error={errors}
-                  />
+                  <div className='w-full relative'>
+                    <Input
+                      disabled={loading} autoComplete='off' icon={<TbPassword size={22} />} type={showPassword ? 'text' : 'password'} placeholder='Contraseña' name='password' error={errors}
+                    />
+
+                    <EyePassword state={showPassword} setState={setShowPassword} />
+                  </div>
 
                   <Input
-                    disabled={loading} autoComplete='off' icon={<TbPassword size={22} />} type='password' placeholder='Repetir contraseña' name='secondPassword' error={errors}
+                    disabled={loading} autoComplete='off' icon={<TbPassword size={22} />} type={showPassword ? 'text' : 'password'} placeholder='Repetir contraseña' name='secondPassword' error={errors}
                   />
                 </div>
                 <div className='flex flex-col items-start justify-between w-full'>

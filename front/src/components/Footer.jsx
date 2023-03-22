@@ -1,11 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import sendDataContact from './../services/modalEmailService'
+import { WaveUp } from './Icons'
 export default function Footer () {
   return (
     <>
-      <img src='/wave.svg' />
       <div className='w-full h-fit flex flex-wrap 2xl:justify-around md:justify-start sm:justify-start justify-center gap-10 p-7 font-light text-gray-500 text-base bg-black bottom-0'>
+        <WaveUp fill='#68A7AD' />
 
         <div className='w-80 text-left'>
           <h3 className='text-xl font-bold text-white mb-2.5'>Nosotros</h3>
