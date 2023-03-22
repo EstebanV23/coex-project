@@ -5,11 +5,17 @@ import Input from './Input'
 import { GiBodyHeight } from 'react-icons/gi'
 import { FaWeight } from 'react-icons/fa'
 import { RiPencilRulerLine } from 'react-icons/ri'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { valoracionDiccionario } from '../constants/valorationDictionary'
+import { useNavbarStore } from '../stores/useNavbarStore'
+import { shallow } from 'zustand/shallow'
 
 export default function UnitVal () {
   const [valoracion, setValoracion] = useState(null)
+  const { hiddenTrue } = useNavbarStore(store => store, shallow)
+  useEffect(() => {
+    hiddenTrue()
+  }, [])
   return (
     <Formik
       initialValues={{

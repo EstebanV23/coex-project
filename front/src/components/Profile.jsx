@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import { shallow } from 'zustand/shallow'
 import { useNavbarStore } from '../stores/useNavbarStore'
 import { useUserStore } from '../stores/useUserStore'
-import Loading from './Loading'
-import MyAvatar from './MyAvatar'
 import { IoChevronBack } from 'react-icons/io5'
 import { useProfileStore } from '../stores/useProfileStore'
 import LinksProfile from './LinksProfile'
 import { Wave } from './Icons'
+import Avatar from './Avatar'
 
 export default function Profile () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -25,9 +24,9 @@ export default function Profile () {
 
   return (
     <div className='flex gap-5 bg-gray-200 h-fit relative'>
-      <div className={`${hiddenStyles} bg-slate-300 text-primary-blue-800 p-3 rounded-lg transition-all z-0 flex flex-col items-center fixed gap-8 h-fit top-1/2 -translate-y-1/2 left-0 w-fit justify-center sm:static sm:left-auto sm:top-auto sm:translate-x-0 sm:translate-y-0 sm:py-14 sm:pr-8 md:pl-20 sm:rounded-none sm:h-auto sm:justify-start sm:w-3/5 sm:max-w-[300px]`}>
+      <div className={`${hiddenStyles} bg-slate-300 text-primary-blue-800 p-3 rounded-lg transition-all z-10 flex flex-col items-center fixed gap-8 h-fit top-1/2 -translate-y-1/2 left-0 w-fit justify-center sm:static sm:left-auto sm:top-auto sm:translate-x-0 sm:translate-y-0 sm:py-14 sm:pr-8 md:pl-20 sm:rounded-none sm:h-auto sm:justify-start sm:w-3/5 sm:max-w-[300px]`}>
         <h1 className='text-2xl hidden font-semibold sm:block'>Hola <span className='font-bold'>{name}</span>!</h1>
-        <MyAvatar fullName={`${name} ${surname}`} className='text-2xl hidden sm:block' />
+        <Avatar sizeProp={53} className='text-2xl hidden sm:block'>{`${name} ${surname}`}</Avatar>
         <ul className='flex flex-col items-center text-lg'>
           <LinksProfile />
         </ul>
