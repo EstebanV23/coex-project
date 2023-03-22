@@ -64,11 +64,6 @@ export default function UnitVal () {
                 <SelectUnit
                   name='genero' value={values.genero} onChange={handleChange} onBlur={handleBlur}
                 />
-                {/* <select id='' name='genero' value={values.genero} onChange={handleChange} onBlur={handleBlur}>
-                  <option value=''>Seleccione</option>
-                  <option name='nino' id='nino'>nino</option>
-                  <option name='nina' id='nina'>nina</option>
-                </select> */}
               </div>
               <div className='flex flex-col md:flex-row gap-6 w-full'>
                 <Input
