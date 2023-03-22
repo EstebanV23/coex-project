@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Home from './components/Home'
 import { useNavbarStore } from './stores/useNavbarStore'
 import { shallow } from 'zustand/shallow'
 import Profile from './components/Profile'
@@ -18,6 +17,7 @@ import ResetPasswordPage from './pages/ResetPasswordPage'
 import VerifyPage from './pages/VerifyPage'
 import File from './components/File'
 import ValoracionUnica from './components/ValoracionUnica'
+import HomePage from './pages/HomePage'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -34,7 +34,7 @@ function App () {
       <Navbar />
       <div className='bg-primary-blue-300 min-h-[45vh]' onClick={hiddenTrue}>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<HomePage />} />
           <Route path='/forgot-password' element={<Protected restrictLogged><EmailForgotPage /></Protected>} />
           <Route path='/new-password/' element={<ResetPasswordPage />} />
           <Route path='/login' element={<Protected restrictLogged><LoginPage /></Protected>} />
@@ -45,8 +45,8 @@ function App () {
           </Route>
           <Route path='/register' element={<Protected restrictLogged><RegisterPage /></Protected>} />
           <Route path='/verify' element={<VerifyPage />} />
-          <Route path='/archivo' element={<File />} />
-          <Route path='/valoracion' element={<ValoracionUnica />} />
+          <Route path='/file-up' element={<Protected verified><File /></Protected>} />
+          <Route path='/valoration' element={<Protected><ValoracionUnica /></Protected>} />
         </Routes>
       </div>
       <Footer />

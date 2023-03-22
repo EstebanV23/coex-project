@@ -1,15 +1,21 @@
 import { Formik } from 'formik'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ViwerExcel from './ViwerExcel'
 import LoadingComponents from './LoadingComponents'
+import { shallow } from 'zustand/shallow'
+import { useNavbarStore } from '../stores/useNavbarStore'
 
 export default function File () {
   const [fileData, setFileData] = useState(null)
   function Change (e) {
     setFileData(e)
   }
+  const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    hiddenTrue()
+  }, [])
   return (
     <Formik
       initialValues={{
