@@ -1,5 +1,5 @@
-import { config } from "dotenv";
-config();
+import { config } from 'dotenv'
+config()
 
 // Configuración de variables de entorno
 export default {
@@ -9,6 +9,5 @@ export default {
   mailUser: process.env.MAIL_USER,
   mailPass: process.env.MAIL_PASS,
   uriApp: process.env.URI_APP || `http://localhost:${process.env.PORT}`,
-  uriAppFront:
-    process.env.URI_APP_FRONT || `http://localhost:${process.env.PORT_FRONT}`,
-};
+  uriAppFront: process.env.URI_APP_FRONT || `http://localhost:${process.env.PORT_FRONT}`
+}
