@@ -8,9 +8,10 @@ import { FaWeight } from 'react-icons/fa'
 import { RiPencilRulerLine } from 'react-icons/ri'
 import { useState } from 'react'
 import { valoracionDiccionario } from '../constants/valorationDictionary'
-
+import LoadingComponents from './LoadingComponents'
 export default function UnitVal () {
   const [valoracion, setValoracion] = useState(null)
+  const [loading, setLoading] = useState(false)
   return (
     <Formik
       initialValues={{
@@ -19,6 +20,7 @@ export default function UnitVal () {
         genero: ''
       }}
       onSubmit={(data) => {
+        setLoading(true)
         const { peso, talla, genero } = data
         const options = {
           method: 'POST',
@@ -35,6 +37,7 @@ export default function UnitVal () {
           .then(response => response.json())
           .then(response => {
             setValoracion(response.resultado)
+            setLoading(false)
           })
       }}
     >
@@ -72,7 +75,7 @@ export default function UnitVal () {
                   icon={<RiPencilRulerLine size={22} />} disabled type='text' placeholder='Valoración' name='valoracion' value={valoracionDiccionario[valoracion]} error={errors}
                 />
               </div>
-              <Button type='submit' className='py-2 transition-all duration-500 text-xl text-primary-blue font-bold hover:bg-primary-blue hover:text-white border-primary-blue'>Valorar</Button>
+              <Button type='submit' className='py-2 transition-all duration-500 text-xl text-primary-blue font-bold hover:bg-primary-blue hover:text-white border-primary-blue'>{loading ? <LoadingComponents size={27} /> : 'Valorar'}</Button>
 
             </div>
           </form>
