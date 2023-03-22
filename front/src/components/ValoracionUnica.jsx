@@ -55,20 +55,17 @@ export default function UnitVal () {
 
               <div className='flex flex-col md:flex-row gap-6 w-full'>
                 <Input
-                  icon={<GiBodyHeight size={22} />} type='text' placeholder='Talla' name='talla' error={errors} value={values.talla} onChange={handleChange} onBlur={handleBlur}
+                  icon={<GiBodyHeight size={22} />} type='text' placeholder='Talla' name='talla' error={errors}
                 />
                 <Input
-                  icon={<FaWeight size={22} />} type='text' placeholder='Peso' name='peso' error={errors} value={values.peso} onChange={handleChange} onBlur={handleBlur}
+                  icon={<FaWeight size={22} />} type='text' placeholder='Peso' name='peso' error={errors}
                 />
               </div>
-              <div className='flex flex-col gap-3 w-full'>
-                <label htmlFor=''>Género</label>
-                <select id='' name='genero' value={values.genero} onChange={handleChange} onBlur={handleBlur}>
-                  <option value=''>Seleccione</option>
-                  <option name='nino' id='nino'>nino</option>
-                  <option name='nina' id='nina'>nina</option>
-                </select>
-              </div>
+              <Input name='generos' icon={<FaWeight size={22} />} as='select'>
+                <option value=''>Genero</option>
+                <option name='nino' id='nino'>nino</option>
+                <option name='nina' id='nina'>nina</option>
+              </Input>
               <div className='flex flex-col md:flex-row gap-6 w-full'>
                 <Input
                   icon={<RiPencilRulerLine size={22} />} disabled type='text' placeholder='Valoración' name='valoracion' value={valoracionDiccionario[valoracion]} error={errors}
