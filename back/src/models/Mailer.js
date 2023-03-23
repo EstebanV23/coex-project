@@ -1,12 +1,13 @@
 import emailSend from '../config/emailSend.js'
 
 class Mailer {
-  constructor ({ from, to, subject, text, html }) {
+  constructor ({ from, to, subject, text, html, atachments }) {
     this.from = from
     this.to = to
     this.subject = subject
     this.text = text
     this.html = html
+    this.atachments = atachments
   }
 
   async sendMail () {
@@ -15,7 +16,8 @@ class Mailer {
       to: this.to,
       subject: this.subject,
       text: this.text,
-      html: this.html
+      html: this.html,
+      atachments: this.atachments
     })
   }
 }
