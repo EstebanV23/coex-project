@@ -5,14 +5,21 @@ import { useUserStore } from '../stores/useUserStore'
 import sweetAlert from '../constants/sweetAlert'
 import { TbPassword } from 'react-icons/tb'
 import Button from './Button'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import EyePassword from './EyePassword'
 import changePasswordService from '../services/changePasswordService'
+import { useProfileStore } from '../stores/useProfileStore'
+import { shallow } from 'zustand/shallow'
 
 export default function ChangePassword () {
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordOld, setShowPasswordOld] = useState(false)
   const { email, token } = useUserStore(store => store)
+  const { hiddenProfileTrue } = useProfileStore(store => store, shallow)
+
+  useEffect(() => {
+    hiddenProfileTrue()
+  }, [])
 
   return (
     <div>

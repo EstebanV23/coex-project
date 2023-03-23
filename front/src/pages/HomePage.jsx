@@ -1,11 +1,14 @@
 import { useEffect } from 'react'
+import HomePresentation from '../components/HomePresentation'
 import { useNavbarStore } from '../stores/useNavbarStore'
-export default function Home () {
+export default function HomePage () {
   const { hiddenTrue } = useNavbarStore(reduce => reduce)
   useEffect(() => {
     hiddenTrue()
   }, [])
   return (
-    <h1 className='font-work text-2xl font-bold text-center'>Here is home</h1>
+    <>
+      <HomePresentation />
+    </>
   )
 }
