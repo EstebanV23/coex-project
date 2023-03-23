@@ -70,10 +70,10 @@ export default function ValoracionUnica () {
 
               <div className='flex flex-col md:flex-row gap-6 w-full'>
                 <Input
-                  required disabled={loading} icon={<GiBodyHeight size={22} />} type='number' placeholder='Talla' name='talla' error={errors}
+                  required disabled={loading} icon={<GiBodyHeight size={22} />} type='text' placeholder='Talla' name='talla' error={errors}
                 />
                 <Input
-                  required disabled={loading} icon={<FaWeight size={22} />} type='number' placeholder='Peso' name='peso' error={errors}
+                  required disabled={loading} icon={<FaWeight size={22} />} type='text' placeholder='Peso' name='peso' error={errors}
                 />
               </div>
               <Input required disabled={loading} name='genero' icon={<FaBaby size={22} />} as='select'>
