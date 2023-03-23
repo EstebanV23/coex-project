@@ -1,3 +1,5 @@
+import useUser from '../hooks/useUser'
+
 const getPercent = (percent, value) =>
   (value * percent) / 100
 
@@ -103,9 +105,16 @@ function stringAvatar (name) {
 }
 
 export default function Avatar ({ children, sizeProp, className, ...props }) {
+  const { avatar } = useUser()
+
+  if (avatar) {
+    return (
+      <img src={avatar} width={sizeProp + 8} height={sizeProp + 8} className={`aspect-square rounded-full ${className}`} {...props} />
+    )
+  }
+
   const size = getPercent(48, sizeProp)
   const textColor = getTextColor(stringToColor(children))
-
   return (
     <svg height={sizeProp} width={sizeProp} className={className} {...props}>
       <circle cx={size} cy={size} r={size} fill={stringToColor(children)} />

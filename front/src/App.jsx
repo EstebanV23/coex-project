@@ -18,26 +18,28 @@ import VerifyPage from './pages/VerifyPage'
 import File from './components/File'
 import ValoracionUnica from './components/ValoracionUnica'
 import HomePage from './pages/HomePage'
+import { useModalStore } from './stores/useModalStore'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const { setUser } = useUserStore(store => store, shallow)
+  const { close } = useModalStore(store => store, shallow)
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
       setUser(JSON.parse(localStorage.getItem('user')))
+      close()
     }
   }, [])
 
   return (
     <>
       <Navbar />
-      <div className='bg-primary-blue-300 min-h-[45vh]' onClick={hiddenTrue}>
+      <div className='bg-primary-blue-300 min-h-screen flex flex-col justify-between' onClick={hiddenTrue}>
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/forgot-password' element={<Protected restrictLogged><EmailForgotPage /></Protected>} />
           <Route path='/new-password/' element={<ResetPasswordPage />} />
-          <Route path='/login' element={<Protected restrictLogged><LoginPage /></Protected>} />
           <Route path='/profile' element={<Profile />}>
             <Route index element={<Protected><InfoProfile /></Protected>} />
             <Route path='edit' element={<Protected><EditProfile /></Protected>} />
@@ -48,8 +50,8 @@ function App () {
           <Route path='/file-up' element={<Protected verified><File /></Protected>} />
           <Route path='/valoration' element={<Protected><ValoracionUnica /></Protected>} />
         </Routes>
+        <Footer />
       </div>
-      <Footer />
     </>
   )
 }
