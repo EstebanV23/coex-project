@@ -6,9 +6,9 @@ import { LogoIcon, WaveUp } from './Icons'
 export default function Footer () {
   return (
     <>
-      <div className='text-gray-400 text-base bg-black'>
+      <div className='text-gray-400 text-base bg-primary-blue-900'>
         <WaveUp fill='#9DC6CA' />
-        <div className='w-full h-fit flex flex-wrap justify-around gap-10 pb-5 font-light px-2'>
+        <div className='w-full max-w-[1200px] m-auto h-fit flex flex-wrap justify-around gap-10 pb-5 font-light px-2'>
           <div className='w-80'>
             <h3 className='text-xl text-center font-bold text-white mb-2.5'>Nosotros</h3>
             <p>Somos un grupo de desarrolladores que ha implementado esta herramienta para la ayuda de nutricionistas.</p>

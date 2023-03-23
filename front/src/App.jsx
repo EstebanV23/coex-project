@@ -32,7 +32,7 @@ function App () {
   return (
     <>
       <Navbar />
-      <div className='bg-primary-blue-300 min-h-[50vh]' onClick={hiddenTrue}>
+      <div className='bg-primary-blue-300 min-h-screen flex flex-col justify-between' onClick={hiddenTrue}>
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/forgot-password' element={<Protected restrictLogged><EmailForgotPage /></Protected>} />
@@ -48,8 +48,8 @@ function App () {
           <Route path='/file-up' element={<Protected verified><File /></Protected>} />
           <Route path='/valoration' element={<Protected><ValoracionUnica /></Protected>} />
         </Routes>
+        <Footer />
       </div>
-      <Footer />
     </>
   )
 }
