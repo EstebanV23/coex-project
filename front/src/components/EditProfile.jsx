@@ -11,6 +11,7 @@ import Button from './Button'
 import { regex } from '../constants/regex'
 import { updateNutritionist } from '../services/editProfileService'
 import sweetAlert from '../constants/sweetAlert'
+import ImageAvatarInput from './ImageAvatarInput'
 
 export default function EditProfile () {
   const { hiddenProfileTrue } = useProfileStore(store => store, shallow)
@@ -23,6 +24,7 @@ export default function EditProfile () {
   return (
     <div>
       <h2 className='text-3xl font-bold text-center mb-3'>Edita tu información</h2>
+      <ImageAvatarInput />
       <Formik
         initialValues={{ name, surname, email: emailOld, phone }}
         validate={(values) => {
@@ -88,6 +90,7 @@ export default function EditProfile () {
               <Button type='submit' className='text-xl py-2'>Enviar</Button>
             </form>
         }
+
       </Formik>
     </div>
   )

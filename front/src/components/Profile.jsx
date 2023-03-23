@@ -6,7 +6,6 @@ import { useUserStore } from '../stores/useUserStore'
 import { IoChevronBack } from 'react-icons/io5'
 import { useProfileStore } from '../stores/useProfileStore'
 import LinksProfile from './LinksProfile'
-import { WaveUp } from './Icons'
 import Avatar from './Avatar'
 
 export default function Profile () {
@@ -35,7 +34,6 @@ export default function Profile () {
       <div className='py-14 px-2 w-full m-auto text-primary-blue-800'>
         <Outlet />
       </div>
-      {/* <WaveUp fill='#9dc6ca' /> */}
     </div>
   )
 }

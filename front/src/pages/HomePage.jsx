@@ -9,9 +9,9 @@ export default function HomePage () {
     hiddenTrue()
   }, [])
   return (
-    <>
+    <div>
       <HomePresentation />
       <HomeCards />
-    </>
+    </div>
   )
 }

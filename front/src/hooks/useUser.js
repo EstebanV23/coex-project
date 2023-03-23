@@ -5,7 +5,7 @@ import { useNavbarStore } from '../stores/useNavbarStore'
 import { useNavigate } from 'react-router-dom'
 
 export default function useUser () {
-  const { token, restarUser, setUser, isVerified } = useUserStore(store => store)
+  const { token, restarUser, setUser, isVerified, avatar } = useUserStore(store => store)
   const { hiddenTrue } = useNavbarStore(store => store)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -36,6 +36,7 @@ export default function useUser () {
     isLoginLoading: loading,
     hasLoginError: error,
     isVerified,
+    avatar,
     login,
     logout
   }
