@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom'
 import linksRouters from '../constants/linksRouters'
 import sweetAlert from './../constants/sweetAlert'
+import Login from './Login'
+import Modal from './Modal'
 
 export default function LinksNavbar () {
   const stylesDefault = 'flex flex-col items-center h-full pt-1 px-3 rounded-2xl transition-all duration-400 ease-in-out text-white font-medium text-lg md:text-base hover:text-primary-blue hover:bg-white hover:font-bolder'
@@ -13,7 +15,7 @@ export default function LinksNavbar () {
 
   function handleClickLogged (e) {
     e.preventDefault()
-    sweetAlert('No tienes una sesión iniciada', 'Debes iniciar sesión con tu cuenta para ingresar a este apartado', 'info')
+    return <Modal><Login /></Modal>
   }
 
   return linksRouters().map(link => {

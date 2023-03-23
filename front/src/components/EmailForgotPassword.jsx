@@ -46,9 +46,9 @@ export default function EmailForgotPassword () {
               icon={<MdOutlineAlternateEmail size={23} />}
               name='email'
               type='email'
+              textLabel='Correo electrónico'
               autoComplete='on'
               error={errors}
-              placeholder='Email. ej: ejemplo@dominio.com'
             />
             <Button type='submit' className='text-primary-blue py-3 border-primary-blue hover:bg-primary-blue hover:text-white transition-all duration-500'>Enviar</Button>
           </form>

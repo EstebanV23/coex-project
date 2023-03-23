@@ -5,6 +5,7 @@ export default function Card ({ children, title, to, needVerify = true }) {
   const { isLogged, isVerified } = useUser()
   const textButtonLog = (!isLogged && 'Inicia sesión') || (needVerify && (!isVerified && 'Verifícate')) || 'Utilizar'
   const classNotAuth = 'opacity-50 cursor-not-allowed'
+
   return (
     <div className='flex flex-col items-center text-center gap-3 bg-white rounded-[3rem] px-6 py-4 basis-[330px]'>
       <h2 className='text-primary-blue font-bold text-2xl'>{title}</h2>

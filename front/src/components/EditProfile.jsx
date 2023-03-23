@@ -49,43 +49,37 @@ export default function EditProfile () {
       >
         {
           ({ errors, handleSubmit }) =>
-            <form action='' className='flex flex-col gap-3' onSubmit={handleSubmit}>
+            <form action='' className='flex flex-col gap-6' onSubmit={handleSubmit}>
               <div className='flex flex-col gap-3 md:flex-row'>
                 <Input
-                  id='name'
                   icon={<BsPersonFill size={23} />}
                   error={errors}
                   name='name'
                   autoComplete='off'
-                  placeholder='Nombres'
+                  textLabel='Nombres'
                 />
                 <Input
-                  id='surname'
                   icon={<BsPersonFill size={23} />}
                   error={errors}
                   name='surname'
                   autoComplete='off'
-                  placeholder='Apellidos'
+                  textLabel='Apellidos'
                 />
               </div>
-              <div className='flex flex-col gap-3'>
-                <Input
-                  id='email'
-                  icon={<MdOutlineAlternateEmail size={23} />}
-                  error={errors}
-                  name='email'
-                  autoComplete='off'
-                  placeholder='Email. ej: ejemplo@midominio.com'
-                />
-                <Input
-                  id='phone'
-                  icon={<AiTwotonePhone size={23} />}
-                  error={errors}
-                  name='phone'
-                  autoComplete='off'
-                  placeholder='Telefono. ej: 3156254789'
-                />
-              </div>
+              <Input
+                icon={<MdOutlineAlternateEmail size={23} />}
+                error={errors}
+                name='email'
+                autoComplete='off'
+                textLabel='Correo electrónico'
+              />
+              <Input
+                icon={<AiTwotonePhone size={23} />}
+                error={errors}
+                name='phone'
+                autoComplete='off'
+                textLabel='Telefono'
+              />
               {errorEdit && <p className='text-xl text-error'>El correo al que tratas de cambiar ya está registrado</p>}
               <Button type='submit' className='text-xl py-2'>Enviar</Button>
             </form>

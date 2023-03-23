@@ -4,6 +4,7 @@ import ViwerExcel from './ViwerExcel'
 import LoadingComponents from './LoadingComponents'
 import { shallow } from 'zustand/shallow'
 import { useNavbarStore } from '../stores/useNavbarStore'
+import { useUserStore } from '../stores/useUserStore'
 
 export default function File () {
   const [fileData, setFileData] = useState(null)
@@ -11,6 +12,7 @@ export default function File () {
     setFileData(e)
   }
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
+  const { token } = useUserStore(store => store, shallow)
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
   useEffect(() => {
@@ -29,7 +31,7 @@ export default function File () {
           method: 'POST',
           body: f
         }
-        fetch('https://mianthroapi.onrender.com/multi/mitoken', options)
+        fetch(`https://mianthroapi.onrender.com/multi/${token}`, options)
           .then(response => response.json())
           .then(response => {
             setData(response)

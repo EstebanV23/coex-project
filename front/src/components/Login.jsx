@@ -53,6 +53,7 @@ export default function Login () {
                 icon={<EmailIcon />}
                 type='email'
                 name='email'
+                textLabel='Correo electrónico'
                 error={errors}
               />
 
@@ -61,6 +62,7 @@ export default function Login () {
                   icon={<PasswordIcon />}
                   type={showPassword ? 'text' : 'password'}
                   name='password'
+                  textLabel='Contraseña'
                   error={errors}
                   autoComplete='off'
                 />
@@ -72,19 +74,19 @@ export default function Login () {
               <div className='flex flex-col sm:flex-row justify-between w-full text-center gap-3'>
                 <NavLink
                   to='/forgot-password'
-                  className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'
+                  className='text-base text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'
                 >Olvidó su contraseña?
                 </NavLink>
                 <NavLink
                   to='/register'
-                  className='text-xl text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'
+                  className='text-base text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'
                 >Aún no tienes una cuenta?
                 </NavLink>
               </div>
 
               <button
                 type='submit'
-                className='bg-primary-blue text-white h-14 w-full rounded-xl text-2xl font-bold hover:bg-primary-blue-600 ease-in-out duration-200'
+                className='bg-primary-blue text-white h-12 w-full rounded-xl text-xl font-bold hover:bg-primary-blue-600 ease-in-out duration-200'
               >
                 Iniciar sesión
               </button>
