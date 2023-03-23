@@ -13,7 +13,12 @@ import { regex } from '../constants/regex'
 
 const validateInputs = values => {
   const errors = {}
-  if (!regex.peso.exp.test(values.peso)) errors.peso = regex.peso.msg
+  if (!regex.peso.exp.test(values.peso)) {
+    errors.peso = regex.peso.msg
+  }
+  if (!regex.talla.exp.test(values.talla)) {
+    errors.talla = regex.talla.msg
+  }
   return errors
 }
 
@@ -31,6 +36,7 @@ export default function ValoracionUnica () {
         talla: '',
         genero: ''
       }}
+      validate={validateInputs}
       onSubmit={(data) => {
         setLoading(true)
         const { peso, talla, genero } = data
