@@ -19,6 +19,8 @@ const validateInputs = values => {
   if (!regex.talla.exp.test(values.talla)) {
     errors.talla = regex.talla.msg
   }
+
+  if (!values.genero) errors.genero = 'Selecciona una opción'
   return errors
 }
 
@@ -70,16 +72,16 @@ export default function ValoracionUnica () {
 
               <div className='flex flex-col md:flex-row gap-6 w-full'>
                 <Input
-                  required disabled={loading} icon={<GiBodyHeight size={22} />} type='text' placeholder='Talla' name='talla' error={errors}
+                  disabled={loading} icon={<GiBodyHeight size={22} />} type='number' placeholder='Talla' name='talla' error={errors}
                 />
                 <Input
-                  required disabled={loading} icon={<FaWeight size={22} />} type='text' placeholder='Peso' name='peso' error={errors}
+                  disabled={loading} icon={<FaWeight size={22} />} type='number' placeholder='Peso' name='peso' error={errors}
                 />
               </div>
-              <Input required disabled={loading} name='genero' icon={<FaBaby size={22} />} as='select'>
+              <Input disabled={loading} name='genero' error={errors} icon={<FaBaby size={22} />} as='select'>
                 <option value=''>Género</option>
-                <option name='nino' id='nino'>Niño</option>
-                <option name='nina' id='nina'>Niña</option>
+                <option value='nino' id='nino'>Niño</option>
+                <option value='nina' id='nina'>Niña</option>
               </Input>
               <div className='flex flex-col md:flex-row gap-6 w-full'>
                 <Input
