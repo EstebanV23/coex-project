@@ -66,7 +66,7 @@ export default function EditProfile () {
                   placeholder='Apellidos'
                 />
               </div>
-              <div className='flex flex-col gap-3 lg:flex-row'>
+              <div className='flex flex-col gap-3'>
                 <Input
                   id='email'
                   icon={<MdOutlineAlternateEmail size={23} />}
@@ -85,7 +85,7 @@ export default function EditProfile () {
                 />
               </div>
               {errorEdit && <p className='text-xl text-error'>El correo al que tratas de cambiar ya está registrado</p>}
-              <Button type='submit' className='text-primary-blue border-primary-blue hover:text-white hover:bg-primary-blue py-3 text-xl'>Enviar</Button>
+              <Button type='submit' className='text-xl py-2'>Enviar</Button>
             </form>
         }
       </Formik>

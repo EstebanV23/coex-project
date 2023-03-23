@@ -104,6 +104,7 @@ const NutritionistController = {
       await new Mailer(template).sendMail()
       buildResponse.success(res, 200, 'Token generate', { email })
     } catch (error) {
+      console.log({ error: error.message })
       next(error)
     }
   },

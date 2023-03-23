@@ -29,9 +29,11 @@ export default function EmailForgotPassword () {
         onSubmit={async (values) => {
           const { email } = values
           setLoading(true)
-          await forgotPasswordService(email)
+          const response = await forgotPasswordService(email)
           setLoading(false)
-          sweetAlert(`Email enviado a ${email}`, 'Te hemos enviado un email con las instrucciones para cambiar tu contraseña')
+          response.error
+            ? sweetAlert('Este correo no tiene cuenta asociada', 'El correo al que intentas cambiar lac contraseña no tiene una cuenta asociada', 'error')
+            : sweetAlert(`Email enviado a ${email}`, 'Te hemos enviado un email con las instrucciones para cambiar tu contraseña')
           navigate('/login')
         }}
       >

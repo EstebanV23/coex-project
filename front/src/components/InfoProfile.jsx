@@ -18,7 +18,7 @@ export default function InfoProfile () {
         <h3 className=' break-all'>Email: <span className='font-bold'>{email}sdfafsf</span></h3>
       </div>
       <h3 className=' break-all'>Teléfono: <span className='font-bold'>{phone}</span></h3>
-      <LinkButton to='edit' className='transition-all text-primary-blue border-primary-blue hover:text-primary-blue-600 self-start '>Editar información</LinkButton>
+      <LinkButton to='edit' className='transition-all duration-300 text-primary-blue-600 bg-white self-start'>Editar información</LinkButton>
       <VerifiedText />
     </div>
   )

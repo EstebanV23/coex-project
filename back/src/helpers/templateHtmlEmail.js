@@ -11,38 +11,40 @@ export default function templateHtmlEmail ({ title, message, path, textButton })
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet">
   </head>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Work Sans', sans-serif;
-    }
   
-    .body {
-      display: grid;
-      place-items: center;
-      gap: 20px;
-      background-color: #68a7ad;
-      color: white;
-    }
-  
-    .button {
+  <body class="body" style="
+    background-color: #68A7AD;
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    gap: 20px;
+    color: white;
+    margin: 0;
+    padding: 20px;
+    margin: auto;
+    border-radius: 1rem;
+    font-family: 'Work Sans', sans-serif;
+    max-width: 800px;"
+  >
+    <img src="cid:logo" width="60%" style="align-self: center; margin: auto;" alt="Here will be the logo">
+    <h1 style="font-size: 2rem; margin: 10px;">${title}</h1>
+    <p style="font-size: 1.3rem; margin: 10px;">${message}</p>
+    <a href="${path}" class="button" style="
       text-decoration: none;
       background-color: #ffffff;
       padding: 10px 20px;
       border-radius: 2rem;
+      margin: auto;
+      margin-top: 10px;
       font-weight: 600;
       color: #68a7ad;
       border: 2px solid;
-    }
-  </style>
-  
-  <body class="body" style="background-color: #0000ff">
-    <img src="logo.svg" width="340" alt="Here will be the logo">
-    <h1>${title}</h1>
-    <p>${message}</p>
-    <a href="${path}" class="button">${textButton}</a>
+      width: fit-content;
+      font-size: 1.3rem;"
+    >
+      ${textButton}
+    </a>
   </body>
   
   </html>`

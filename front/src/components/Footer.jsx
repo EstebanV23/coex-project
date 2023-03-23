@@ -6,7 +6,7 @@ import { LogoIcon, WaveUp } from './Icons'
 export default function Footer () {
   return (
     <>
-      <div className='text-gray-400 text-base bg-black'>
+      <div className='text-gray-400 text-base bg-primary-blue-900'>
         <WaveUp fill='#9DC6CA' />
         <div className='w-full h-fit flex flex-wrap justify-around gap-10 pb-5 font-light px-2'>
           <div className='w-80'>
