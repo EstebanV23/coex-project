@@ -26,7 +26,7 @@ export const useUserStore = create((set, get) => ({
     return set(
       {
         id: user.id,
-        avatar: user.avatar ?? 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+        avatar: user.avatar,
         name: user.name,
         surname: user.surname,
         email: user.email,

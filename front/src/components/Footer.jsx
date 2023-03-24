@@ -3,34 +3,36 @@ import { NavLink } from 'react-router-dom'
 import sendDataContact from './../services/modalEmailService'
 import { LogoIcon, WaveUp } from './Icons'
 
+const stylesHover = 'hover:text-white hover:bg-primary-blue-500 hover:bg-opacity-20 px-2 rounded-md transition-colors duration-200'
+
 export default function Footer () {
   return (
     <>
-      <div className='text-gray-400 text-base bg-primary-blue-900'>
+      <div className='text-primary-blue-100 text-base bg-primary-blue-900'>
         <WaveUp fill='#9DC6CA' />
         <div className='w-full max-w-[1200px] m-auto h-fit flex flex-wrap justify-around gap-10 pb-5 font-light px-2'>
           <div className='w-80'>
             <h3 className='text-xl text-center font-bold text-white mb-2.5'>Nosotros</h3>
             <p>Somos un grupo de desarrolladores que ha implementado esta herramienta para la ayuda de nutricionistas.</p>
-            <div className='my-5 w-[200px] h-[20px] sm:w-[300px] sm:h-[30px]'>
+            <div className='my-5 w-[200px] h-[20px] xs:w-[300px] sm:h-[30px] mx-auto'>
               <LogoIcon fill='#68A7AD' />
             </div>
           </div>
 
           <div className='text-center'>
-            <h3 className='text-xl text-center font-bold text-white mb-2.5'>Navegacion</h3>
-            <div className='flex flex-col  '>
+            <h3 className='text-xl text-center font-bold text-white mb-2.5 '>Navegacion</h3>
+            <div className='flex flex-col gap-1'>
               <NavLink to='/' preventScrollReset>
-                <p>Inicio</p>
+                <p className={stylesHover}>Inicio</p>
               </NavLink>
               <NavLink to='/valoracion'>
-                <p>Valoracion Unitaria</p>
+                <p className={stylesHover}>Valoracion Unitaria</p>
               </NavLink>
               <NavLink to='/archivo'>
-                <p>Subida de archivos</p>
+                <p className={stylesHover}>Subida de archivos</p>
               </NavLink>
               <NavLink to='/unidades'>
-                <p>Gestion de unidades</p>
+                <p className={stylesHover}>Gestion de unidades</p>
               </NavLink>
             </div>
 

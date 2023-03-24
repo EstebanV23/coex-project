@@ -9,6 +9,10 @@ const nutritionistSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  avatar: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
     unique: true,
@@ -20,7 +24,7 @@ const nutritionistSchema = new mongoose.Schema({
   },
   isVerified: {
     type: Boolean,
-    required: false
+    required: true
   },
   phone: {
     type: String,
