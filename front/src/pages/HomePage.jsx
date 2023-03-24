@@ -18,8 +18,8 @@ export default function HomePage () {
   }, [])
   return (
     <div>
-      {(isOpenLoggin && !isLogged) && <Modal close={closeLoggin}><Login /></Modal>}
-      {(isOpenRegister && !isLogged) && <Modal close={closeRegister}><Register /></Modal>}
+      {(!isLogged) && <Modal isOpen={isOpenLoggin} close={closeLoggin}><Login /></Modal>}
+      {(!isLogged) && <Modal isOpen={isOpenRegister} close={closeRegister}><Register /></Modal>}
       <HomePresentation />
       <HomeCards />
     </div>

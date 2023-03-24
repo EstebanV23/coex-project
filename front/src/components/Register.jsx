@@ -6,7 +6,7 @@ import { TbPassword } from 'react-icons/tb'
 import { regex } from '../constants/regex'
 import { MdOutlineAlternateEmail } from 'react-icons/md'
 import Button from './Button'
-import { Link, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import registerService from '../services/registerService'
 import { useState } from 'react'
 import LoadingComponents from './LoadingComponents'
@@ -19,7 +19,7 @@ export default function Register () {
   const [loading, setLoading] = useState(false)
   const [emailDuplicate, setEmailDuplicate] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-  const { openLogin, closeRegister } = useModalStore(store => store, shallow)
+  const { openLoggin, closeRegister } = useModalStore(store => store, shallow)
   const navigate = useNavigate()
 
   return (
@@ -107,14 +107,14 @@ export default function Register () {
                   />
                 </div>
                 <div className='flex flex-col items-start justify-between w-full'>
-                  <Link
+                  <NavLink
+                    className='text-base text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'
                     onClick={() => {
                       closeRegister()
-                      openLogin()
+                      openLoggin()
                     }}
-                    className='text-primary-blue text-base'
                   >Ya tienes una cuenta?
-                  </Link>
+                  </NavLink>
                   {emailDuplicate && <p className='text-error text-base'>Este correo ya se encuentra registrado</p>}
                 </div>
                 <Button disabled={loading} type='submit' className='py-2 transition-all duration-500 text-xl text-primary-blue font-bold hover:bg-primary-blue hover:text-white border-primary-blue'>{loading ? <LoadingComponents size={27} /> : 'Registrarse'}</Button>

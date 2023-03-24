@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { shallow } from 'zustand/shallow'
 import linksRouters from '../constants/linksRouters'
@@ -6,8 +5,7 @@ import { useModalStore } from '../stores/useModalStore'
 import sweetAlert from './../constants/sweetAlert'
 
 export default function LinksNavbar () {
-  const { open, isOpen } = useModalStore()
-  const { isLogged } = useUser()
+  const { openLoggin } = useModalStore(store => store, shallow)
   const stylesDefault = 'flex flex-col items-center h-full pt-1 px-3 rounded-2xl transition-all duration-300 ease-in-out text-white font-medium text-lg md:text-base hover:text-primary-blue hover:bg-white hover:font-bolder'
   const stylesActive = `${stylesDefault.replace('text-white', 'text-primary-blue')} bg-white font-bolder`
 

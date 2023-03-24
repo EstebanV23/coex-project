@@ -1,15 +1,11 @@
 import { Fragment } from 'react'
 
 import { Dialog, Transition } from '@headlessui/react'
-import { useModalStore } from '../stores/useModalStore'
-import { shallow } from 'zustand/shallow'
 
-export default function Modal ({ children, title }) {
-  const { isOpen, close } = useModalStore(store => store, shallow)
-
+export default function Modal ({ isOpen, close, title, children }) {
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as='div' className='relative z-40' onClose={() => close()}>
+      <Dialog as='div' className='relative z-40' onClose={close}>
         <Transition.Child
           as={Fragment}
           enter='ease-out duration-300'
