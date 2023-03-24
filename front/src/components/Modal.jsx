@@ -1,18 +1,52 @@
-import { createPortal } from 'react-dom'
-import { AiOutlineClose } from 'react-icons/ai'
+import { Fragment } from 'react'
+
+import { Dialog, Transition } from '@headlessui/react'
 import { useModalStore } from '../stores/useModalStore'
 
 export default function Modal ({ children, title }) {
-  const { close } = useModalStore()
+  const { isOpen, close } = useModalStore()
 
-  return createPortal(
-    <div className='w-screen h-screen fixed top-0 left-0 bg-black bg-opacity-50 z-50 flex items-center justify-center'>
-      <div className='relative w-[500px] bg-white min-h-[100px] rounded-3xl shadow-xl p-5'>
-        {title && <div className='flex justify-between mb-5 pb-5 border-b-2 border-primary-blue-200 pr-10 text-primary-blue-800'>{title}</div>}
-        {children}
-        <button onClick={() => close()} className='absolute right-5 top-5 hover:bg-gray-200 rounded-full px-2 py-1 ease-in-out duration-300'><AiOutlineClose size={20} fill='#264446' /></button>
-      </div>
-    </div>,
-    document.getElementById('modal-root')
+  return (
+    <Transition appear show={isOpen} as={Fragment}>
+      <Dialog as='div' className='relative z-40' onClose={() => close()}>
+        <Transition.Child
+          as={Fragment}
+          enter='ease-out duration-300'
+          enterFrom='opacity-0'
+          enterTo='opacity-100'
+          leave='ease-in duration-200'
+          leaveFrom='opacity-100'
+          leaveTo='opacity-0'
+        >
+          <div className='fixed inset-0 bg-black bg-opacity-25' />
+        </Transition.Child>
+
+        <div className='fixed inset-0 overflow-y-auto'>
+          <div className='flex min-h-full items-center justify-center p-4 text-center'>
+            <Transition.Child
+              as={Fragment}
+              enter='ease-out duration-300'
+              enterFrom='opacity-0 scale-95'
+              enterTo='opacity-100 scale-100'
+              leave='ease-in duration-200'
+              leaveFrom='opacity-100 scale-100'
+              leaveTo='opacity-0 scale-95'
+            >
+              <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white text-black p-6 text-left align-middle shadow-xl transition-all'>
+                {title && (
+                  <Dialog.Title
+                    as='h3'
+                    className='text-lg font-medium leading-6 mb-4 text-gray-400'
+                  >
+                    {title}
+                  </Dialog.Title>
+                )}
+                {children}
+              </Dialog.Panel>
+            </Transition.Child>
+          </div>
+        </div>
+      </Dialog>
+    </Transition>
   )
 }

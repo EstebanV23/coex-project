@@ -43,11 +43,8 @@ export default function Login () {
         onSubmit={handleSubmit}
       >
         {({ errors }) => (
-          <div className='bg-white rounded-3xl w-[95%] sm:max-w-3xl m-auto px-2 sm:px-10 py-12'>
-            <div className='flex flex-col justify-center items-center'>
-              <LogoIcon fill='black' />
-              <h1 className='text-4xl font-work mt-6 font-bold'>Login</h1>
-            </div>
+          <div className='w-full px-2 sm:px-10 py-12'>
+            <h1 className='text-4xl text-center font-work font-bold'>Login</h1>
             <Form className='flex flex-col w-full gap-8 items-center pt-8'>
               <Input
                 icon={<EmailIcon />}
