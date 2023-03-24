@@ -10,6 +10,7 @@ import Loading from './Loading'
 import { useNavbarStore } from '../stores/useNavbarStore'
 import { shallow } from 'zustand/shallow'
 import EyePassword from './EyePassword'
+import { useModalStore } from '../stores/useModalStore'
 
 const validateInputs = values => {
   const errors = {}
@@ -22,6 +23,7 @@ export default function Login () {
   const { isLoginLoading, hasLoginError, login } = useUser()
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const [showPassword, setShowPassword] = useState(false)
+  const { closeLoggin, openRegister } = useModalStore(store => store, shallow)
 
   useEffect(() => {
     hiddenTrue()
@@ -68,15 +70,18 @@ export default function Login () {
 
               {hasLoginError && <p className='text-red-500 text-lg font-semibold text-center'>El correo o la contraseña son incorrectos</p>}
 
-              <div className='flex flex-col sm:flex-row justify-between w-full text-center gap-3'>
+              <div className='flex flex-col sm:flex-row justify-between w-full text-center gap-2'>
                 <NavLink
                   to='/forgot-password'
                   className='text-base text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'
                 >Olvidó su contraseña?
                 </NavLink>
                 <NavLink
-                  to='/register'
                   className='text-base text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'
+                  onClick={() => {
+                    closeLoggin()
+                    openRegister()
+                  }}
                 >Aún no tienes una cuenta?
                 </NavLink>
               </div>

@@ -1,11 +1,9 @@
 import { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+import { shallow } from 'zustand/shallow'
 import linksRouters from '../constants/linksRouters'
-import useUser from '../hooks/useUser'
 import { useModalStore } from '../stores/useModalStore'
 import sweetAlert from './../constants/sweetAlert'
-import Login from './Login'
-import Modal from './Modal'
 
 export default function LinksNavbar () {
   const { open, isOpen } = useModalStore()
@@ -20,12 +18,11 @@ export default function LinksNavbar () {
 
   function handleClickLogged (e) {
     e.preventDefault()
-    open()
+    openLoggin()
   }
 
   return (
     <>
-      {(isOpen && !isLogged) && <Modal><Login /></Modal>}
       {linksRouters().map(link => {
         return (
           <NavLink

@@ -8,7 +8,8 @@ import {
   nutritionistRegister,
   nutritionistEmail,
   nutritionistResetPassword,
-  nutritionistChangePassword
+  nutritionistChangePassword,
+  nutritionistAvatar
 } from '../../schemas/requestSchema/nutritionistRequest.js'
 
 const authRouter = express.Router()
@@ -56,4 +57,11 @@ authRouter
     handlerAuthorizationJWT,
     NutritionistController.updateNutritionist
   )
+  .patch(
+    '/update-avatar',
+    handlerAuthorizationJWT,
+    validateData(nutritionistAvatar, 'body'),
+    NutritionistController.updateAvatar
+  )
+
 export default authRouter
