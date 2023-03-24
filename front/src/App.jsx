@@ -8,8 +8,6 @@ import EditProfile from './components/EditProfile'
 import Footer from './components/Footer'
 import { useUserStore } from './stores/useUserStore'
 import Protected from './components/Protected'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
 import ChangePassword from './components/ChangePassword'
 import { useEffect } from 'react'
 import EmailForgotPage from './pages/EmailForgotPage'
@@ -24,12 +22,12 @@ import Unidades from './components/Unidades'
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const { setUser } = useUserStore(store => store, shallow)
-  const { close } = useModalStore(store => store, shallow)
+  const { closeLoggin } = useModalStore(store => store, shallow)
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
       setUser(JSON.parse(localStorage.getItem('user')))
-      close()
+      closeLoggin()
     }
   }, [])
 
@@ -46,7 +44,6 @@ function App () {
             <Route path='edit' element={<Protected><EditProfile /></Protected>} />
             <Route path='change-password' element={<Protected><ChangePassword /></Protected>} />
           </Route>
-          <Route path='/register' element={<Protected restrictLogged><RegisterPage /></Protected>} />
           <Route path='/verify' element={<VerifyPage />} />
           <Route path='/file-up' element={<Protected verified><File /></Protected>} />
           <Route path='/valoration' element={<Protected><ValoracionUnica /></Protected>} />

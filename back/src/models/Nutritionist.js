@@ -2,10 +2,12 @@ import schemaNutritionist from '../schemas/collectionSchema/nutritionistSchema.j
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import encryptPassword from '../helpers/encryptPassword.js'
+import generateRandomAvatar from '../helpers/generateRandomAvatar.js'
 
 class Nutritionist {
   name
   surname
+  avatar
   email
   phone
   password
@@ -21,6 +23,7 @@ class Nutritionist {
   }) {
     this.name = name
     this.surname = surname
+    this.avatar = generateRandomAvatar(`${name}&${surname}`)
     this.email = email
     this.phone = phone
     this.password = password
@@ -76,6 +79,7 @@ class Nutritionist {
     return {
       name: this.name,
       surname: this.surname,
+      avatar: this.avatar,
       email: this.email,
       phone: this.phone,
       password: await encryptPassword(this.password),

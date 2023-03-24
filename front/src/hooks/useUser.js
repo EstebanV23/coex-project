@@ -4,11 +4,12 @@ import loginService from '../services/loginService'
 import { useNavbarStore } from '../stores/useNavbarStore'
 import { useNavigate } from 'react-router-dom'
 import { useModalStore } from '../stores/useModalStore'
+import { shallow } from 'zustand/shallow'
 
 export default function useUser () {
   const { token, restarUser, setUser, isVerified, avatar } = useUserStore(store => store)
   const { hiddenTrue } = useNavbarStore(store => store)
-  const { close, open } = useModalStore()
+  const { closeLoggin, openLoggin } = useModalStore(store => store, shallow)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const navigate = useNavigate()
@@ -18,10 +19,10 @@ export default function useUser () {
     loginService({ email, password })
       .then(user => {
         setLoading(false)
-        close()
+        closeLoggin()
         setUser(user)
       })
-      .catch(() => {
+      .catch((e) => {
         setLoading(false)
         setError(true)
       })
@@ -31,7 +32,7 @@ export default function useUser () {
     restarUser()
     hiddenTrue()
     navigate('/')
-    open()
+    openLoggin()
     localStorage.removeItem('user')
   }, [restarUser])
 

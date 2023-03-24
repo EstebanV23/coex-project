@@ -6,7 +6,8 @@ function handlerAuthorizationJWT (req, _, next) {
     if (!bearerHeader || !bearerHeader.toLowerCase().startsWith('bearer')) throw new Error()
 
     const token = bearerHeader.split(' ')[1]
-    verifyToken(token)
+    const userData = verifyToken(token)
+    req.user = userData
     next()
   } catch (error) {
     error.status = 401

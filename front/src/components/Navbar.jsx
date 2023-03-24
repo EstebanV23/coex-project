@@ -31,8 +31,8 @@ export default function Navbar () {
         (!isVerified && isLogged) &&
           <div className='px-2 min-h-[1.7rem] gap-3 flex items-center bg-secondary-yellow sm:px-8 md:px-20'>
             <div className='max-w-[1200px] m-auto px-2 gap-3 flex items-center bg-secondary-yellow'>
-              <AiFillWarning size={20} color='rgb(234 179 8/0.7)' />
-              <p className='text-yellow-500 text-xs sm:text-base'>A su correo se ha enviado un link para verificar su cuenta</p>
+              <AiFillWarning size={20} color='rgb(234 179 8/1)' />
+              <p className='text-primary-blue-700 text-xs sm:text-base'>A su correo se ha enviado un link para verificar su cuenta</p>
 
             </div>
           </div>
