@@ -17,11 +17,16 @@ import File from './components/File'
 import ValoracionUnica from './components/ValoracionUnica'
 import HomePage from './pages/HomePage'
 import { useModalStore } from './stores/useModalStore'
+import useUser from './hooks/useUser'
+import Login from './components/Login'
+import Register from './components/Register'
+import Modal from './components/Modal'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const { setUser } = useUserStore(store => store, shallow)
-  const { closeLoggin } = useModalStore(store => store, shallow)
+  const { isLogged } = useUser()
+  const { isOpenLoggin, closeLoggin, isOpenRegister, closeRegister } = useModalStore(store => store, shallow)
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
@@ -32,6 +37,8 @@ function App () {
 
   return (
     <>
+      <Modal isOpen={isOpenLoggin && !isLogged} close={closeLoggin}><Login /></Modal>
+      <Modal isOpen={isOpenRegister && !isLogged} close={closeRegister}><Register /></Modal>
       <Navbar />
       <div className='bg-primary-blue-300 min-h-screen flex flex-col justify-between' onClick={hiddenTrue}>
         <Routes>
