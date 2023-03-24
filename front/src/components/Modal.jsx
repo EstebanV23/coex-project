@@ -1,10 +1,7 @@
 import { createPortal } from 'react-dom'
 import { AiOutlineClose } from 'react-icons/ai'
-import { useModalStore } from '../stores/useModalStore'
 
-export default function Modal ({ children, title }) {
-  const { close } = useModalStore()
-
+export default function Modal ({ children, title, close }) {
   return createPortal(
     <div className='w-screen h-screen fixed top-0 left-0 bg-black bg-opacity-50 z-50 flex items-center justify-center'>
       <div className='relative w-[500px] bg-white min-h-[100px] rounded-3xl shadow-xl p-5'>

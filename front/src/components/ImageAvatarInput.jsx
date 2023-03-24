@@ -6,13 +6,12 @@ import MyAvatar from './Avatar'
 import Modal from './Modal'
 
 export default function ImageAvatarInput () {
-  const [showModal, setShowModal] = useState(false)
-  const { open, isOpen } = useModalStore(store => store, shallow)
+  const { openAvatarEdit, isOpenAvatarEdit, closeAvatarEdit } = useModalStore(store => store, shallow)
   return (
     <>
-      <MyAvatar sizeProp={100} className='cursor-pointer m-auto mb-5' onClick={() => open()} />
-      {isOpen &&
-        <Modal>
+      <MyAvatar sizeProp={100} className='cursor-pointer m-auto mb-5' onClick={() => openAvatarEdit()} />
+      {isOpenAvatarEdit &&
+        <Modal close={closeAvatarEdit}>
           <Avatar
             height={200}
             width={200}

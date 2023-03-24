@@ -8,7 +8,6 @@ import EditProfile from './components/EditProfile'
 import Footer from './components/Footer'
 import { useUserStore } from './stores/useUserStore'
 import Protected from './components/Protected'
-import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import ChangePassword from './components/ChangePassword'
 import { useEffect } from 'react'
@@ -23,12 +22,12 @@ import { useModalStore } from './stores/useModalStore'
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const { setUser } = useUserStore(store => store, shallow)
-  const { close } = useModalStore(store => store, shallow)
+  const { closeLoggin } = useModalStore(store => store, shallow)
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
       setUser(JSON.parse(localStorage.getItem('user')))
-      close()
+      closeLoggin()
     }
   }, [])
 

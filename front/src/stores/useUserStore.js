@@ -26,7 +26,7 @@ export const useUserStore = create((set, get) => ({
     return set(
       {
         id: user.id,
-        avatar: user.avatar ?? 'source.boringavatars.com/bauhaus/120/Stefan?colors=264653,2a9d8f,e9c46a',
+        avatar: user.avatar,
         name: user.name,
         surname: user.surname,
         email: user.email,
