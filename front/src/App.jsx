@@ -19,6 +19,7 @@ import File from './components/File'
 import ValoracionUnica from './components/ValoracionUnica'
 import HomePage from './pages/HomePage'
 import { useModalStore } from './stores/useModalStore'
+import Unidades from './components/Unidades'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -49,6 +50,7 @@ function App () {
           <Route path='/verify' element={<VerifyPage />} />
           <Route path='/file-up' element={<Protected verified><File /></Protected>} />
           <Route path='/valoration' element={<Protected><ValoracionUnica /></Protected>} />
+          <Route path='/unidades' element={<Protected><Unidades /></Protected>} />
         </Routes>
         <Footer />
       </div>
