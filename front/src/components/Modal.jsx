@@ -15,7 +15,7 @@ export default function Modal ({ isOpen, close, title, className, children }) {
           leaveFrom='opacity-100'
           leaveTo='opacity-0'
         >
-          <div className='fixed inset-0 bg-black bg-opacity-25' />
+          <div className='fixed inset-0 bg-black bg-opacity-50' />
         </Transition.Child>
 
         <div className='fixed inset-0 overflow-y-auto'>
@@ -29,7 +29,7 @@ export default function Modal ({ isOpen, close, title, className, children }) {
               leaveFrom='opacity-100 scale-100'
               leaveTo='opacity-0 scale-95'
             >
-              <Dialog.Panel className={`${className ?? 'max-w-xl'} w-full transform overflow-hidden rounded-2xl bg-white text-black p-6 text-left align-middle shadow-xl transition-all`}>
+              <Dialog.Panel className={`${className ?? 'max-w-xl'} w-full transform overflow-hidden rounded-2xl bg-white text-black p-6 text-left align-middle shadow-xl transition-all opasity-100 scale-100`}>
                 {title && (
                   <Dialog.Title
                     as='h3'
