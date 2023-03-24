@@ -45,7 +45,7 @@ export default function Login () {
         onSubmit={handleSubmit}
       >
         {({ errors }) => (
-          <div className='w-full px-2 sm:px-10 py-12'>
+          <div className='w-full px-2 sm:px-10 py-12 transition-all '>
             <h1 className='text-4xl text-center font-work font-bold'>Login</h1>
             <Form className='flex flex-col w-full gap-8 items-center pt-8'>
               <Input
