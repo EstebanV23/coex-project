@@ -115,7 +115,7 @@ export default function Register () {
                     }}
                   >Ya tienes una cuenta?
                   </NavLink>
-                  {emailDuplicate && <p className='text-error text-base'>Este correo ya se encuentra registrado</p>}
+                  {emailDuplicate && <p className='text-red-500 text-base'>Este correo ya se encuentra registrado</p>}
                 </div>
                 <Button disabled={loading} type='submit' className='py-2 transition-all duration-500 text-xl text-primary-blue font-bold hover:bg-primary-blue hover:text-white border-primary-blue'>{loading ? <LoadingComponents size={27} /> : 'Registrarse'}</Button>
               </div>
