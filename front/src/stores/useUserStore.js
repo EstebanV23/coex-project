@@ -2,6 +2,7 @@ import { create } from 'zustand'
 
 export const useUserStore = create((set, get) => ({
   id: null,
+  avatar: null,
   name: null,
   surname: null,
   email: null,
@@ -11,6 +12,7 @@ export const useUserStore = create((set, get) => ({
   restarUser: () => set(
     {
       id: null,
+      avatar: null,
       name: null,
       surname: null,
       email: null,
@@ -24,6 +26,7 @@ export const useUserStore = create((set, get) => ({
     return set(
       {
         id: user.id,
+        avatar: user.avatar ?? 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
         name: user.name,
         surname: user.surname,
         email: user.email,
@@ -32,5 +35,7 @@ export const useUserStore = create((set, get) => ({
         isVerified: user.isVerified
       }
     )
-  }
+  },
+  setVerified: () => set({ isVerified: true }),
+  updateAvatar: (avatar) => set({ avatar })
 }))

@@ -1,45 +1,60 @@
-import { useState } from 'react'
+import { Formik } from 'formik'
 import { useNavigate } from 'react-router-dom'
+import sweetAlert from '../constants/sweetAlert'
+import forgotPasswordService from '../services/forgotPasswordService'
+import Input from './Input'
+import { MdOutlineAlternateEmail } from 'react-icons/md'
+import Button from './Button'
+import { useState } from 'react'
+import Loading from './Loading'
+import { regex } from '../constants/regex'
 
 export default function EmailForgotPassword () {
   const navigate = useNavigate()
-  const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const sendForm = (event, email) => {
-    console.log('Entro')
-    event.preventDefault()
-    console.log(email)
-    fetch('http://localhost:5000/auth/forgot-password', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email })
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-        data.error ? alert('Error') : navigate('/')
-      })
-  }
-  console.log({ email })
   return (
-    <form
-      className='flex flex-col border-2 w-1/3 m-auto justify-center gap-3 items-center p-10'
-      onSubmit={(e) => sendForm(e, email)}
-    >
-      <label htmlFor='email'>Email</label>
-      <input
-        type='email'
-        className='border-2 border-gray-500 rounded'
-        required
-        id='email'
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button type='submit' className='px-12 py-6 rounded-md bg-amber-300'>
-        Send
-      </button>
-    </form>
+    <>
+      {loading && <Loading />}
+      <h2 className='text-3xl font-bold text-center mb-3'>Cambio de contraseña</h2>
+      <Formik
+        initialValues={{ email: '' }}
+        validate={(values) => {
+          const errors = {}
+          if (!regex.email.exp.test(values.email)) {
+            errors.email = regex.email.msg
+          }
+          return errors
+        }}
+        onSubmit={async (values) => {
+          const { email } = values
+          setLoading(true)
+          const response = await forgotPasswordService(email)
+          setLoading(false)
+          response.error
+            ? sweetAlert('Este correo no tiene cuenta asociada', 'El correo al que intentas cambiar lac contraseña no tiene una cuenta asociada', 'error')
+            : sweetAlert(`Email enviado a ${email}`, 'Te hemos enviado un email con las instrucciones para cambiar tu contraseña')
+          navigate('/login')
+        }}
+      >
+        {({ errors, handleSubmit }) => (
+          <form
+            className='bg-white w-full max-w-[500px] rounded-xl py-8 px-2 sm:px-8 flex flex-col gap-4'
+            onSubmit={handleSubmit}
+          >
+            <Input
+              icon={<MdOutlineAlternateEmail size={23} />}
+              name='email'
+              type='email'
+              textLabel='Correo electrónico'
+              autoComplete='on'
+              error={errors}
+            />
+            <Button type='submit' className='text-primary-blue py-3 border-primary-blue hover:bg-primary-blue hover:text-white transition-all duration-500'>Enviar</Button>
+          </form>
+
+        )}
+      </Formik>
+    </>
   )
 }

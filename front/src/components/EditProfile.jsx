@@ -11,38 +11,28 @@ import Button from './Button'
 import { regex } from '../constants/regex'
 import { updateNutritionist } from '../services/editProfileService'
 import sweetAlert from '../constants/sweetAlert'
+import ImageAvatarInput from './ImageAvatarInput'
 
 export default function EditProfile () {
   const { hiddenProfileTrue } = useProfileStore(store => store, shallow)
   const { id, name, surname, email: emailOld, phone, token, setUser } = useUserStore(store => store)
   const [errorEdit, setErrorEdit] = useState(false)
 
-  const { name: nameRegex, email: emailRegex, phone: phoneRegex } = regex
   useEffect(() => {
     hiddenProfileTrue()
   }, [])
   return (
     <div>
       <h2 className='text-3xl font-bold text-center mb-3'>Edita tu información</h2>
+      <ImageAvatarInput />
       <Formik
         initialValues={{ name, surname, email: emailOld, phone }}
         validate={(values) => {
           const errors = {}
-          if (!nameRegex.test(values.name)) {
-            errors.name = 'El nombre es solo debe tener letras'
-          }
-
-          if (!nameRegex.test(values.surname)) {
-            errors.surname = 'El apellido es solo debe tener letras'
-          }
-
-          if (!emailRegex.test(values.email)) {
-            errors.email = 'El debe contener un dominio válido ej: @dominio.com'
-          }
-
-          if (!phoneRegex.test(values.phone)) {
-            errors.phone = 'El telefono debe ser de 10 digitos'
-          }
+          if (!regex.name.exp.test(values.name)) errors.name = regex.name.msg
+          if (!regex.name.exp.test(values.surname)) errors.surname = regex.name.msg.replace('nombres', 'apellidos')
+          if (!regex.phone.exp.test(values.phone)) errors.phone = regex.phone.msg
+          if (!regex.email.exp.test(values.email)) errors.email = regex.email.msg
           return errors
         }}
         onSubmit={async (values) => {
@@ -59,47 +49,42 @@ export default function EditProfile () {
       >
         {
           ({ errors, handleSubmit }) =>
-            <form action='' className='flex flex-col gap-3' onSubmit={handleSubmit}>
+            <form action='' className='flex flex-col gap-6' onSubmit={handleSubmit}>
               <div className='flex flex-col gap-3 md:flex-row'>
                 <Input
-                  id='name'
                   icon={<BsPersonFill size={23} />}
                   error={errors}
                   name='name'
                   autoComplete='off'
-                  placeholder='Nombres'
+                  textLabel='Nombres'
                 />
                 <Input
-                  id='surname'
                   icon={<BsPersonFill size={23} />}
                   error={errors}
                   name='surname'
                   autoComplete='off'
-                  placeholder='Apellidos'
+                  textLabel='Apellidos'
                 />
               </div>
-              <div className='flex flex-col gap-3 lg:flex-row'>
-                <Input
-                  id='email'
-                  icon={<MdOutlineAlternateEmail size={23} />}
-                  error={errors}
-                  name='email'
-                  autoComplete='off'
-                  placeholder='Email. ej: ejemplo@midominio.com'
-                />
-                <Input
-                  id='phone'
-                  icon={<AiTwotonePhone size={23} />}
-                  error={errors}
-                  name='phone'
-                  autoComplete='off'
-                  placeholder='Telefono. ej: 3156254789'
-                />
-              </div>
+              <Input
+                icon={<MdOutlineAlternateEmail size={23} />}
+                error={errors}
+                name='email'
+                autoComplete='off'
+                textLabel='Correo electrónico'
+              />
+              <Input
+                icon={<AiTwotonePhone size={23} />}
+                error={errors}
+                name='phone'
+                autoComplete='off'
+                textLabel='Telefono'
+              />
               {errorEdit && <p className='text-xl text-error'>El correo al que tratas de cambiar ya está registrado</p>}
-              <Button type='submit' className='text-primary-blue border-primary-blue hover:text-white hover:bg-primary-blue py-3 text-xl'>Enviar</Button>
+              <Button type='submit' className='text-xl py-2'>Enviar</Button>
             </form>
         }
+
       </Formik>
     </div>
   )

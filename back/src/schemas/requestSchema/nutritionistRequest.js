@@ -46,4 +46,18 @@ const nutritionistResetPassword = Joi.object(
   }
 )
 
-export { nutritionistRegister, nutritionistLogin, nutritionistEmail, nutritionistResetPassword }
+const nutritionistChangePassword = Joi.object(
+  {
+    email: Joi.string()
+      .pattern(/^[a-z0-9.-_]+@[a-z]+\.[a-z]{2,3}$/)
+      .required(),
+    oldPassword: Joi.string()
+      .pattern(/^(?=.*[0-9])(?=.*[A-Z]).{8,}$/)
+      .required(),
+    password: Joi.string()
+      .pattern(/^(?=.*[0-9])(?=.*[A-Z]).{8,}$/)
+      .required()
+  }
+)
+
+export { nutritionistRegister, nutritionistLogin, nutritionistEmail, nutritionistResetPassword, nutritionistChangePassword }

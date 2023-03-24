@@ -1,8 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import RestartPassword from './components/RestartPassword'
-import EmailForgotPassword from './components/EmailForgotPassword'
-import Home from './components/Home'
 import { useNavbarStore } from './stores/useNavbarStore'
 import { shallow } from 'zustand/shallow'
 import Profile from './components/Profile'
@@ -15,39 +12,46 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import ChangePassword from './components/ChangePassword'
 import { useEffect } from 'react'
+import EmailForgotPage from './pages/EmailForgotPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
+import VerifyPage from './pages/VerifyPage'
 import File from './components/File'
 import ValoracionUnica from './components/ValoracionUnica'
+import HomePage from './pages/HomePage'
+import { useModalStore } from './stores/useModalStore'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const { setUser } = useUserStore(store => store, shallow)
+  const { close } = useModalStore(store => store, shallow)
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
       setUser(JSON.parse(localStorage.getItem('user')))
+      close()
     }
   }, [])
 
   return (
     <>
       <Navbar />
-      <div className='bg-primary-blue-300' onClick={hiddenTrue}>
+      <div className='bg-primary-blue-300 min-h-screen flex flex-col justify-between' onClick={hiddenTrue}>
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/forgot-password' element={<EmailForgotPassword />} />
-          <Route path='/new-password/' element={<RestartPassword />} />
-          <Route path='/login' element={<Protected restrictLogged><LoginPage /></Protected>} />
+          <Route path='/' element={<HomePage />} />
+          <Route path='/forgot-password' element={<Protected restrictLogged><EmailForgotPage /></Protected>} />
+          <Route path='/new-password/' element={<ResetPasswordPage />} />
           <Route path='/profile' element={<Profile />}>
             <Route index element={<Protected><InfoProfile /></Protected>} />
             <Route path='edit' element={<Protected><EditProfile /></Protected>} />
             <Route path='change-password' element={<Protected><ChangePassword /></Protected>} />
           </Route>
           <Route path='/register' element={<Protected restrictLogged><RegisterPage /></Protected>} />
-          <Route path='/archivo' element={<File />} />
-          <Route path='/valoracion' element={<ValoracionUnica />} />
+          <Route path='/verify' element={<VerifyPage />} />
+          <Route path='/file-up' element={<Protected verified><File /></Protected>} />
+          <Route path='/valoration' element={<Protected><ValoracionUnica /></Protected>} />
         </Routes>
+        <Footer />
       </div>
-      <Footer />
     </>
   )
 }

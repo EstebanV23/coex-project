@@ -1,8 +1,9 @@
 import { configEnviroment } from '../config/configEnviroment'
 import getNutritionistEmailService from './getNutritionistEmailService'
+
 export default async function registerService (body) {
   const dataEmail = await getNutritionistEmailService({ email: body.email })
-  if (!dataEmail.error) return
+  if (!(Object.values(dataEmail.data).length === 0)) return
 
   const response = await fetch(`${configEnviroment.URL_BACKEND}/auth/signup`, {
     method: 'POST',
