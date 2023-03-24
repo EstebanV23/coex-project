@@ -44,7 +44,6 @@ function App () {
             <Route path='edit' element={<Protected><EditProfile /></Protected>} />
             <Route path='change-password' element={<Protected><ChangePassword /></Protected>} />
           </Route>
-          <Route path='/register' element={<Protected restrictLogged><RegisterPage /></Protected>} />
           <Route path='/verify' element={<VerifyPage />} />
           <Route path='/file-up' element={<Protected verified><File /></Protected>} />
           <Route path='/valoration' element={<Protected><ValoracionUnica /></Protected>} />
