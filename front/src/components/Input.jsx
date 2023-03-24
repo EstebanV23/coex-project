@@ -4,7 +4,7 @@ export default function Input ({ children, textLabel, icon, error, name, ...prop
   return (
     <div className='w-full'>
       <div className='relative z-0'>
-        <Field className='block rounded-t-lg pt-4 pb-3 px-7 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary-blue-600 peer' name={name} id={name} placeholder=' ' {...props}>
+        <Field className='block rounded-t-lg pt-5 pb-2.5 px-7 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary-blue-600 peer' name={name} id={name} placeholder=' ' {...props}>
           {children}
         </Field>
         <label
