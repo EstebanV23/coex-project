@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 export const useModalStore = create(set => ({
-  isOpenLoggin: true,
+  isOpenLoggin: false,
   openLoggin: () => set({ isOpenLoggin: true }),
   closeLoggin: () => set({ isOpenLoggin: false }),
   isOpenRegister: false,
