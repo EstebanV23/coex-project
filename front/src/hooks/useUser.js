@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useUserStore } from '../stores/useUserStore'
 import loginService from '../services/loginService'
 import { useNavbarStore } from '../stores/useNavbarStore'

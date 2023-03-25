@@ -11,7 +11,7 @@ export default function HomePage () {
   }, [])
 
   return (
-    <div>
+    <div className='h-full bg-primary-blue-300'>
       <HomePresentation />
       <HomeCards />
     </div>

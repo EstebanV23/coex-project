@@ -66,9 +66,9 @@ export default function Register () {
             setEmailDuplicate(true)
             return
           }
-
-          sweetAlert('Registro exitoso', `A tu correo ${email} se ha enviado un link para verificar tu cuenta`)
-          navigate('/login')
+          sweetAlert('Registro exitoso', `A tu correo ${email} se ha enviado un link para verificar tu cuenta, recuerda que tienes 3 días para verificarte, de lo contrario tu cuenta será eliminada`)
+          closeRegister()
+          openLoggin()
         }}
       >
         {({ errors, handleSubmit }) => (
