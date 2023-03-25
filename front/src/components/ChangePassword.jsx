@@ -65,7 +65,8 @@ export default function ChangePassword () {
             <form action='' className='flex flex-col gap-3' onSubmit={handleSubmit}>
               <div className='relative'>
                 <Input
-                  id='oldPassword'
+                  colorBase='primary-blue-800'
+                  colorFocus='primary-blue-700'
                   icon={<TbPassword size={23} />}
                   error={errors}
                   name='oldPassword'
@@ -77,6 +78,8 @@ export default function ChangePassword () {
               </div>
               <div className='relative'>
                 <Input
+                  colorBase='primary-blue-800'
+                  colorFocus='primary-blue-700'
                   icon={<TbPassword size={23} />}
                   error={errors}
                   type={showPassword ? 'text' : 'password'}
@@ -87,6 +90,8 @@ export default function ChangePassword () {
                 <EyePassword setState={setShowPassword} state={showPassword} />
               </div>
               <Input
+                colorBase='primary-blue-800'
+                colorFocus='primary-blue-700'
                 icon={<TbPassword size={23} />}
                 error={errors}
                 type={showPassword ? 'text' : 'password'}

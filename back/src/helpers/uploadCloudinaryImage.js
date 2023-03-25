@@ -16,8 +16,3 @@ async function uploadCloudinaryImage (url, id) {
 }
 
 export default uploadCloudinaryImage
-
-// Generate
-
-// The output url
-// https://res.cloudinary.com/<cloud_name>/image/upload/h_150,w_100/olympic_flag

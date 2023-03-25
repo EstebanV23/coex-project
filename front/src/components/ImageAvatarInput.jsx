@@ -32,14 +32,14 @@ export default function ImageAvatarInput () {
   return (
     <>
       {loading && <Loading />}
-      <MyAvatar sizeProp={100} className='cursor-pointer m-auto mb-5' onClick={() => openAvatarEdit()} />
+      <MyAvatar sizeProp={80} className='cursor-pointer m-auto mb-5 border-2' onClick={() => openAvatarEdit()} />
 
       <Modal isOpen={isOpenAvatarEdit} close={closeAvatarEdit}>
         <div className='flex flex-col gap-4'>
           <Avatar
             height={300}
             label='arrastra tu imagen o haz click aquí'
-            labelStyle={{ width: '100%', textAlign: 'center', fontSize: '1.5rem', cursor: 'pointer', height: '300px', display: 'block' }}
+            labelStyle={{ width: '100%', textAlign: 'center', fontSize: '1.5rem', cursor: 'pointer', height: '300px', display: 'block', wordBreak: 'break-all' }}
             width='100%'
             onCrop={(preview) => setPreview(preview)}
             shadingOpacity={0.8}

@@ -24,7 +24,7 @@ const nutritionistSchema = new mongoose.Schema({
   },
   isVerified: {
     type: Boolean,
-    required: true
+    required: false
   },
   phone: {
     type: String,
@@ -40,6 +40,14 @@ const nutritionistSchema = new mongoose.Schema({
   },
   lastConnection: {
     type: Date,
+    required: false
+  },
+  parnet: {
+    type: Boolean,
+    required: false
+  },
+  retriesVerify: {
+    type: Number,
     required: false
   }
 })

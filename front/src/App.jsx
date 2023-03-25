@@ -1,15 +1,14 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import { useNavbarStore } from './stores/useNavbarStore'
 import { shallow } from 'zustand/shallow'
-import Profile from './components/Profile'
 import InfoProfile from './components/InfoProfile'
 import EditProfile from './components/EditProfile'
 import Footer from './components/Footer'
 import { useUserStore } from './stores/useUserStore'
 import Protected from './components/Protected'
 import ChangePassword from './components/ChangePassword'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import EmailForgotPage from './pages/EmailForgotPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
 import VerifyPage from './pages/VerifyPage'
@@ -21,16 +20,43 @@ import useUser from './hooks/useUser'
 import Login from './components/Login'
 import Register from './components/Register'
 import Modal from './components/Modal'
+import tokenValidateService from './services/tokenValidateService'
+import sweetAlert from './constants/sweetAlert'
+import ProfilePage from './pages/ProfilePage'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
-  const { setUser } = useUserStore(store => store, shallow)
+  const { setUser, restarUser } = useUserStore(store => store, shallow)
   const { isLogged } = useUser()
-  const { isOpenLoggin, closeLoggin, isOpenRegister, closeRegister } = useModalStore(store => store, shallow)
+  const { isOpenLoggin, closeLoggin, isOpenRegister, closeRegister, openLoggin } = useModalStore(store => store, shallow)
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [lastLocation, setLastLocation] = useState(null)
+
+  useEffect(() => {
+    if (lastLocation) {
+      localStorage.setItem('location', JSON.stringify(lastLocation))
+    }
+    setLastLocation(location)
+  }, [location])
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
-      setUser(JSON.parse(localStorage.getItem('user')))
+      const user = JSON.parse(localStorage.getItem('user'))
+      setUser(user)
+      tokenValidateService(user.token)
+        .then(data => {
+          if (data.error) {
+            sweetAlert('Sesión expirada', 'Su sesión ha expirado, por favor vuelva a iniciar sesión', 'info')
+            localStorage.removeItem('user')
+            restarUser()
+            openLoggin()
+            return
+          }
+          if (localStorage.getItem('location')) {
+            navigate(JSON.parse(localStorage.getItem('location')).pathname)
+          }
+        })
     }
   }, [])
 
@@ -44,7 +70,7 @@ function App () {
           <Route path='/' element={<HomePage />} />
           <Route path='/forgot-password' element={<Protected restrictLogged><EmailForgotPage /></Protected>} />
           <Route path='/new-password/' element={<ResetPasswordPage />} />
-          <Route path='/profile' element={<Profile />}>
+          <Route path='/profile' element={<ProfilePage />}>
             <Route index element={<Protected><InfoProfile /></Protected>} />
             <Route path='edit' element={<Protected><EditProfile /></Protected>} />
             <Route path='change-password' element={<Protected><ChangePassword /></Protected>} />
