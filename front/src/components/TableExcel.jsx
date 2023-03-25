@@ -1,4 +1,3 @@
-import react from "@handsontable/react";
 import DownloadExcel from './DownloadExcel'
 export default function TableExcel({json}) {
     return(
