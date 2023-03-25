@@ -28,7 +28,7 @@ export default function Footer () {
               <NavLink to='/valoracion'>
                 <p className={stylesHover}>Valoracion Unitaria</p>
               </NavLink>
-              <NavLink to='/archivo'>
+              <NavLink to='/file-up'>
                 <p className={stylesHover}>Subida de archivos</p>
               </NavLink>
               <NavLink to='/unidades'>

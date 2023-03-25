@@ -5,6 +5,8 @@ import LoadingComponents from './LoadingComponents'
 import { shallow } from 'zustand/shallow'
 import { useNavbarStore } from '../stores/useNavbarStore'
 import { BsFillCloudUploadFill } from 'react-icons/bs';
+import { useUserStore } from '../stores/useUserStore'
+import sweetAlert from '../constants/sweetAlert'
 
 export default function File () {
   const [fileData, setFileData] = useState(null)
@@ -35,8 +37,12 @@ export default function File () {
         fetch(`https://mianthroapi.onrender.com/multi/${token}`, options)
           .then(response => response.json())
           .then(response => {
-            setData(response)
             setLoading(false)
+            if(response.error){
+              sweetAlert('Error de arcvhivo' , response.error, 'error')
+              return
+            }
+            setData(response)
           })
       }}
     >
@@ -49,7 +55,8 @@ export default function File () {
               <input type='file' className='mb-5' name='file' id='file' required onChange={() => Change(event.target.files) } accept='.xlsx' />
               <p className='mt-5'id='nameFile'></p>
             </div>
-            <button type='submit' className='w-fit px-6 bg-[#66a7ad] hover:bg-[#82B6BB] text-white h-10 rounded-md   hover:bg-[#3A676B mt-10'>Cargar archivo</button>
+            {fileData && <button type='submit' id='btnSendFile' className='w-fit px-6 bg-[#66a7ad] hover:bg-[#82B6BB] text-white h-10 rounded-md   hover:bg-[#3A676B mt-10'>Cargar archivo</button>}
+            
           </form>
 
           {loading && <LoadingComponents size={100} />}

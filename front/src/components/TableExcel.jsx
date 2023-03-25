@@ -13,8 +13,7 @@ export default function TableExcel({json}) {
               <th>Género</th>
               <th>Valoracion</th>
             </tr>
-            {
-            json.map((json, index) => (
+            { json.map((json, index) => (
               <tr className='text-gray-500 hover:bg-slate-300 hover:text-slate-800'>
                 <th>{index+1}</th>
                 <th>{json.nombre}</th>
