@@ -7,12 +7,15 @@ import { useNavbarStore } from '../stores/useNavbarStore'
 import { BsFillCloudUploadFill } from 'react-icons/bs'
 import { useUserStore } from '../stores/useUserStore'
 import sweetAlert from '../constants/sweetAlert'
+import Button from './Button'
+import Loading from './Loading'
 
 export default function File () {
   const [fileData, setFileData] = useState(null)
+  const [nameFile, setNameFile] = useState(null)
   function Change (e) {
     setFileData(e)
-    document.querySelector('#nameFile').innerHTML = document.querySelector('#file').files[0].name
+    setNameFile(document.querySelector('#file').files[0].name)
   }
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const { token } = useUserStore(store => store, shallow)
@@ -46,22 +49,20 @@ export default function File () {
           })
       }}
     >
-      {({ errors, values, handleSubmit, handleChange, handleBlur }) => (
+      {({ handleSubmit }) => (
         <div className='h-full my-10 text-black flex flex-col  items-center'>
-          <strong> <h2 className='text-center text-white text-4xl mb-10'>Subir Archivo</h2></strong>
-          <form onSubmit={handleSubmit} className='mb-10 text-center w-fit md:flex md:gap-20 bg-white p-10 rounded-3xl'>
-            <div className='flex items-center flex-col m-2'>
+          <strong> <h2 className='text-center text-primary-blue-800 text-4xl mb-10'>Subir Archivo</h2></strong>
+          <form onSubmit={handleSubmit} className='text-center w-full flex flex-col gap-5 max-w-[200px]'>
+            <div className='flex items-center bg-white flex-col rounded-3xl gap-3 w-full p-5'>
               <label className='cursor-pointer' htmlFor='file'><BsFillCloudUploadFill size={70} color='#66a7ad' /></label>
-              <input type='file' className='mb-5' name='file' id='file' required onChange={(e) => Change(e.target.files)} accept='.xlsx' />
-              <p className='mt-5' id='nameFile' />
+              <input type='file' name='file' id='file' className='w-full h-full' required onChange={(e) => Change(e.target.files)} accept='.xlsx' />
+              {nameFile ? <p className='text-sm text-gray-500'>{nameFile}</p> : <label htmlFor='file' className='text-sm cursor-pointer text-gray-500'>Dale click para subir tu archivo</label>}
             </div>
-            {fileData && <button type='submit' id='btnSendFile' className='w-fit px-6 bg-[#66a7ad] hover:bg-[#82B6BB] text-white h-10 rounded-md   hover:bg-[#3A676B mt-10'>Cargar archivo</button>}
+            {fileData && <Button type='submit' id='btnSendFile'>Cargar archivo</Button>}
 
           </form>
-
-          {loading && <LoadingComponents size={100} />}
+          {loading && <Loading />}
           {data && <ViwerExcel json={data} />}
-
         </div>
       )}
 
