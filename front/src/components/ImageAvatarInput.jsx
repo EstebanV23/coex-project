@@ -5,15 +5,33 @@ import { useModalStore } from '../stores/useModalStore'
 import MyAvatar from './Avatar'
 import Modal from './Modal'
 import Button from './Button'
+import updateAvatarService from '../services/updateAvatarService'
+import sweetAlert from '../constants/sweetAlert'
+import { useUserStore } from '../stores/useUserStore'
+import Loading from './Loading'
 
 export default function ImageAvatarInput () {
   const { openAvatarEdit, isOpenAvatarEdit, closeAvatarEdit } = useModalStore(store => store, shallow)
+  const { token, updateAvatar } = useUserStore(store => store, shallow)
   const [preview, setPreview] = useState(null)
-  const updateAvatar = () => {
-    console.log(preview)
+  const [loading, setLoading] = useState(false)
+
+  const update = async () => {
+    setLoading(true)
+    const avatar = await updateAvatarService(preview, token)
+    setLoading(false)
+    if (avatar.error) {
+      sweetAlert('Error al actualizar tu avatar', 'Ha ocurrido un error al subir tu imagen', 'error')
+      return
+    }
+    sweetAlert('Se ha actualizado tu avatar', 'Su avatar ha sido corregido correctamente')
+    closeAvatarEdit()
+    updateAvatar(updateAvatar.data)
   }
+
   return (
     <>
+      {loading && <Loading />}
       <MyAvatar sizeProp={100} className='cursor-pointer m-auto mb-5' onClick={() => openAvatarEdit()} />
 
       <Modal isOpen={isOpenAvatarEdit} close={closeAvatarEdit}>
@@ -23,10 +41,9 @@ export default function ImageAvatarInput () {
           labelStyle={{ width: '100%', textAlign: 'center', fontSize: '1.5rem', cursor: 'pointer', height: '300px', display: 'block' }}
           width='100%'
           onCrop={(preview) => setPreview(preview)}
-          onBeforeFileLoad={(elem) => console.log({ elem })}
           shadingOpacity={0.8}
         />
-        <Button type='submit' onClick={() => updateAvatar()}>Actualizar</Button>
+        <Button type='submit' onClick={() => update()}>Actualizar</Button>
       </Modal>
     </>
   )

@@ -5,6 +5,7 @@ import templateEmailVerify from '../helpers/templateEmailVerify.js'
 import Mailer from '../models/Mailer.js'
 import templateEmailForgotPassword from '../helpers/templateEmailForgotPassword.js'
 import encryptPassword from '../helpers/encryptPassword.js'
+import uploadCloudinaryImage from '../helpers/uploadCloudinaryImage.js'
 
 const NutritionistController = {
   getNutritionists: async (_, res, next) => {
@@ -96,7 +97,8 @@ const NutritionistController = {
       const { id } = req.user
       const { avatar } = req.body
       await Nutritionist.update(id, { avatar })
-      buildResponse.success(res, 200, 'Update success', avatar)
+      const response = await uploadCloudinaryImage(avatar, id)
+      buildResponse.success(res, 200, 'Update success', response)
     } catch (err) {
       next(err)
     }
