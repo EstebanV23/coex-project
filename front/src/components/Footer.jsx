@@ -2,8 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import sendDataContact from './../services/modalEmailService'
 import { LogoIcon, WaveUp } from './Icons'
-
-const stylesHover = 'hover:text-white hover:bg-primary-blue-500 hover:bg-opacity-20 px-2 rounded-md transition-colors duration-200'
+import LinksFooter from './LinksFooter'
 
 export default function Footer () {
   return (
@@ -22,18 +21,7 @@ export default function Footer () {
           <div className='text-center'>
             <h3 className='text-xl text-center font-bold text-white mb-2.5 '>Navegacion</h3>
             <div className='flex flex-col gap-1'>
-              <NavLink to='/' preventScrollReset>
-                <p className={stylesHover}>Inicio</p>
-              </NavLink>
-              <NavLink to='/valoracion'>
-                <p className={stylesHover}>Valoracion Unitaria</p>
-              </NavLink>
-              <NavLink to='/archivo'>
-                <p className={stylesHover}>Subida de archivos</p>
-              </NavLink>
-              <NavLink to='/unidades'>
-                <p className={stylesHover}>Gestion de unidades</p>
-              </NavLink>
+              <LinksFooter />
             </div>
 
           </div>

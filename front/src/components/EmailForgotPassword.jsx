@@ -34,7 +34,7 @@ export default function EmailForgotPassword () {
           response.error
             ? sweetAlert('Este correo no tiene cuenta asociada', 'El correo al que intentas cambiar lac contraseña no tiene una cuenta asociada', 'error')
             : sweetAlert(`Email enviado a ${email}`, 'Te hemos enviado un email con las instrucciones para cambiar tu contraseña')
-          navigate('/login')
+          navigate('/')
         }}
       >
         {({ errors, handleSubmit }) => (

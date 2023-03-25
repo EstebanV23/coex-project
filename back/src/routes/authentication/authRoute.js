@@ -63,5 +63,15 @@ authRouter
     validateData(nutritionistAvatar, 'body'),
     NutritionistController.updateAvatar
   )
+  .get(
+    '/validate-token/:token',
+    handlerJwtVerify('params'),
+    NutritionistController.tokenValidate
+  )
+  .post(
+    '/again-verify',
+    handlerAuthorizationJWT,
+    NutritionistController.againVerify
+  )
 
 export default authRouter

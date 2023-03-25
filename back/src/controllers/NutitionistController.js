@@ -4,7 +4,6 @@ import { generateToken } from '../config/JWT.js'
 import templateEmailVerify from '../helpers/templateEmailVerify.js'
 import Mailer from '../models/Mailer.js'
 import templateEmailForgotPassword from '../helpers/templateEmailForgotPassword.js'
-import encryptPassword from '../helpers/encryptPassword.js'
 import uploadCloudinaryImage from '../helpers/uploadCloudinaryImage.js'
 
 const NutritionistController = {
@@ -20,8 +19,8 @@ const NutritionistController = {
   getNutritionist: async (req, res, next) => {
     try {
       const nutritionist = await Nutritionist.getByEmail(req.body.email)
-      const { email } = nutritionist
-      buildResponse.success(res, 200, 'Nutritionist', email)
+      const { email, isVerified, parnet, _id: id } = nutritionist
+      buildResponse.success(res, 200, 'Nutritionist', { email, isVerified, parnet, id })
     } catch (err) {
       buildResponse.success(res, 200, 'Nutritionist', {})
     }
@@ -31,10 +30,27 @@ const NutritionistController = {
     try {
       const nutritionist = await new Nutritionist(req.body).create()
       const { _id: id, email, name } = nutritionist
-      const token = generateToken({ id })
+      const token = generateToken({ id }, '3 days')
       const template = templateEmailVerify({ email, token, name })
       await new Mailer(template).sendMail()
       buildResponse.success(res, 201, 'Nutritionist created', { email })
+    } catch (err) {
+      next(err)
+    }
+  },
+
+  againVerify: async (req, res, next) => {
+    try {
+      const { id } = req.user
+      const nutritionist = await Nutritionist.getOne(id)
+      const { email, name, isVerified, retriesVerify } = nutritionist
+      if (isVerified || retriesVerify >= 2) throw new Error('You cant go retry create a verify token')
+      const token = generateToken({ id }, '3 days')
+      const template = templateEmailVerify({ email, token, name })
+      await new Mailer(template).sendMail()
+      const newRetries = retriesVerify + 1
+      await Nutritionist.update(id, { retriesVerify: newRetries })
+      buildResponse.success(res, 201, 'Send new verify', { email, retriesVerify: newRetries })
     } catch (err) {
       next(err)
     }
@@ -45,8 +61,8 @@ const NutritionistController = {
       const { params: { id }, body: data } = req
       await Nutritionist.update(id, data)
       const nutritionist = await Nutritionist.getByEmail(data.email)
-      const { email, name, surname, phone, isVerified, avatar } = nutritionist
-      buildResponse.success(res, 200, 'Nutritionist updated', { email, name, surname, phone, isVerified, id, avatar })
+      const { email, name, surname, phone, isVerified, avatar, parnet } = nutritionist
+      buildResponse.success(res, 200, 'Nutritionist updated', { email, name, surname, phone, isVerified, id, avatar, parnet })
     } catch (err) {
       err.status = 403
       err.message = 'Data invalid'
@@ -73,9 +89,9 @@ const NutritionistController = {
         throw new Error(ERROR_MESSAGE, 401)
       }
       await Nutritionist.update(nutritionist._id, { lastConnection: new Date() })
-      const { _id: id, name, surname, isVerified, phone, avatar } = nutritionist
-      const token = generateToken({ id })
-      const dataNutritionist = { id, name, avatar, surname, email, phone, isVerified, token }
+      const { _id: id, name, surname, isVerified, phone, avatar, parnet, retriesVerify } = nutritionist
+      const token = generateToken({ id }, '7 days')
+      const dataNutritionist = { id, name, avatar, surname, email, phone, isVerified, token, parnet, retriesVerify }
       buildResponse.success(res, 200, 'Nutritionist logged', dataNutritionist)
     } catch (err) {
       next(err)
@@ -111,7 +127,7 @@ const NutritionistController = {
       if (!nutritionist) {
         throw new Error('Nutritionist not found', 404)
       }
-      const token = generateToken({ email }, '20m')
+      const token = generateToken({ email }, '10m')
       const { name } = nutritionist
       const template = templateEmailForgotPassword({ email, name, token })
       await new Mailer(template).sendMail()
@@ -149,6 +165,10 @@ const NutritionistController = {
     } catch (err) {
       next(err)
     }
+  },
+
+  tokenValidate: async (_, res) => {
+    buildResponse.success(res, 200, 'Token valid', {})
   }
 }
 

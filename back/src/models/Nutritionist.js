@@ -15,11 +15,13 @@ class Nutritionist {
   createdAt
   verificationDate
   lastConnection
+  parnet
+  retriesVerify
 
   constructor ({
     name, surname, email,
     phone = '', password, isVerified = false, createdAt = new Date(),
-    verificationDate = null, lastConnection = null
+    verificationDate = null, lastConnection = null, parnet = false, retriesVerify = 1
   }) {
     this.name = name
     this.surname = surname
@@ -31,6 +33,8 @@ class Nutritionist {
     this.createdAt = createdAt
     this.verificationDate = verificationDate
     this.lastConnection = lastConnection
+    this.parnet = parnet
+    this.retriesVerify = retriesVerify
   }
 
   async create () {
@@ -46,6 +50,11 @@ class Nutritionist {
 
   static async getByEmail (email) {
     const nutritionist = await schemaNutritionist.findOne({ email })
+    return nutritionist
+  }
+
+  static async getOne (id) {
+    const nutritionist = await schemaNutritionist.findOne({ _id: new mongoose.Types.ObjectId(id) })
     return nutritionist
   }
 
@@ -86,7 +95,9 @@ class Nutritionist {
       isVerified: this.isVerified,
       createdAt: this.createdAt,
       verificationDate: this.verificationDate,
-      lastConnection: this.lastConnection
+      lastConnection: this.lastConnection,
+      parnet: this.parnet,
+      retriesVerify: this.retriesVerify
     }
   }
 }
