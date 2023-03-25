@@ -37,10 +37,17 @@ export const useUserStore = create((set, get) => ({
     )
   },
   setVerified: () => {
-    JSON.parse(localStorage.getItem('user')).isVerified = true
-    return set({
-      isVerified: true
-    })
+    const user = JSON.parse(localStorage.getItem('user'))
+    user.isVerified = true
+    localStorage.setItem('user', JSON.stringify(user))
+
+    return set({ isVerified: true })
   },
-  updateAvatar: (avatar) => set({ avatar })
+  updateAvatar: (avatar) => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    user.avatar = avatar
+    localStorage.setItem('user', JSON.stringify(user))
+
+    return set({ avatar })
+  }
 }))

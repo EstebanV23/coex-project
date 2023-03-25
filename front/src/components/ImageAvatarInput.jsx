@@ -25,8 +25,8 @@ export default function ImageAvatarInput () {
       return
     }
     sweetAlert('Se ha actualizado tu avatar', 'Su avatar ha sido corregido correctamente')
+    updateAvatar(avatar.data)
     closeAvatarEdit()
-    updateAvatar(updateAvatar.data)
   }
 
   return (
@@ -35,15 +35,17 @@ export default function ImageAvatarInput () {
       <MyAvatar sizeProp={100} className='cursor-pointer m-auto mb-5' onClick={() => openAvatarEdit()} />
 
       <Modal isOpen={isOpenAvatarEdit} close={closeAvatarEdit}>
-        <Avatar
-          height={300}
-          label='arrastra tu imagen o haz click aquí'
-          labelStyle={{ width: '100%', textAlign: 'center', fontSize: '1.5rem', cursor: 'pointer', height: '300px', display: 'block' }}
-          width='100%'
-          onCrop={(preview) => setPreview(preview)}
-          shadingOpacity={0.8}
-        />
-        <Button type='submit' onClick={() => update()}>Actualizar</Button>
+        <div className='flex flex-col gap-4'>
+          <Avatar
+            height={300}
+            label='arrastra tu imagen o haz click aquí'
+            labelStyle={{ width: '100%', textAlign: 'center', fontSize: '1.5rem', cursor: 'pointer', height: '300px', display: 'block' }}
+            width='100%'
+            onCrop={(preview) => setPreview(preview)}
+            shadingOpacity={0.8}
+          />
+          <Button type='submit' onClick={() => update()}>Actualizar</Button>
+        </div>
       </Modal>
     </>
   )

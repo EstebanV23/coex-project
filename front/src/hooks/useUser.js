@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useUserStore } from '../stores/useUserStore'
 import loginService from '../services/loginService'
 import { useNavbarStore } from '../stores/useNavbarStore'
@@ -26,7 +26,7 @@ export default function useUser () {
         setLoading(false)
         setError(true)
       })
-  }, [setUser])
+  }, [])
 
   const logout = useCallback(() => {
     restarUser()
@@ -34,7 +34,7 @@ export default function useUser () {
     navigate('/')
     openLoggin()
     localStorage.removeItem('user')
-  }, [restarUser])
+  }, [])
 
   return {
     isLogged: Boolean(token),

@@ -5,13 +5,12 @@ export default async function updateAvatarService (avatar, token) {
     {
       method: 'PATCH',
       headers: {
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ avatar })
     }
   )
   const data = await response.json()
-
   return data
 }
