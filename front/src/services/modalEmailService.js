@@ -1,5 +1,4 @@
 import Swal from 'sweetalert2'
-
 export default async function sendDataContact () {
   const { value: email } = await Swal.fire({
     title: 'Contacto',

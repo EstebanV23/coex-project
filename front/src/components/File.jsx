@@ -4,7 +4,7 @@ import ViwerExcel from './ViwerExcel'
 import LoadingComponents from './LoadingComponents'
 import { shallow } from 'zustand/shallow'
 import { useNavbarStore } from '../stores/useNavbarStore'
-import { BsFillCloudUploadFill } from 'react-icons/bs';
+import { BsFillCloudUploadFill } from 'react-icons/bs'
 import { useUserStore } from '../stores/useUserStore'
 import sweetAlert from '../constants/sweetAlert'
 
@@ -12,7 +12,7 @@ export default function File () {
   const [fileData, setFileData] = useState(null)
   function Change (e) {
     setFileData(e)
-    document.querySelector('#nameFile').innerHTML=document.querySelector('#file').files[0].name
+    document.querySelector('#nameFile').innerHTML = document.querySelector('#file').files[0].name
   }
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const { token } = useUserStore(store => store, shallow)
@@ -38,8 +38,8 @@ export default function File () {
           .then(response => response.json())
           .then(response => {
             setLoading(false)
-            if(response.error){
-              sweetAlert('Error de arcvhivo' , response.error, 'error')
+            if (response.error) {
+              sweetAlert('Error de arcvhivo', response.error, 'error')
               return
             }
             setData(response)
@@ -50,13 +50,13 @@ export default function File () {
         <div className='h-full my-10 text-black flex flex-col  items-center'>
           <strong> <h2 className='text-center text-white text-4xl mb-10'>Subir Archivo</h2></strong>
           <form onSubmit={handleSubmit} className='mb-10 text-center w-fit md:flex md:gap-20 bg-white p-10 rounded-3xl'>
-            <div  className='flex items-center flex-col m-2'> 
-              <label className='cursor-pointer' for='file'><BsFillCloudUploadFill size={70} color='#66a7ad' /></label>
-              <input type='file' className='mb-5' name='file' id='file' required onChange={() => Change(event.target.files) } accept='.xlsx' />
-              <p className='mt-5'id='nameFile'></p>
+            <div className='flex items-center flex-col m-2'>
+              <label className='cursor-pointer' htmlFor='file'><BsFillCloudUploadFill size={70} color='#66a7ad' /></label>
+              <input type='file' className='mb-5' name='file' id='file' required onChange={(e) => Change(e.target.files)} accept='.xlsx' />
+              <p className='mt-5' id='nameFile' />
             </div>
             {fileData && <button type='submit' id='btnSendFile' className='w-fit px-6 bg-[#66a7ad] hover:bg-[#82B6BB] text-white h-10 rounded-md   hover:bg-[#3A676B mt-10'>Cargar archivo</button>}
-            
+
           </form>
 
           {loading && <LoadingComponents size={100} />}
