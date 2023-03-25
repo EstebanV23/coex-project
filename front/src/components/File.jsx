@@ -6,7 +6,6 @@ import { shallow } from 'zustand/shallow'
 import { useNavbarStore } from '../stores/useNavbarStore'
 import { BsFillCloudUploadFill } from 'react-icons/bs';
 
-
 export default function File () {
   const [fileData, setFileData] = useState(null)
   function Change (e) {
@@ -14,6 +13,7 @@ export default function File () {
     document.querySelector('#nameFile').innerHTML=document.querySelector('#file').files[0].name
   }
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
+  const { token } = useUserStore(store => store, shallow)
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function File () {
           method: 'POST',
           body: f
         }
-        fetch('https://mianthroapi.onrender.com/multi/mitoken', options)
+        fetch(`https://mianthroapi.onrender.com/multi/${token}`, options)
           .then(response => response.json())
           .then(response => {
             setData(response)

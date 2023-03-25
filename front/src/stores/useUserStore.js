@@ -2,6 +2,7 @@ import { create } from 'zustand'
 
 export const useUserStore = create((set, get) => ({
   id: null,
+  avatar: null,
   name: null,
   surname: null,
   email: null,
@@ -11,6 +12,7 @@ export const useUserStore = create((set, get) => ({
   restarUser: () => set(
     {
       id: null,
+      avatar: null,
       name: null,
       surname: null,
       email: null,
@@ -24,6 +26,7 @@ export const useUserStore = create((set, get) => ({
     return set(
       {
         id: user.id,
+        avatar: user.avatar,
         name: user.name,
         surname: user.surname,
         email: user.email,
@@ -33,5 +36,18 @@ export const useUserStore = create((set, get) => ({
       }
     )
   },
-  setVerified: () => set({ isVerified: true })
+  setVerified: () => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    user.isVerified = true
+    localStorage.setItem('user', JSON.stringify(user))
+
+    return set({ isVerified: true })
+  },
+  updateAvatar: (avatar) => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    user.avatar = avatar
+    localStorage.setItem('user', JSON.stringify(user))
+
+    return set({ avatar })
+  }
 }))

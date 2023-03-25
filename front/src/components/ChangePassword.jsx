@@ -70,33 +70,31 @@ export default function ChangePassword () {
                   error={errors}
                   name='oldPassword'
                   autoComplete='off'
-                  placeholder='Antigua contraseña'
+                  textLabel='Antigua contraseña'
                   type={showPasswordOld ? 'text' : 'password'}
                 />
                 <EyePassword setState={setShowPasswordOld} state={showPasswordOld} />
               </div>
               <div className='relative'>
                 <Input
-                  id='password'
                   icon={<TbPassword size={23} />}
                   error={errors}
                   type={showPassword ? 'text' : 'password'}
                   name='password'
                   autoComplete='off'
-                  placeholder='Nueva contraseña'
+                  textLabel='Nueva contraseña'
                 />
                 <EyePassword setState={setShowPassword} state={showPassword} />
               </div>
               <Input
-                id='passwordConfirm'
                 icon={<TbPassword size={23} />}
                 error={errors}
                 type={showPassword ? 'text' : 'password'}
                 name='passwordConfirm'
                 autoComplete='off'
-                placeholder='Repite tu nueva contraseña'
+                textLabel='Repite tu nueva contraseña'
               />
-              <Button type='submit' className='text-primary-blue border-primary-blue hover:text-white hover:bg-primary-blue py-3 text-xl'>Enviar</Button>
+              <Button type='submit' className='text-xl py-2'>Enviar</Button>
             </form>
         }
       </Formik>

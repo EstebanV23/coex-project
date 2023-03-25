@@ -5,6 +5,7 @@ import templateEmailVerify from '../helpers/templateEmailVerify.js'
 import Mailer from '../models/Mailer.js'
 import templateEmailForgotPassword from '../helpers/templateEmailForgotPassword.js'
 import encryptPassword from '../helpers/encryptPassword.js'
+import uploadCloudinaryImage from '../helpers/uploadCloudinaryImage.js'
 
 const NutritionistController = {
   getNutritionists: async (_, res, next) => {
@@ -44,8 +45,8 @@ const NutritionistController = {
       const { params: { id }, body: data } = req
       await Nutritionist.update(id, data)
       const nutritionist = await Nutritionist.getByEmail(data.email)
-      const { email, name, surname, phone, isVerified } = nutritionist
-      buildResponse.success(res, 200, 'Nutritionist updated', { email, name, surname, phone, isVerified, id })
+      const { email, name, surname, phone, isVerified, avatar } = nutritionist
+      buildResponse.success(res, 200, 'Nutritionist updated', { email, name, surname, phone, isVerified, id, avatar })
     } catch (err) {
       err.status = 403
       err.message = 'Data invalid'
@@ -72,9 +73,9 @@ const NutritionistController = {
         throw new Error(ERROR_MESSAGE, 401)
       }
       await Nutritionist.update(nutritionist._id, { lastConnection: new Date() })
-      const { _id: id, name, surname, isVerified, phone } = nutritionist
+      const { _id: id, name, surname, isVerified, phone, avatar } = nutritionist
       const token = generateToken({ id })
-      const dataNutritionist = { id, name, surname, email, phone, isVerified, token }
+      const dataNutritionist = { id, name, avatar, surname, email, phone, isVerified, token }
       buildResponse.success(res, 200, 'Nutritionist logged', dataNutritionist)
     } catch (err) {
       next(err)
@@ -86,6 +87,18 @@ const NutritionistController = {
       const { id } = req.user
       const nutritionist = await Nutritionist.update(id, { isVerified: true, verificationDate: new Date() })
       buildResponse.success(res, 200, 'Nutritionist verified', nutritionist)
+    } catch (err) {
+      next(err)
+    }
+  },
+
+  updateAvatar: async (req, res, next) => {
+    try {
+      const { id } = req.user
+      const { avatar } = req.body
+      const response = await uploadCloudinaryImage(avatar, id)
+      await Nutritionist.update(id, { avatar: response.data })
+      buildResponse.success(res, 200, 'Update success', response)
     } catch (err) {
       next(err)
     }
