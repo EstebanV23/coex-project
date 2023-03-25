@@ -3,7 +3,6 @@ import { useNavbarStore } from '../stores/useNavbarStore'
 import { shallow } from 'zustand/shallow'
 import { IoReturnUpBack } from 'react-icons/io5'
 import useUser from '../hooks/useUser'
-import { useModalStore } from '../stores/useModalStore'
 
 export default function ModalUser () {
   const { hiddenModal, toggleHiddenModal } = useNavbarStore(store => store, shallow)

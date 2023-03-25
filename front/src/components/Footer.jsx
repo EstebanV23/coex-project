@@ -1,5 +1,4 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import sendDataContact from './../services/modalEmailService'
 import { LogoIcon, WaveUp } from './Icons'
 import LinksFooter from './LinksFooter'

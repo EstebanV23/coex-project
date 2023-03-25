@@ -61,8 +61,8 @@ const NutritionistController = {
       const { params: { id }, body: data } = req
       await Nutritionist.update(id, data)
       const nutritionist = await Nutritionist.getByEmail(data.email)
-      const { email, name, surname, phone, isVerified, avatar, parnet } = nutritionist
-      buildResponse.success(res, 200, 'Nutritionist updated', { email, name, surname, phone, isVerified, id, avatar, parnet })
+      const { email, name, surname, phone, isVerified, avatar, parnet, retriesVerify } = nutritionist
+      buildResponse.success(res, 200, 'Nutritionist updated', { email, name, surname, phone, isVerified, id, avatar, parnet, retriesVerify })
     } catch (err) {
       err.status = 403
       err.message = 'Data invalid'

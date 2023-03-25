@@ -26,7 +26,6 @@ export default function InfoProfile () {
       sweetAlert('Ha ocurrido un error al solicitar tu nueva verificación', 'Tu verificación ha expirado o has llegado al límite de tus solicitudes, revisa tu correo', 'error')
       return
     }
-    console.log({ responseAgain })
     const { retriesVerify } = responseAgain.data
     setRetries(retriesVerify)
     sweetAlert('Hemos enviado un nuevo correo para tu verificación', 'Revisa tu bandeja de entrada, spam o correos no deseados, el correo es enviado como "MiAnthro", así podrás buscarlo')
