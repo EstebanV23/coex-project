@@ -3,10 +3,13 @@ import { useUserStore } from '../stores/useUserStore'
 import loginService from '../services/loginService'
 import { useNavbarStore } from '../stores/useNavbarStore'
 import { useNavigate } from 'react-router-dom'
+import { useModalStore } from '../stores/useModalStore'
+import { shallow } from 'zustand/shallow'
 
 export default function useUser () {
-  const { token, restarUser, setUser, isVerified } = useUserStore(store => store)
+  const { token, restarUser, setUser, isVerified, avatar } = useUserStore(store => store)
   const { hiddenTrue } = useNavbarStore(store => store)
+  const { closeLoggin, openLoggin } = useModalStore(store => store, shallow)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const navigate = useNavigate()
@@ -16,9 +19,10 @@ export default function useUser () {
     loginService({ email, password })
       .then(user => {
         setLoading(false)
+        closeLoggin()
         setUser(user)
       })
-      .catch(() => {
+      .catch((e) => {
         setLoading(false)
         setError(true)
       })
@@ -27,7 +31,8 @@ export default function useUser () {
   const logout = useCallback(() => {
     restarUser()
     hiddenTrue()
-    navigate('/login')
+    navigate('/')
+    openLoggin()
     localStorage.removeItem('user')
   }, [restarUser])
 
@@ -36,6 +41,7 @@ export default function useUser () {
     isLoginLoading: loading,
     hasLoginError: error,
     isVerified,
+    avatar,
     login,
     logout
   }

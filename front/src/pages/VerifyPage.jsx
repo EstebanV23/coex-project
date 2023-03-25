@@ -14,7 +14,6 @@ export default function VerifyPage () {
   useEffect(() => {
     verifyService(token)
       .then(data => {
-        console.log(data)
         if (data.error) {
           sweetAlert('Tu tiempo ha caducado', 'Vuelve a crear tu cuenta y verifícala en el tiempo correspondiente', 'error')
           return

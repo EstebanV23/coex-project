@@ -14,10 +14,10 @@ function templateEmailForgotPassword ({ email, name, token }) {
       textButton: 'Recuperar contraseña',
       path
     }), // html body
-    atachments: [
+    attachments: [
       {
-        filename: 'logo.svg',
-        path: './../../public/logo.svg',
+        filename: 'logo.png',
+        path: 'public/logo.png',
         cid: 'logo'
       }
     ]

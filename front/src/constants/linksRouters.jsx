@@ -1,10 +1,9 @@
 import { IoHome } from 'react-icons/io5'
 import { BsPersonHeart, BsFillFileEarmarkArrowUpFill, BsPeopleFill } from 'react-icons/bs'
-import { useUserStore } from '../stores/useUserStore'
-import { shallow } from 'zustand/shallow'
+import useUser from '../hooks/useUser'
 
 export default function () {
-  const { isVerified } = useUserStore(store => store, shallow)
+  const { isVerified, isLogged } = useUser()
 
   return [
     {
@@ -12,28 +11,32 @@ export default function () {
       name: 'Inicio',
       icon: <IoHome stroke='2' size={25} />,
       path: '/',
-      verify: true
+      verify: true,
+      isLogged: true
     },
     {
       id: 'link2',
       name: 'Valoración unitaria',
       icon: <BsPersonHeart stroke='2' size={25} />,
       path: '/valoration',
-      verify: true
+      verify: true,
+      isLogged
     },
     {
       id: 'link3',
       name: 'Subir archivo',
       icon: <BsFillFileEarmarkArrowUpFill stroke='2' size={25} />,
       path: '/file-up',
-      verify: isVerified
+      verify: isVerified,
+      isLogged
     },
     {
       id: 'link4',
       name: 'Unidades',
       icon: <BsPeopleFill stroke='2' size={25} />,
       path: '/unidades',
-      verify: isVerified
+      verify: isVerified,
+      isLogged
     }
   ]
 }

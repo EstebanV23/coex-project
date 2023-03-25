@@ -14,7 +14,14 @@ function templateEmailVerify ({ email, name, token }) {
       title: 'Verifica tu cuenta',
       textButton: 'Verificar cuenta',
       path
-    }) // html body
+    }), // html body
+    attachments: [
+      {
+        filename: 'logo.png',
+        path: './public/logo.png',
+        cid: 'logo'
+      }
+    ]
   }
 }
 
