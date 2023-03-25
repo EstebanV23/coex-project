@@ -6,6 +6,7 @@ import { shallow } from 'zustand/shallow'
 import { useNavbarStore } from '../stores/useNavbarStore'
 import { BsFillCloudUploadFill } from 'react-icons/bs';
 
+
 export default function File () {
   const [fileData, setFileData] = useState(null)
   function Change (e) {
