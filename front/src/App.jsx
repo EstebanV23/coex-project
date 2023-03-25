@@ -31,13 +31,12 @@ function App () {
   useEffect(() => {
     if (localStorage.getItem('user')) {
       setUser(JSON.parse(localStorage.getItem('user')))
-      closeLoggin()
     }
   }, [])
 
   return (
     <>
-      <Modal isOpen={isOpenLoggin && !isLogged} close={closeLoggin}><Login /></Modal>
+      <Modal isOpen={isOpenLoggin && !isLogged} className='max-w-md' close={closeLoggin}><Login /></Modal>
       <Modal isOpen={isOpenRegister && !isLogged} close={closeRegister}><Register /></Modal>
       <Navbar />
       <div className='bg-primary-blue-300 min-h-screen flex flex-col justify-between' onClick={hiddenTrue}>
