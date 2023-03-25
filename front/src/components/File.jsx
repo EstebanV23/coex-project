@@ -2,6 +2,7 @@ import { Formik } from 'formik'
 import { useEffect, useState } from 'react'
 import ViwerExcel from './ViwerExcel'
 import LoadingComponents from './LoadingComponents'
+import sweetAlert from '../constants/sweetAlert'
 import { shallow } from 'zustand/shallow'
 import { useNavbarStore } from '../stores/useNavbarStore'
 import { useUserStore } from '../stores/useUserStore'
@@ -31,11 +32,15 @@ export default function File () {
           method: 'POST',
           body: f
         }
-        fetch(`https://mianthroapi.onrender.com/multi/${token}`, options)
+        fetch('https://mianthroapi.onrender.com/multi/mitoken', options)
           .then(response => response.json())
           .then(response => {
-            setData(response)
             setLoading(false)
+            if (response.error) {
+              sweetAlert('Error de archivo', response.error, 'error')
+              return
+            }
+            setData(response)
           })
       }}
     >

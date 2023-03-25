@@ -4,20 +4,22 @@ import { BsPersonFill } from 'react-icons/bs'
 import { AiTwotonePhone } from 'react-icons/ai'
 import { TbPassword } from 'react-icons/tb'
 import { regex } from '../constants/regex'
-import { LogoIcon } from './Icons'
 import { MdOutlineAlternateEmail } from 'react-icons/md'
 import Button from './Button'
-import { Link, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import registerService from '../services/registerService'
 import { useState } from 'react'
 import LoadingComponents from './LoadingComponents'
 import sweetAlert from '../constants/sweetAlert'
 import EyePassword from './EyePassword'
+import { shallow } from 'zustand/shallow'
+import { useModalStore } from '../stores/useModalStore'
 
 export default function Register () {
   const [loading, setLoading] = useState(false)
   const [emailDuplicate, setEmailDuplicate] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const { openLoggin, closeRegister } = useModalStore(store => store, shallow)
   const navigate = useNavigate()
 
   return (
@@ -70,8 +72,8 @@ export default function Register () {
         }}
       >
         {({ errors, handleSubmit }) => (
-          <div className='flex justify-center items-center'>
-            <form className='bg-white h-fit p-3 rounded-xl w-[95%] sm:p-6 md:p-12 md:max-w-3xl lg:w-3xl' onSubmit={handleSubmit}>
+          <div className='w-full flex justify-center items-center'>
+            <form className='bg-white h-fit p-3 rounded-xl sm:p-6 md:max-w-3xl lg:w-3xl' onSubmit={handleSubmit}>
               <div className='flex flex-col gap-0 sm:gap-4 mb-5 justify-center items-center'>
                 <h1 className='text-3xl font-work font-bold'>Registro</h1>
               </div>
@@ -85,14 +87,12 @@ export default function Register () {
                     disabled={loading} icon={<BsPersonFill size={22} />} type='text' textLabel='Apellidos' name='surname' error={errors}
                   />
                 </div>
-                <div className='flex flex-col md:flex-row gap-6 w-full'>
-                  <Input
-                    disabled={loading} icon={<AiTwotonePhone size={22} />} type='text' textLabel='Telefono' name='phone' error={errors}
-                  />
-                  <Input
-                    disabled={loading} icon={<MdOutlineAlternateEmail size={22} />} type='text' textLabel='Correo electrónico' name='email' error={errors}
-                  />
-                </div>
+                <Input
+                  disabled={loading} icon={<AiTwotonePhone size={22} />} type='text' textLabel='Telefono' name='phone' error={errors}
+                />
+                <Input
+                  disabled={loading} icon={<MdOutlineAlternateEmail size={22} />} type='text' textLabel='Correo electrónico' name='email' error={errors}
+                />
                 <div className='flex flex-col md:flex-row gap-6 w-full'>
                   <div className='w-full relative'>
                     <Input
@@ -107,7 +107,14 @@ export default function Register () {
                   />
                 </div>
                 <div className='flex flex-col items-start justify-between w-full'>
-                  <Link to='/login' className='text-primary-blue text-base'>Ya tienes una cuenta?</Link>
+                  <NavLink
+                    className='text-base text-primary-blue-500 hover:text-slate-700 hover:underline ease-in-out duration-200'
+                    onClick={() => {
+                      closeRegister()
+                      openLoggin()
+                    }}
+                  >Ya tienes una cuenta?
+                  </NavLink>
                   {emailDuplicate && <p className='text-error text-base'>Este correo ya se encuentra registrado</p>}
                 </div>
                 <Button disabled={loading} type='submit' className='py-2 transition-all duration-500 text-xl text-primary-blue font-bold hover:bg-primary-blue hover:text-white border-primary-blue'>{loading ? <LoadingComponents size={27} /> : 'Registrarse'}</Button>
