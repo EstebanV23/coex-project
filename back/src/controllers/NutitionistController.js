@@ -96,9 +96,9 @@ const NutritionistController = {
     try {
       const { id } = req.user
       const { avatar } = req.body
-      const response = await uploadCloudinaryImage(avatar, id)
-      await Nutritionist.update(id, { avatar: response.data })
-      buildResponse.success(res, 200, 'Update success', response)
+      const avatarUrl = await uploadCloudinaryImage(avatar, id)
+      await Nutritionist.update(id, { avatar: avatarUrl })
+      buildResponse.success(res, 200, 'Update success', avatarUrl)
     } catch (err) {
       next(err)
     }
