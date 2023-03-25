@@ -40,7 +40,7 @@ export default function File () {
       }}
     >
       {({ errors, values, handleSubmit, handleChange, handleBlur }) => (
-        <div className='h-full mb-36'>
+        <div className='h-full mb-36 p-10'>
           <form onSubmit={handleSubmit} className='text-center '>
             <strong> <h1 className='text-center text-white text-5xl mb-10'>Subir archivo</h1></strong>
             <input type='file' name='file' id='file' required onChange={() => Change(event.target.files)} /><br />
