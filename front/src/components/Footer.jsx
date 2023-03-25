@@ -23,10 +23,10 @@ export default function Footer () {
               <NavLink to='/' preventScrollReset>
                 <p>Inicio</p>
               </NavLink>
-              <NavLink to='/valoracion'>
+              <NavLink to='/valoration'>
                 <p>Valoracion Unitaria</p>
               </NavLink>
-              <NavLink to='/archivo'>
+              <NavLink to='/file-up'>
                 <p>Subida de archivos</p>
               </NavLink>
               <NavLink to='/unidades'>
