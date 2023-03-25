@@ -14,5 +14,13 @@ export const regex = {
   phone: {
     exp: /^(\+\d{12}|\d{10})$/,
     msg: '*El teléfono debe contener 10 digitos'
+  },
+  peso: {
+    exp: /^[0-9]+([.])?([0-9]+)?$/,
+    msg: 'El peso debe ser un dato númerico'
+  },
+  talla: {
+    exp: /^[0-9]+([.])?([0-9]+)?$/,
+    msg: 'La talla debe ser un dato númerico'
   }
 }
