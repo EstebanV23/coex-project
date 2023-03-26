@@ -13,9 +13,9 @@ import Loading from './Loading'
 export default function File () {
   const [fileData, setFileData] = useState(null)
   const [nameFile, setNameFile] = useState(null)
-  function Change (e) {
-    setFileData(e)
-    setNameFile(document.querySelector('#file').files[0].name)
+  function Change (file) {
+    setFileData(file)
+    setNameFile(file[0].name)
   }
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const { token } = useUserStore(store => store, shallow)
