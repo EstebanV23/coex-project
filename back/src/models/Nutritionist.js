@@ -1,8 +1,8 @@
 import schemaNutritionist from '../schemas/collectionSchema/nutritionistSchema.js'
-import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import encryptPassword from '../helpers/encryptPassword.js'
 import generateRandomAvatar from '../helpers/generateRandomAvatar.js'
+import hiddenValuesDatabase from '../helpers/hiddenValuesDatabase.js'
 
 class Nutritionist {
   name
@@ -44,7 +44,7 @@ class Nutritionist {
   }
 
   static async getAll () {
-    const nutritionists = await schemaNutritionist.find()
+    const nutritionists = await schemaNutritionist.find({}, hiddenValuesDatabase.nutritinist)
     return nutritionists
   }
 
@@ -54,13 +54,18 @@ class Nutritionist {
   }
 
   static async getOne (id) {
-    const nutritionist = await schemaNutritionist.findOne({ _id: new mongoose.Types.ObjectId(id) })
+    const nutritionist = await schemaNutritionist.findOne({ _id: id })
+    return nutritionist
+  }
+
+  static async getUnits (id) {
+    const nutritionist = await schemaNutritionist.findOne({ _id: id }, hiddenValuesDatabase.nutritinist).populate('units').then(data => data.populate('units.trimesters'))
     return nutritionist
   }
 
   static async update (id, data) {
     if (data.password) data.password = await encryptPassword(data.password)
-    const newNutritionist = await schemaNutritionist.updateOne({ _id: new mongoose.Types.ObjectId(id) }, { $set: data })
+    const newNutritionist = await schemaNutritionist.updateOne({ _id: id }, { $set: data })
     return newNutritionist
   }
 
@@ -68,6 +73,17 @@ class Nutritionist {
     if (data.password) data.password = await encryptPassword(data.password)
     const newNutritionist = await schemaNutritionist.updateOne({ email }, { $set: data })
     return newNutritionist
+  }
+
+  static deleteUnit (nutritinistId, unitId) {
+    return schemaNutritionist.updateOne({ _id: nutritinistId }, { $pull: { units: unitId } })
+  }
+
+  static async addUnit (nutritinistId, unitId) {
+    const nutritinist = await this.getOne(nutritinistId)
+    nutritinist.units.push(unitId)
+    const { units } = nutritinist
+    await this.update(nutritinistId, { units })
   }
 
   static async delete (id) {
