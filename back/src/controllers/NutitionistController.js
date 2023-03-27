@@ -4,7 +4,7 @@ import { generateToken } from '../config/JWT.js'
 import templateEmailVerify from '../helpers/templateEmailVerify.js'
 import Mailer from '../models/Mailer.js'
 import templateEmailForgotPassword from '../helpers/templateEmailForgotPassword.js'
-import uploadCloudinaryImage from '../helpers/uploadCloudinaryImage.js'
+import uploadCloudinary from '../helpers/uploadCloudinary.js'
 
 const NutritionistController = {
   getNutritionists: async (_, res, next) => {
@@ -112,7 +112,7 @@ const NutritionistController = {
     try {
       const { id } = req.user
       const { avatar } = req.body
-      const avatarUrl = await uploadCloudinaryImage(avatar, id)
+      const avatarUrl = await uploadCloudinary(avatar, id)
       await Nutritionist.update(id, { avatar: avatarUrl })
       buildResponse.success(res, 200, 'Update success', avatarUrl)
     } catch (err) {
@@ -169,6 +169,12 @@ const NutritionistController = {
 
   tokenValidate: async (_, res) => {
     buildResponse.success(res, 200, 'Token valid', {})
+  },
+
+  getAllUnits: async (req, res) => {
+    const { id } = req.params
+    const nutritinist = await Nutritionist.getUnits(id)
+    return buildResponse.success(res, 200, 'Nutritionist', nutritinist)
   }
 }
 

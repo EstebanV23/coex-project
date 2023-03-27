@@ -5,6 +5,8 @@ import authRouter from './src/routes/authentication/authRoute.js'
 import mongoDb from './src/database/mongo.js'
 import handlerException from './src/middlewares/handlerException.js'
 import configEnvironment from './src/config/configEnvironment.js'
+import unitsRouter from './src/routes/units/unitsRoute.js'
+import trimestersRouter from './src/routes/trimesters/trimestersRoute.js'
 
 // Inicialización del proyecto
 const app = express()
@@ -18,8 +20,11 @@ mongoDb()
 
 // Rutas para los endpoints
 app.use('/auth', authRouter)
+app.use('/units', unitsRouter)
+app.use('/trimesters', trimestersRouter)
+
 app.use(handlerException)
-app.use((req, res) => {
+app.use((_, res) => {
   res.status(405).send('<h2>The server correct!</h2>')
 })
 

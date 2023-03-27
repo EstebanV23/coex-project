@@ -9,10 +9,11 @@ cloudinary.config({
   api_secret: configEnvironment.cloudApiSecret
 })
 
-async function uploadCloudinaryImage (url, id) {
-  return await cloudinary.uploader.upload(url, { public_id: id })
+async function uploadCloudinary (url, id) {
+  const response = await cloudinary.uploader.upload(url, { public_id: id })
     .then((data) => data.url)
     .catch((err) => err)
+  return response
 }
 
-export default uploadCloudinaryImage
+export default uploadCloudinary
