@@ -1,16 +1,29 @@
 import Button from './Button'
 import Input from './Input'
 import { Form, Formik } from 'formik'
-
+import createUnitService from '../services/createUnitServices'
+import { useUserStore } from '../stores/useUserStore'
+import { useModalStore } from '../stores/useModalStore'
+import sweetAlert from '../constants/sweetAlert'
 export default function ModalNewUnidad () {
+  const { token } = useUserStore(store => store)
+  const { closeUnitModal } = useModalStore()
   return (
     <Formik
       initialValues={{
         name: '',
-        zonal: ''
+        zoneCenter: ''
       }}
-      handleSubmit={(elements) => {
-        console.log('pasa')
+      onSubmit={(elements) => {
+        createUnitService(token, elements)
+          .then((response) => {
+            if (response.error) {
+              sweetAlert('No tienes permisoss para crear mas unidades', '', 'error')
+              return
+            }
+
+            sweetAlert('Unidad creada con exito', '', 'success')
+          }).finally(() => closeUnitModal())
       }}
     >
       {({ errors }) => (
@@ -25,7 +38,7 @@ export default function ModalNewUnidad () {
           />
           <Input
             type='text'
-            name='zonal'
+            name='zoneCenter'
             textLabel='Centro zonal'
             error={errors}
           />

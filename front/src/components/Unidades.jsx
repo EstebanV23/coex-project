@@ -6,9 +6,12 @@ import Modal from './Modal'
 import ModalNewUnidad from './ModalNewUnidad'
 import getUnitsService from '../services/getUnitsService'
 import { useUserStore } from '../stores/useUserStore'
+import { useModalStore } from '../stores/useModalStore'
 
 export default function Example () {
-  const [changeModal, setChangeModal] = useState(false)
+  const { openUnitModal, closeUnitModal, isOpenUnitModal } = useModalStore()
+  const { openTrimesterModal, isOpenTrimesterModal } = useModalStore()
+
   const { token } = useUserStore(store => store)
   const [unitsResponse, setUnits] = useState(false)
 
@@ -64,7 +67,7 @@ export default function Example () {
                             </a>
                           ))}
                         </div>
-                        <div className='bg-gray-50 p-4'>
+                        <div className='bg-gray-50 p-4' onClick={openTrimesterModal}>
                           <a
                             className='flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50'
                           >
@@ -84,13 +87,17 @@ export default function Example () {
           )
         })}
 
-        <Modal isOpen={changeModal} close={setChangeModal}>
+        <Modal isOpen={isOpenTrimesterModal} close={closeUnitModal}>
+          <ModalNewUnidad />
+        </Modal>
+
+        <Modal isOpen={isOpenUnitModal} close={closeUnitModal}>
           <ModalNewUnidad />
         </Modal>
       </div>
       <div className='w-full flex justify-center mt-20'>
         <div className='w-60 '>
-          <Button onClick={() => setChangeModal(true)}>Nueva unidad</Button>
+          <Button onClick={() => openUnitModal()}>Nueva unidad</Button>
         </div>
       </div>
 
