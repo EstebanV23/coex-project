@@ -59,7 +59,7 @@ export default function RestartPassword () {
                   type={showPassword ? 'text' : 'password'}
                   name='password'
                   autoComplete='off'
-                  placeholder='Nueva contraseña'
+                  textLabel='Nueva contraseña'
                 />
                 <EyePassword setState={setShowPassword} state={showPassword} />
               </div>
@@ -70,7 +70,7 @@ export default function RestartPassword () {
                 type={showPassword ? 'text' : 'password'}
                 name='passwordConfirm'
                 autoComplete='off'
-                placeholder='Repite tu nueva contraseña'
+                textLabel='Repite tu nueva contraseña'
               />
               <Button type='submit' className='text-primary-blue border-primary-blue hover:text-white hover:bg-primary-blue py-3 text-xl'>Enviar</Button>
             </form>

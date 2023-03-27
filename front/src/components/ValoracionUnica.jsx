@@ -71,12 +71,18 @@ export default function ValoracionUnica () {
             <div className=' flex flex-wrap gap-6 w-full'>
 
               <div className='flex flex-col md:flex-row gap-6 w-full'>
-                <Input
-                  disabled={loading} icon={<GiBodyHeight size={22} />} type='number' placeholder='Talla' name='talla' error={errors}
-                />
-                <Input
-                  disabled={loading} icon={<FaWeight size={22} />} type='number' placeholder='Peso' name='peso' error={errors}
-                />
+                <div className='relative w-full'>
+                  <Input
+                    disabled={loading} icon={<GiBodyHeight size={22} />} type='number' textLabel='Talla' name='talla' error={errors}
+                  />
+                  <p className='absolute right-10 top-5 text-gray-500'>CM</p>
+                </div>
+                <div className='relative w-full'>
+                  <Input
+                    disabled={loading} icon={<FaWeight size={22} />} type='number' textLabel='Peso' name='peso' error={errors}
+                  />
+                  <p className='absolute right-10 top-5 text-gray-500'>KG</p>
+                </div>
               </div>
               <Input disabled={loading} name='genero' error={errors} icon={<FaBaby size={22} />} as='select'>
                 <option value=''>Género</option>
@@ -85,7 +91,7 @@ export default function ValoracionUnica () {
               </Input>
               <div className='flex flex-col md:flex-row gap-6 w-full'>
                 <Input
-                  icon={<RiPencilRulerLine size={22} />} disabled type='text' placeholder='Valoración' name='valoracion' value={valoracionDiccionario[valoracion]} error={errors}
+                  icon={<RiPencilRulerLine size={22} />} disabled type='text' textLabel='Valoración' name='valoracion' value={valoracionDiccionario[valoracion]} error={errors}
                 />
               </div>
               <Button type='submit' disabled={loading} className='py-2 transition-all duration-500 text-xl text-primary-blue font-bold hover:bg-primary-blue hover:text-white border-primary-blue'>{loading ? <LoadingComponents size={27} /> : 'Valorar'}</Button>
