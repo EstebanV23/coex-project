@@ -64,7 +64,7 @@ export default function ValoracionUnica () {
       {({ errors }) => (
 
         <div className='flex justify-center my-12 items-center'>
-          <Form className='bg-white h-fit py-10 px-6 rounded-xl sm:py-12 sm:px-16 max-w-3xl'>
+          <Form className='bg-white h-fit py-10 px-6 rounded-2xl sm:py-12 sm:px-16 max-w-3xl shadow-xl'>
             <div className='flex flex-col gap-0 sm:gap-4 mb-5 justify-center items-center'>
               <h1 className='text-3xl font-bold text-center text-primary-blue-800'>Valoración unitaria</h1>
             </div>
