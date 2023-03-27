@@ -7,7 +7,6 @@ import { shallow } from 'zustand/shallow'
 import { useNavbarStore } from '../stores/useNavbarStore'
 import { BsFillCloudUploadFill } from 'react-icons/bs'
 import { useUserStore } from '../stores/useUserStore'
-import sweetAlert from '../constants/sweetAlert'
 import Button from './Button'
 import Loading from './Loading'
 
