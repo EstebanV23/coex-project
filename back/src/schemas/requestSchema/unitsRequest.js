@@ -16,6 +16,8 @@ const updateUnits = Joi.object({
   unitId: Joi.string()
     .required(),
   name: Joi.string()
+    .required(),
+  zoneCenter: Joi.string()
     .required()
 })
 

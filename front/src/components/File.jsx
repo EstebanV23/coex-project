@@ -1,8 +1,8 @@
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import { useEffect, useState } from 'react'
-import ViwerExcel from './ViwerExcel'
 import LoadingComponents from './LoadingComponents'
 import sweetAlert from '../constants/sweetAlert'
+import ViewerExcel from './ViewerExcel'
 import { shallow } from 'zustand/shallow'
 import { useNavbarStore } from '../stores/useNavbarStore'
 import { BsFillCloudUploadFill } from 'react-icons/bs'
@@ -49,20 +49,20 @@ export default function File () {
           })
       }}
     >
-      {({ handleSubmit }) => (
-        <div className='h-full my-10 text-black flex flex-col  items-center'>
+      {() => (
+        <div className='h-full my-10 text-black flex flex-col items-center '>
           <strong> <h2 className='text-center text-primary-blue-800 text-4xl mb-10'>Subir Archivo</h2></strong>
-          <form onSubmit={handleSubmit} className='text-center w-full flex flex-col gap-5 max-w-[200px]'>
-            <div className='flex items-center bg-white flex-col rounded-3xl gap-3 w-full p-5'>
+          <Form className='text-center w-full flex flex-col gap-5 max-w-[200px] '>
+            <div className='flex items-center bg-white flex-col rounded-3xl gap-3 w-full p-5 shadow-xl'>
               <label className='cursor-pointer' htmlFor='file'><BsFillCloudUploadFill size={70} color='#66a7ad' /></label>
               <input type='file' name='file' id='file' className='w-full h-full' required onChange={(e) => Change(e.target.files)} accept='.xlsx' />
               {nameFile ? <p className='text-sm text-gray-500'>{nameFile}</p> : <label htmlFor='file' className='text-sm cursor-pointer text-gray-500'>Dale click para subir tu archivo</label>}
             </div>
             {fileData && <Button type='submit' id='btnSendFile'>Cargar archivo</Button>}
 
-          </form>
+          </Form>
           {loading && <Loading />}
-          {data && <ViwerExcel json={data} />}
+          {data && <ViewerExcel json={data} />}
         </div>
       )}
 
