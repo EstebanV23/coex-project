@@ -16,6 +16,7 @@ import File from './components/File'
 import ValoracionUnica from './components/ValoracionUnica'
 import HomePage from './pages/HomePage'
 import { useModalStore } from './stores/useModalStore'
+import Unidades from './components/Unidades'
 import useUser from './hooks/useUser'
 import Login from './components/Login'
 import Register from './components/Register'
@@ -78,6 +79,7 @@ function App () {
           <Route path='/verify' element={<VerifyPage />} />
           <Route path='/file-up' element={<Protected verified><File /></Protected>} />
           <Route path='/valoration' element={<Protected><ValoracionUnica /></Protected>} />
+          <Route path='/unidades' element={<Protected><Unidades /></Protected>} />
         </Routes>
         <Footer />
       </div>

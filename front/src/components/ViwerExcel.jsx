@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react'
 import TableExcel from './TableExcel'
-import "./../assets/ViwerExcel.css";
-export default function ViwerExcel({ json }) {
+import './../assets/ViwerExcel.css'
+export default function ViwerExcel ({ json }) {
   return (
     <>
-    { json && (<TableExcel json={json}/>) }
+      {json && (<TableExcel json={json} />)}
     </>
-  );
+  )
 }
