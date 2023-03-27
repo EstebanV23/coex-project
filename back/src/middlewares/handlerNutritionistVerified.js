@@ -1,4 +1,4 @@
-import Nutritionist from '../models/Nutritionist'
+import Nutritionist from '../models/Nutritionist.js'
 
 function handlerNutritionistVerified (property, nameOfId = 'id') {
   return async (req, _, next) => {

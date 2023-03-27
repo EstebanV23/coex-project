@@ -172,7 +172,7 @@ const NutritionistController = {
   },
 
   getAllUnits: async (req, res) => {
-    const { id } = req.params
+    const { id } = req.user
     const nutritinist = await Nutritionist.getUnits(id)
     return buildResponse.success(res, 200, 'Nutritionist', nutritinist)
   }

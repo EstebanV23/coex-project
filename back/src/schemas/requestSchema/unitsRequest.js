@@ -4,14 +4,10 @@ const newUnits = Joi.object({
   name: Joi.string()
     .required(),
   zoneCenter: Joi.string()
-    .required(),
-  nutritionist: Joi.string()
     .required()
 })
 
 const deleteUnits = Joi.object({
-  nutritionistId: Joi.string()
-    .required(),
   unitId: Joi.string()
     .required()
 })

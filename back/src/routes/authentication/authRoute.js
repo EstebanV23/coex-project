@@ -2,6 +2,7 @@ import express from 'express'
 import NutritionistController from '../../controllers/NutitionistController.js'
 import handlerAuthorizationJWT from '../../middlewares/handlerAuthorizationJWT.js'
 import handlerJwtVerify from '../../middlewares/handlerJwtValidate.js'
+import handlerNutritionistVerified from '../../middlewares/handlerNutritionistVerified.js'
 import validateData from '../../middlewares/validationData.js'
 import {
   nutritionistLogin,
@@ -75,7 +76,9 @@ authRouter
     handlerAuthorizationJWT,
     NutritionistController.againVerify
   )
-  .get('/get-units/:id',
+  .get('/get-units/:token',
+    handlerJwtVerify('params'),
+    handlerNutritionistVerified('user'),
     NutritionistController.getAllUnits
   )
 

@@ -28,7 +28,7 @@ const TrimesterController = {
       const { trimesterId, unitId } = req.body
       const trimester = await Trimester.delete(trimesterId, unitId)
       if (trimester.deletedCount === 0) throw new Error('Trimester not found')
-      buildResponse.success(res, 200, 'Update trimester success', trimester)
+      buildResponse.success(res, 200, 'Delete trimester success', trimester)
     } catch (error) {
       next(error)
     }
