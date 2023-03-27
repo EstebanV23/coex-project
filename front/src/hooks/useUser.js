@@ -26,7 +26,7 @@ export default function useUser () {
         setLoading(false)
         setError(true)
       })
-  }, [setUser])
+  }, [])
 
   const logout = useCallback(() => {
     restarUser()
@@ -34,7 +34,7 @@ export default function useUser () {
     navigate('/')
     openLoggin()
     localStorage.removeItem('user')
-  }, [restarUser])
+  }, [])
 
   return {
     isLogged: Boolean(token),

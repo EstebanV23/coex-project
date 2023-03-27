@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const nutritionistSchema = new mongoose.Schema({
   name: {
@@ -24,7 +24,7 @@ const nutritionistSchema = new mongoose.Schema({
   },
   isVerified: {
     type: Boolean,
-    required: true
+    required: false
   },
   phone: {
     type: String,
@@ -41,7 +41,19 @@ const nutritionistSchema = new mongoose.Schema({
   lastConnection: {
     type: Date,
     required: false
-  }
+  },
+  parnet: {
+    type: Boolean,
+    required: false
+  },
+  retriesVerify: {
+    type: Number,
+    required: false
+  },
+  units: [{
+    type: Schema.Types.ObjectId,
+    ref: 'units'
+  }]
 })
 
 const schemaNutritionist = mongoose.model('nutritionist', nutritionistSchema)

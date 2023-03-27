@@ -1,9 +1,7 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import sendDataContact from './../services/modalEmailService'
 import { LogoIcon, WaveUp } from './Icons'
-
-const stylesHover = 'hover:text-white hover:bg-primary-blue-500 hover:bg-opacity-20 px-2 rounded-md transition-colors duration-200'
+import LinksFooter from './LinksFooter'
 
 export default function Footer () {
   return (

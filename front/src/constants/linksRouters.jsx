@@ -33,6 +33,7 @@ export default function () {
     {
       id: 'link4',
       name: 'Unidades',
+      nameOfFooter: 'Gestión de unidades',
       icon: <BsPeopleFill stroke='2' size={25} />,
       path: '/unidades',
       verify: isVerified,

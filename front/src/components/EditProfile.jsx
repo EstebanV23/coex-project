@@ -21,6 +21,7 @@ export default function EditProfile () {
   useEffect(() => {
     hiddenProfileTrue()
   }, [])
+
   return (
     <div>
       <h2 className='text-3xl font-bold text-center mb-3'>Edita tu información</h2>
@@ -52,6 +53,8 @@ export default function EditProfile () {
             <form action='' className='flex flex-col gap-6' onSubmit={handleSubmit}>
               <div className='flex flex-col gap-3 md:flex-row'>
                 <Input
+                  colorBase='primary-blue-800'
+                  colorFocus='primary-blue-700'
                   icon={<BsPersonFill size={23} />}
                   error={errors}
                   name='name'
@@ -59,6 +62,8 @@ export default function EditProfile () {
                   textLabel='Nombres'
                 />
                 <Input
+                  colorBase='primary-blue-800'
+                  colorFocus='primary-blue-700'
                   icon={<BsPersonFill size={23} />}
                   error={errors}
                   name='surname'
@@ -67,6 +72,8 @@ export default function EditProfile () {
                 />
               </div>
               <Input
+                colorBase='primary-blue-800'
+                colorFocus='primary-blue-700'
                 icon={<MdOutlineAlternateEmail size={23} />}
                 error={errors}
                 name='email'
@@ -74,6 +81,8 @@ export default function EditProfile () {
                 textLabel='Correo electrónico'
               />
               <Input
+                colorBase='primary-blue-800'
+                colorFocus='primary-blue-700'
                 icon={<AiTwotonePhone size={23} />}
                 error={errors}
                 name='phone'

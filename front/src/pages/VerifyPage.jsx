@@ -22,7 +22,7 @@ export default function VerifyPage () {
           setVerified()
         }
 
-        navigate('/login')
+        navigate('/')
       })
   }, [])
   return null

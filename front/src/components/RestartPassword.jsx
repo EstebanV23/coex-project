@@ -45,7 +45,7 @@ export default function RestartPassword () {
           const response = await resetPasswordService(password, token)
           setLoading(false)
           response.error ? sweetAlert('Tu tiempo ha caducado', 'Vuelve a solicitar el cambio de contraseña y realizado en el menor tiempo posible', 'error') : sweetAlert('Cambio de contraseña exitoso', 'Tu contraseña ha sido cambiada con éxito')
-          navigate('/login')
+          navigate('/')
         }}
       >
         {

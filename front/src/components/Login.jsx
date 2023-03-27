@@ -68,7 +68,7 @@ export default function Login () {
                 <EyePassword size={23} state={showPassword} setState={setShowPassword} />
               </div>
 
-              {hasLoginError && <p className='text-red-500 text-lg font-semibold text-center'>El correo o la contraseña son incorrectos</p>}
+              {hasLoginError && <p className='text-red-500 text-base font-semibold text-center'>El correo o la contraseña son incorrectos</p>}
 
               <div className='flex flex-col sm:flex-row justify-between w-full text-center gap-2'>
                 <NavLink
