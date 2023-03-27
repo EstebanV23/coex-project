@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview --omit=dev"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@handsontable/react": "^12.3.1",
