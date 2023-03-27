@@ -5,8 +5,10 @@ import Unit from '../models/Unit.js'
 const UnitController = {
   createUnit: async (req, res, next) => {
     try {
-      const { body } = req
-      const unit = await new Unit(body).create()
+      const { body, user } = req
+      const { name, zoneCenter } = body
+      const { id: nutritionist } = user
+      const unit = await new Unit({ name, zoneCenter, nutritionist }).create()
       buildResponse.success(res, 200, 'Unit', unit)
     } catch (err) {
       next(err)
@@ -15,7 +17,8 @@ const UnitController = {
 
   deleteUnit: async (req, res, next) => {
     try {
-      const { nutritionistId, unitId } = req.body
+      const { unitId } = req.body
+      const { id: nutritionistId } = req.user
       const deleteResponse = await Unit.delete(nutritionistId, unitId)
       if (deleteResponse.deletedCount === 0) throw new Error('Unit not found')
       await Trimester.deleteFromUnit(unitId)

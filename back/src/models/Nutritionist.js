@@ -69,6 +69,11 @@ class Nutritionist {
     return newNutritionist
   }
 
+  static async verifyUnitFromNutritionist (nutritionistId, unitId) {
+    const nutritinist = await schemaNutritionist.findOne({ _id: nutritionistId, units: { $in: [unitId] } }, hiddenValuesDatabase.nutritinist)
+    return nutritinist
+  }
+
   static async updateByEmail (email, data) {
     if (data.password) data.password = await encryptPassword(data.password)
     const newNutritionist = await schemaNutritionist.updateOne({ email }, { $set: data })
