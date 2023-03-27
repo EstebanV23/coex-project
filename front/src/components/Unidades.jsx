@@ -1,14 +1,15 @@
 import { Popover, Transition } from '@headlessui/react'
 import { AiFillFileText, AiFillPlusCircle } from 'react-icons/ai'
-import { useState, Fragment } from 'react'
-
+import { useState, Fragment, useEffect } from 'react'
+import { useUserStore } from '../stores/useUserStore'
+import { shallow } from 'zustand/shallow'
 import Button from './Button'
 import Modal from './Modal'
 import ModalNewUnidad from './ModalNewUnidad'
 
 export default function Example () {
   const [changeModal, setChangeModal] = useState(false)
-
+  const { token } = useUserStore(store => store)
   const responseData = {
     msg: 'Nutritionist',
     data: {
@@ -72,6 +73,12 @@ export default function Example () {
       ]
     }
   }
+
+  useEffect(function () {
+    fetch(`http://localhost:5000/auth/get-units/${token}}`)
+      .then((response) => response.json())
+      .then((response) => console.log(response))
+  }, [])
 
   function openclose () {
     setChangeModal(true)
