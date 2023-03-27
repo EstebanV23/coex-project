@@ -11,7 +11,7 @@ cloudinary.config({
 
 async function uploadCloudinary (url, id) {
   const response = await cloudinary.uploader.upload(url, { public_id: id })
-    .then((data) => data.url)
+    .then((data) => data.secure_url)
     .catch((err) => err)
   return response
 }

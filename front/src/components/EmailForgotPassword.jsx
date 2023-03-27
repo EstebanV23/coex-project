@@ -5,13 +5,20 @@ import forgotPasswordService from '../services/forgotPasswordService'
 import Input from './Input'
 import { MdOutlineAlternateEmail } from 'react-icons/md'
 import Button from './Button'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Loading from './Loading'
 import { regex } from '../constants/regex'
+import { useModalStore } from '../stores/useModalStore'
+import { shallow } from 'zustand/shallow'
 
 export default function EmailForgotPassword () {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
+  const { closeLoggin, closeRegister } = useModalStore(store => store, shallow)
+  useEffect(() => {
+    closeLoggin()
+    closeRegister()
+  }, [])
 
   return (
     <>

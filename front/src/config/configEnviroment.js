@@ -1,3 +1,3 @@
 export const configEnviroment = {
-  URL_BACKEND: 'http://localhost:5000'
+  URL_BACKEND: 'https://miapianthro.up.railway.app'
 }

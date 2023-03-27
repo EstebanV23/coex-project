@@ -3,11 +3,11 @@ import Joi from 'joi'
 const nutritionistRegister = Joi.object(
   {
     name: Joi.string()
-      .pattern(/^[a-zA-Z]+$/)
+      .pattern(/^(?!\s)+[a-zA-Z ]+[a-zA-Z]$/)
       .min(3)
       .required(),
     surname: Joi.string()
-      .pattern(/^[a-zA-Z]+$/)
+      .pattern(/^(?!\s)+[a-zA-Z ]+[a-zA-Z]$/)
       .min(3)
       .required(),
     email: Joi.string()
@@ -24,11 +24,11 @@ const nutritionistRegister = Joi.object(
 const nutritionistUpdate = Joi.object(
   {
     name: Joi.string()
-      .pattern(/^[a-zA-Z]+$/)
+      .pattern(/^(?!\s)+[a-zA-Z ]+[a-zA-Z]$/)
       .min(3)
       .required(),
     surname: Joi.string()
-      .pattern(/^[a-zA-Z]+$/)
+      .pattern(/^(?!\s)+[a-zA-Z ]+[a-zA-Z]$/)
       .min(3)
       .required(),
     email: Joi.string()

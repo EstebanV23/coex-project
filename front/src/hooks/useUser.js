@@ -18,13 +18,15 @@ export default function useUser () {
     setLoading(true)
     loginService({ email, password })
       .then(user => {
-        setLoading(false)
         closeLoggin()
+        navigate('/')
         setUser(user)
       })
       .catch((e) => {
-        setLoading(false)
         setError(true)
+      })
+      .finally(() => {
+        setLoading(false)
       })
   }, [])
 
