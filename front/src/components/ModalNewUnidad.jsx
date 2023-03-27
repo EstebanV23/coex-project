@@ -1,23 +1,25 @@
 import Button from './Button'
 import Input from './Input'
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 
 export default function ModalNewUnidad () {
   return (
     <Formik
       initialValues={{
         name: '',
-        zonal: '',
-        file: ''
+        zonal: ''
+      }}
+      handleSubmit={(elements) => {
+        console.log('pasa')
       }}
     >
       {({ errors }) => (
 
-        <div>
+        <Form>
           <h1 className='text-2xl text-center mb-10 text-primary-blue'>Nueva unidad</h1>
           <Input
             type='text'
-            name='email'
+            name='name'
             textLabel='Nombre de la unidad'
             error={errors}
           />
@@ -28,8 +30,8 @@ export default function ModalNewUnidad () {
             error={errors}
           />
 
-          <Button className='mt-10'>Guardar</Button>
-        </div>
+          <Button className='mt-10' type='submit'>Guardar</Button>
+        </Form>
 
       )}
     </Formik>
