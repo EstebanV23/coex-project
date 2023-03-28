@@ -73,15 +73,15 @@ export default function ValoracionUnica () {
               <div className='flex flex-col md:flex-row gap-6 w-full'>
                 <div className='relative w-full'>
                   <Input
-                    disabled={loading} icon={<GiBodyHeight size={22} />} type='number' textLabel='Talla' name='talla' error={errors}
-                  />
-                  <p className='absolute right-10 top-5 text-gray-500'>CM</p>
-                </div>
-                <div className='relative w-full'>
-                  <Input
                     disabled={loading} icon={<FaWeight size={22} />} type='number' textLabel='Peso' name='peso' error={errors}
                   />
                   <p className='absolute right-10 top-5 text-gray-500'>KG</p>
+                </div>
+                <div className='relative w-full'>
+                  <Input
+                    disabled={loading} icon={<GiBodyHeight size={22} />} type='number' textLabel='Talla' name='talla' error={errors}
+                  />
+                  <p className='absolute right-10 top-5 text-gray-500'>CM</p>
                 </div>
               </div>
               <Input disabled={loading} name='genero' error={errors} icon={<FaBaby size={22} />} as='select'>
