@@ -4,19 +4,23 @@ import { useState, Fragment, useEffect } from 'react'
 import Button from './Button'
 import Modal from './Modal'
 import ModalNewUnidad from './ModalNewUnidad'
+import ModalNewTrimestre from './ModalNewTrimester'
 import getUnitsService from '../services/getUnitsService'
 import { useUserStore } from '../stores/useUserStore'
 import { useModalStore } from '../stores/useModalStore'
-
+import { useTrimesterStore } from '../stores/useTrimesterStore'
 export default function Example () {
   const { openUnitModal, closeUnitModal, isOpenUnitModal } = useModalStore()
-  const { openTrimesterModal, isOpenTrimesterModal } = useModalStore()
+  const { openTrimesterModal, isOpenTrimesterModal, closeTrimesterModal } = useModalStore()
 
   const { token } = useUserStore(store => store)
   const [unitsResponse, setUnits] = useState(false)
-
+  const { loadTrimester } = useTrimesterStore()
   useEffect(function () {
-    getUnitsService(token).then((response) => setUnits(response.data))
+    getUnitsService(token).then((response) => {
+      loadTrimester(response.data)
+      setUnits(response.data)
+    })
   }, [])
 
   return (
@@ -87,8 +91,8 @@ export default function Example () {
           )
         })}
 
-        <Modal isOpen={isOpenTrimesterModal} close={closeUnitModal}>
-          <ModalNewUnidad />
+        <Modal isOpen={isOpenTrimesterModal} close={closeTrimesterModal}>
+          <ModalNewTrimestre />
         </Modal>
 
         <Modal isOpen={isOpenUnitModal} close={closeUnitModal}>
