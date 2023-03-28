@@ -1,6 +1,7 @@
 import { Form, Formik } from 'formik'
 import { useEffect, useState } from 'react'
 import getValorationService from '../services/getValorationService'
+import deleteDocumentsService from '../services/deleteDocumentsService'
 import sweetAlert from '../constants/sweetAlert'
 import ViewerExcel from './ViewerExcel'
 import { shallow } from 'zustand/shallow'
@@ -44,6 +45,8 @@ export default function File () {
               sweetAlert('Error de archivo', response.error, 'error')
               return
             }
+            deleteDocumentsService(token)
+              .then((responsePython) => responsePython.json())
             setFileDataPython(response)
           })
       }}
