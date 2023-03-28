@@ -3,7 +3,9 @@ import { WaveUp } from './Icons'
 export default function HomeCards () {
   return (
     <div className='w-full'>
-      <WaveUp fill='white' />
+      <div className='-mt-[2px]'>
+        <WaveUp fill='white' />
+      </div>
       <div className='lg:-mt-10'>
         <h2 className='px-2 font-semibold text-white text-xl text-center mb-5 md:text-2xl'>Puedes utilizar una de nuestras opciones</h2>
         <div className='flex flex-row items-stretch justify-center gap-5 px-2 sm:px-8 max-w-[1200px] m-auto flex-wrap'>
