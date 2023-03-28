@@ -1,6 +1,6 @@
 import { configEnviroment } from '../config/configEnviroment'
 
-export default async function getValorationService (token, fileData) {
+export default async function getValorationService(token, fileData) {
   const f = new FormData()
   f.append('file', fileData[0])
   const options = {
