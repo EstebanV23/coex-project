@@ -10,6 +10,7 @@ import { useNavbarStore } from '../stores/useNavbarStore'
 import { shallow } from 'zustand/shallow'
 import LoadingComponents from './LoadingComponents'
 import { regex } from '../constants/regex'
+import getValorationUniqueService from '../services/getValorationUniqueService'
 
 const validateInputs = values => {
   const errors = {}
@@ -41,20 +42,7 @@ export default function ValoracionUnica () {
       validate={validateInputs}
       onSubmit={(data) => {
         setLoading(true)
-        const { peso, talla, genero } = data
-        const options = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            peso,
-            talla,
-            genero
-          })
-        }
-        fetch('https://mianthroapi.onrender.com/unico', options)
-          .then(response => response.json())
+        getValorationUniqueService(data)
           .then(response => {
             setValoracion(response.resultado)
             setLoading(false)

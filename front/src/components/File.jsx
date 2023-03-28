@@ -2,6 +2,7 @@ import { Formik } from 'formik'
 import { useEffect, useState } from 'react'
 import ViwerExcel from './ViwerExcel'
 import getValorationService from '../services/getValorationService'
+import deleteDocumentsService from '../services/deleteDocumentsService'
 import sweetAlert from '../constants/sweetAlert'
 import { shallow } from 'zustand/shallow'
 import { useNavbarStore } from '../stores/useNavbarStore'
@@ -34,6 +35,7 @@ export default function File (dataUpdate) {
         getValorationService(token, fileData)
           .then(response => {
             setLoading(false)
+            deleteDocumentsService(token)
             if (response.error) {
               sweetAlert('Error de archivo', response.error, 'error')
               return
