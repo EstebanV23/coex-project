@@ -22,7 +22,7 @@ export default function Profile () {
   const arrowStyle = hiddenModalProfile ? 'rotate-180' : 'rotate-0'
 
   return (
-    <div className='flex gap-5 max-h-full relative max-w-[800px] w-full m-auto pt-10'>
+    <div className='flex gap-5 max-h-full relative max-w-[800px] w-full m-auto'>
       <div className={`${hiddenStyles} bg-slate-300 text-primary-blue-800 p-3 rounded-lg transition-all z-10 flex flex-col items-center fixed gap-8 h-fit top-1/2 -translate-y-1/2 left-0 w-fit justify-center sm:static sm:left-auto sm:top-auto sm:translate-x-0 sm:translate-y-0 sm:py-0 sm:pr-8 sm:rounded-none sm:h-auto sm:bg-transparent sm:border-r sm:border-gray-500 sm:justify-start sm:w-3/5 sm:max-w-[300px] md:pl-8`}>
         <h1 className='text-2xl hidden font-semibold sm:block'>Hola <span className='font-bold'>{name}</span>!</h1>
         <Avatar sizeProp={53} className='text-2xl hidden sm:block border-2'>{`${name} ${surname}`}</Avatar>

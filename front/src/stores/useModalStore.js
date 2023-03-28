@@ -9,5 +9,14 @@ export const useModalStore = create(set => ({
   closeRegister: () => set({ isOpenRegister: false }),
   isOpenAvatarEdit: false,
   openAvatarEdit: () => set({ isOpenAvatarEdit: true }),
-  closeAvatarEdit: () => set({ isOpenAvatarEdit: false })
+  closeAvatarEdit: () => set({ isOpenAvatarEdit: false }),
+  isOpenUnitModal: false,
+  openUnitModal: () => set({ isOpenUnitModal: true }),
+  closeUnitModal: () => set({ isOpenUnitModal: false }),
+  isOpenTrimesterModal: false,
+  openTrimesterModal: () => set({ isOpenTrimesterModal: true }),
+  closeTrimesterModal: () => set({ isOpenTrimesterModal: false }),
+  isOpenViewTrimesterModal: false,
+  openViewTrimesterModal: () => set({ isOpenViewTrimesterModal: true }),
+  closeViewTrimesterModal: () => set({ isOpenViewTrimesterModal: false })
 }))

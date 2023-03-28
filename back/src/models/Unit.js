@@ -28,7 +28,7 @@ class Unit {
   }
 
   static deleteTrimesters (unitId, trimesterId) {
-    return schemaUnit.updateMany({ _id: unitId }, { $pull: { trimesters: trimesterId } })
+    return schemaUnit.updateOne({ _id: unitId }, { $pull: { trimesters: trimesterId } })
   }
 
   static async update (id, data) {

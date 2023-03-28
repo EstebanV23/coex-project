@@ -30,9 +30,11 @@ export default function InfoProfile () {
     setRetries(retriesVerify)
     sweetAlert('Hemos enviado un nuevo correo para tu verificación', 'Revisa tu bandeja de entrada, spam o correos no deseados, el correo es enviado como "MiAnthro", así podrás buscarlo')
   }
+
   useEffect(() => {
     hiddenProfileTrue()
   }, [])
+
   return (
     <div className='flex flex-col items-start text-base lg:text-xl gap-5'>
       {loading && <Loading />}
@@ -41,7 +43,7 @@ export default function InfoProfile () {
         <h3 className=' break-all'>Email: <span className='font-bold'>{email}</span></h3>
       </div>
       <h3 className=' break-all'>Teléfono: <span className='font-bold'>{phone}</span></h3>
-      <LinkButton to='edit' className='transition-all duration-300 text-primary-blue-700 bg-white self-start hover:text-white hover:bg-primary-blue-700 hover:border-primary-blue'>Editar información</LinkButton>
+      <LinkButton to='edit' className='w-full'>Editar información</LinkButton>
       <VerifiedText />
       {(!isVerified) &&
         <button className='text-base text-primary-blue-700 hover:text-slate-700 hover:underline ease-in-out duration-200' onClick={retriesVerify >= 2 ? handleClickOff : () => againVerify()}>
