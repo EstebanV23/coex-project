@@ -32,6 +32,17 @@ const TrimesterController = {
     } catch (error) {
       next(error)
     }
+  },
+
+  getTrimester: async (req, res, next) => {
+    try {
+      const { trimesterId } = req.body
+      const trimester = await Trimester.getOne(trimesterId)
+      if (!trimester) throw new Error('Trimester not found')
+      buildResponse.success(res, 200, 'Delete trimester success', trimester)
+    } catch (error) {
+      next(error)
+    }
   }
 }
 

@@ -15,5 +15,8 @@ export const useModalStore = create(set => ({
   closeUnitModal: () => set({ isOpenUnitModal: false }),
   isOpenTrimesterModal: false,
   openTrimesterModal: () => set({ isOpenTrimesterModal: true }),
-  closeTrimesterModal: () => set({ isOpenTrimesterModal: false })
+  closeTrimesterModal: () => set({ isOpenTrimesterModal: false }),
+  isOpenViewTrimesterModal: false,
+  openViewTrimesterModal: () => set({ isOpenViewTrimesterModal: true }),
+  closeViewTrimesterModal: () => set({ isOpenViewTrimesterModal: false })
 }))

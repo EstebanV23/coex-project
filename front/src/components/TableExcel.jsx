@@ -3,6 +3,7 @@ import { useFileStore } from '../stores/useFileStore'
 
 export default function TableExcel () {
   const { fileDataPython } = useFileStore(store => store, shallow)
+
   return (
     <div className='mt-10 flex justify-center w-full h-full'>
       <div className='flex  flex-col h-fit w-fit items-center rounded-2xl bg-white sm:p-10 py-5 px-2'>
