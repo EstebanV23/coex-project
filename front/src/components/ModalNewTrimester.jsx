@@ -9,7 +9,6 @@ import File from './File'
 export default function ModalNewTrimestre () {
   const { token } = useUserStore(store => store)
   const { closeUnitModal } = useModalStore()
-  const update = true
   return (
     <Formik
       initialValues={{
@@ -30,7 +29,7 @@ export default function ModalNewTrimestre () {
       {({ errors, handleSubmit }) => (
 
         <div>
-          <File update={update} />
+          <File />
         </div>
 
       )}

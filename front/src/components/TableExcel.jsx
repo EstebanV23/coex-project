@@ -4,7 +4,7 @@ import DownloadExcel from './DownloadExcel'
 import Button from './Button'
 export default function TableExcel ({ json }) {
   const { isOpenTrimesterModal } = useModalStore()
-  function cargar (json) {
+  function checkData (json) {
     console.log(json)
   }
   return (
@@ -37,7 +37,7 @@ export default function TableExcel ({ json }) {
           </table>
         </div>
         {!isOpenTrimesterModal && <DownloadExcel json={json} />}
-        {isOpenTrimesterModal && <Button className='mt-10' onClick={cargar(json)}>Guardar trimestre</Button>}
+        {isOpenTrimesterModal && <Button className='mt-10' onClick={checkData(json)}>Guardar trimestre</Button>}
       </div>
     </div>
   )

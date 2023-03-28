@@ -18,7 +18,7 @@ export default function Example () {
   const { loadTrimester } = useTrimesterStore()
   useEffect(function () {
     getUnitsService(token).then((response) => {
-      loadTrimester(response.data)
+      loadTrimester(response.data.units)
       setUnits(response.data)
     })
   }, [])
