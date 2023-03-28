@@ -6,7 +6,7 @@ import { useUserStore } from '../stores/useUserStore'
 import { BsPersonFill } from 'react-icons/bs'
 import { AiTwotonePhone } from 'react-icons/ai'
 import { MdOutlineAlternateEmail } from 'react-icons/md'
-import Input from './Input'
+import { InputBlack } from './Input'
 import Button from './Button'
 import { regex } from '../constants/regex'
 import { updateNutritionist } from '../services/editProfileService'
@@ -52,18 +52,14 @@ export default function EditProfile () {
           ({ errors, handleSubmit }) =>
             <form action='' className='flex flex-col gap-6' onSubmit={handleSubmit}>
               <div className='flex flex-col gap-3 md:flex-row'>
-                <Input
-                  colorBase='primary-blue-800'
-                  colorFocus='primary-blue-700'
+                <InputBlack
                   icon={<BsPersonFill size={23} />}
                   error={errors}
                   name='name'
                   autoComplete='off'
                   textLabel='Nombres'
                 />
-                <Input
-                  colorBase='primary-blue-800'
-                  colorFocus='primary-blue-700'
+                <InputBlack
                   icon={<BsPersonFill size={23} />}
                   error={errors}
                   name='surname'
@@ -71,18 +67,14 @@ export default function EditProfile () {
                   textLabel='Apellidos'
                 />
               </div>
-              <Input
-                colorBase='primary-blue-800'
-                colorFocus='primary-blue-700'
+              <InputBlack
                 icon={<MdOutlineAlternateEmail size={23} />}
                 error={errors}
                 name='email'
                 autoComplete='off'
                 textLabel='Correo electrónico'
               />
-              <Input
-                colorBase='primary-blue-800'
-                colorFocus='primary-blue-700'
+              <InputBlack
                 icon={<AiTwotonePhone size={23} />}
                 error={errors}
                 name='phone'

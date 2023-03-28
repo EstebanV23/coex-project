@@ -1,5 +1,5 @@
 import { Formik } from 'formik'
-import Input from './Input'
+import { InputBlack } from './Input'
 import { regex } from '../constants/regex'
 import { useUserStore } from '../stores/useUserStore'
 import sweetAlert from '../constants/sweetAlert'
@@ -64,9 +64,7 @@ export default function ChangePassword () {
           ({ errors, handleSubmit }) =>
             <form action='' className='flex flex-col gap-3' onSubmit={handleSubmit}>
               <div className='relative'>
-                <Input
-                  colorBase='primary-blue-800'
-                  colorFocus='primary-blue-700'
+                <InputBlack
                   icon={<TbPassword size={23} />}
                   error={errors}
                   name='oldPassword'
@@ -77,9 +75,7 @@ export default function ChangePassword () {
                 <EyePassword setState={setShowPasswordOld} state={showPasswordOld} />
               </div>
               <div className='relative'>
-                <Input
-                  colorBase='primary-blue-800'
-                  colorFocus='primary-blue-700'
+                <InputBlack
                   icon={<TbPassword size={23} />}
                   error={errors}
                   type={showPassword ? 'text' : 'password'}
@@ -89,9 +85,7 @@ export default function ChangePassword () {
                 />
                 <EyePassword setState={setShowPassword} state={showPassword} />
               </div>
-              <Input
-                colorBase='primary-blue-800'
-                colorFocus='primary-blue-700'
+              <InputBlack
                 icon={<TbPassword size={23} />}
                 error={errors}
                 type={showPassword ? 'text' : 'password'}

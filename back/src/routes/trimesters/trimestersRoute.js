@@ -32,5 +32,10 @@ trimestersRouter
     validateData(deleteTrimesters, 'body'),
     TrimesterController.deleteTrimester
   )
+  .post(
+    '/get',
+    validateData(deleteTrimesters, 'body'),
+    TrimesterController.getTrimester
+  )
 
 export default trimestersRouter

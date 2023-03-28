@@ -5,6 +5,7 @@ import { useUserStore } from '../stores/useUserStore'
 import { useModalStore } from '../stores/useModalStore'
 import sweetAlert from '../constants/sweetAlert'
 import File from './File'
+import SaveTrimester from './SaveTrimester'
 
 export default function ModalNewTrimestre () {
   const { token } = useUserStore(store => store)
@@ -30,6 +31,7 @@ export default function ModalNewTrimestre () {
 
         <div>
           <File />
+          <SaveTrimester />
         </div>
 
       )}

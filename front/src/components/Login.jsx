@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 
 import Input from './Input'
-import { EmailIcon, PasswordIcon, LogoIcon } from './Icons'
+import { EmailIcon, PasswordIcon } from './Icons'
 import useUser from '../hooks/useUser'
 import { regex } from '../constants/regex'
 import Loading from './Loading'

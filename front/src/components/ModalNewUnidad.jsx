@@ -14,16 +14,22 @@ export default function ModalNewUnidad () {
         name: '',
         zoneCenter: ''
       }}
+      validate={(values) => {
+        const errors = {}
+        if (!values.name) errors.name = 'El nombre es requerido'
+        if (!values.zoneCenter) errors.zoneCenter = 'El centro zonal es requerido'
+        return errors
+      }}
       onSubmit={(elements) => {
         createUnitService(token, elements)
           .then((response) => {
             if (response.error) {
-              sweetAlert('No tienes permisoss para crear mas unidades', '', 'error')
+              sweetAlert('No tienes permisos para crear mas unidades', 'Tienes un límite de creación de unidades, si deseas obtener más unidades comunicate con nosotros en el correo info.mianthro@gmail.com', 'error')
               return
             }
-
-            sweetAlert('Unidad creada con exito', '', 'success')
-          }).finally(() => closeUnitModal())
+            sweetAlert('Unidad creada con exito', 'Se ha agregado una unidad exitosamente', 'success')
+          })
+          .finally(() => closeUnitModal())
       }}
     >
       {({ errors }) => (

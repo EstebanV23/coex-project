@@ -1,12 +1,9 @@
+import { shallow } from 'zustand/shallow'
+import { useFileStore } from '../stores/useFileStore'
 
-import { useModalStore } from '../stores/useModalStore'
-import DownloadExcel from './DownloadExcel'
-import Button from './Button'
-export default function TableExcel ({ json }) {
-  const { isOpenTrimesterModal } = useModalStore()
-  function checkData (json) {
-    console.log(json)
-  }
+export default function TableExcel () {
+  const { fileDataPython } = useFileStore(store => store, shallow)
+
   return (
     <div className='mt-10 flex justify-center w-full h-full'>
       <div className='flex  flex-col h-fit w-fit items-center rounded-2xl bg-white sm:p-10 py-5 px-2'>
@@ -23,7 +20,7 @@ export default function TableExcel ({ json }) {
               </tr>
             </thead>
             <tbody>
-              {json.map((json, index) => (
+              {fileDataPython.map((json, index) => (
                 <tr key={index} className='text-gray-500 hover:bg-slate-300 hover:text-slate-800'>
                   <th>{index + 1}</th>
                   <th>{json.nombre}</th>
@@ -36,8 +33,6 @@ export default function TableExcel ({ json }) {
             </tbody>
           </table>
         </div>
-        {!isOpenTrimesterModal && <DownloadExcel json={json} />}
-        {isOpenTrimesterModal && <Button className='mt-10' onClick={checkData(json)}>Guardar trimestre</Button>}
       </div>
     </div>
   )

@@ -24,6 +24,7 @@ import Modal from './components/Modal'
 import tokenValidateService from './services/tokenValidateService'
 import sweetAlert from './constants/sweetAlert'
 import ProfilePage from './pages/ProfilePage'
+import FileUpPage from './pages/FileUpPage'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -67,20 +68,22 @@ function App () {
       <Modal isOpen={isOpenRegister && !isLogged} close={closeRegister}><Register /></Modal>
       <Navbar />
       <div className='bg-primary-blue-300 min-h-screen flex flex-col justify-between' onClick={hiddenTrue}>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/forgot-password' element={<Protected restrictLogged><EmailForgotPage /></Protected>} />
-          <Route path='/new-password/' element={<ResetPasswordPage />} />
-          <Route path='/profile' element={<ProfilePage />}>
-            <Route index element={<Protected><InfoProfile /></Protected>} />
-            <Route path='edit' element={<Protected><EditProfile /></Protected>} />
-            <Route path='change-password' element={<Protected><ChangePassword /></Protected>} />
-          </Route>
-          <Route path='/verify' element={<VerifyPage />} />
-          <Route path='/file-up' element={<Protected verified><File /></Protected>} />
-          <Route path='/valoration' element={<Protected><ValoracionUnica /></Protected>} />
-          <Route path='/unidades' element={<Protected><Unidades /></Protected>} />
-        </Routes>
+        <div className='pb-1'>
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/forgot-password' element={<Protected restrictLogged><EmailForgotPage /></Protected>} />
+            <Route path='/new-password/' element={<ResetPasswordPage />} />
+            <Route path='/profile' element={<ProfilePage />}>
+              <Route index element={<Protected><InfoProfile /></Protected>} />
+              <Route path='edit' element={<Protected><EditProfile /></Protected>} />
+              <Route path='change-password' element={<Protected><ChangePassword /></Protected>} />
+            </Route>
+            <Route path='/verify' element={<VerifyPage />} />
+            <Route path='/file-up' element={<Protected verified><FileUpPage /></Protected>} />
+            <Route path='/valoration' element={<Protected><ValoracionUnica /></Protected>} />
+            <Route path='/unidades' element={<Protected><Unidades /></Protected>} />
+          </Routes>
+        </div>
         <Footer />
       </div>
     </>
