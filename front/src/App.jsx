@@ -12,7 +12,6 @@ import { useEffect, useState } from 'react'
 import EmailForgotPage from './pages/EmailForgotPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
 import VerifyPage from './pages/VerifyPage'
-import File from './components/File'
 import ValoracionUnica from './components/ValoracionUnica'
 import HomePage from './pages/HomePage'
 import { useModalStore } from './stores/useModalStore'
@@ -25,6 +24,7 @@ import tokenValidateService from './services/tokenValidateService'
 import sweetAlert from './constants/sweetAlert'
 import ProfilePage from './pages/ProfilePage'
 import FileUpPage from './pages/FileUpPage'
+import NotFound404 from './pages/NotFound404'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -36,10 +36,9 @@ function App () {
   const [lastLocation, setLastLocation] = useState(null)
 
   useEffect(() => {
-    if (lastLocation) {
-      localStorage.setItem('location', JSON.stringify(lastLocation))
-    }
-    setLastLocation(location)
+    const newLocation = location
+    setLastLocation(newLocation)
+    localStorage.setItem('location', JSON.stringify(lastLocation))
   }, [location])
 
   useEffect(() => {
@@ -56,7 +55,7 @@ function App () {
             return
           }
           if (localStorage.getItem('location')) {
-            navigate(JSON.parse(localStorage.getItem('location')).pathname)
+            navigate(JSON.parse(localStorage.getItem('location'))?.pathname)
           }
         })
     }
@@ -67,7 +66,7 @@ function App () {
       <Modal isOpen={isOpenLoggin && !isLogged} className='max-w-md' close={closeLoggin}><Login /></Modal>
       <Modal isOpen={isOpenRegister && !isLogged} close={closeRegister}><Register /></Modal>
       <Navbar />
-      <div className='bg-primary-blue-300 min-h-screen flex flex-col justify-between' onClick={hiddenTrue}>
+      <div className='bg-primary-blue-300 flex flex-col justify-between body' onClick={hiddenTrue}>
         <div className='pb-1'>
           <Routes>
             <Route path='/' element={<HomePage />} />
@@ -82,6 +81,7 @@ function App () {
             <Route path='/file-up' element={<Protected verified><FileUpPage /></Protected>} />
             <Route path='/valoration' element={<Protected><ValoracionUnica /></Protected>} />
             <Route path='/unidades' element={<Protected><Unidades /></Protected>} />
+            <Route path='*' element={<NotFound404 />} />
           </Routes>
         </div>
         <Footer />

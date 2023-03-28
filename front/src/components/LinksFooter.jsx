@@ -6,7 +6,6 @@ import { useModalStore } from '../stores/useModalStore'
 
 export default function LinksFooter () {
   const { openLoggin } = useModalStore(store => store, shallow)
-  const stylesHover = 'hover:text-white hover:bg-primary-blue-500 hover:bg-opacity-20 px-2 rounded-md transition-colors duration-200'
 
   function handleClickVerify (e) {
     e.preventDefault()
@@ -27,7 +26,7 @@ export default function LinksFooter () {
             to={link.path}
             onClick={(!link.isLogged && handleClickLogged) || (!link.verify && handleClickVerify)}
           >
-            <p className={stylesHover}>{link.nameOfFooter ?? link.name}</p>
+            <p className='hover:text-white hover:bg-primary-blue-500 hover:bg-opacity-20 px-2 rounded-md transition-colors duration-200'>{link.nameOfFooter ?? link.name}</p>
           </NavLink>
         )
       })}

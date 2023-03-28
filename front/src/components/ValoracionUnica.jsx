@@ -72,10 +72,10 @@ export default function ValoracionUnica () {
 
               <div className='flex flex-col md:flex-row gap-6 w-full'>
                 <Input
-                  disabled={loading} icon={<FaWeight size={22} />} type='number' placeholder='Peso' name='peso' error={errors}
+                  disabled={loading} icon={<FaWeight size={22} />} type='number' textLabel='Peso' name='peso' error={errors}
                 />
                 <Input
-                  disabled={loading} icon={<GiBodyHeight size={22} />} type='number' placeholder='Talla' name='talla' error={errors}
+                  disabled={loading} icon={<GiBodyHeight size={22} />} type='number' textLabel='Talla' name='talla' error={errors}
                 />
 
               </div>
@@ -89,7 +89,7 @@ export default function ValoracionUnica () {
                   icon={<RiPencilRulerLine size={22} />} disabled type='text' textLabel='Valoración' name='valoracion' value={valoracionDiccionario[valoracion] ?? ''} error={errors}
                 />
               </div>
-              <Button type='submit' disabled={loading} className='py-2 transition-all duration-500 text-xl text-primary-blue font-bold hover:bg-primary-blue hover:text-white border-primary-blue'>{loading ? <LoadingComponents size={27} /> : 'Valorar'}</Button>
+              <Button type='submit' disabled={loading} className='py-2 w-full transition-all duration-500 text-xl text-primary-blue font-bold hover:bg-primary-blue hover:text-white border-primary-blue'>{loading ? <LoadingComponents size={27} /> : 'Valorar'}</Button>
 
             </div>
           </Form>

@@ -52,11 +52,11 @@ export default function File () {
         <div className='h-full my-10 text-black flex flex-col items-center '>
           <strong> <h2 className='text-center text-primary-blue-800 text-4xl mb-10'>Subir Archivo</h2></strong>
           <Form className='text-center w-full flex flex-col gap-5 max-w-[200px] '>
-            <div className='flex items-center bg-white flex-col rounded-3xl gap-3 w-full p-5 shadow-xl'>
-              <label className='cursor-pointer' htmlFor='file'><BsFillCloudUploadFill size={70} color='#66a7ad' /></label>
+            <label className='flex items-center bg-white flex-col rounded-3xl gap-3 w-full p-5 shadow-xl cursor-pointer' htmlFor='file'>
+              <BsFillCloudUploadFill size={70} color='#66a7ad' />
               <input type='file' name='file' id='file' className='w-full h-full' required onChange={(e) => Change(e.target.files)} accept='.xlsx' />
-              {fileName ? <p className='text-sm text-gray-500'>{fileName}</p> : <label htmlFor='file' className='text-sm cursor-pointer text-gray-500'>Dale click para subir tu archivo</label>}
-            </div>
+              {fileName ? <p className='text-sm text-gray-500'>{fileName}</p> : <p htmlFor='file' className='text-sm cursor-pointer text-gray-500'>Dale click para subir tu archivo</p>}
+            </label>
             {fileData && <Button type='submit' id='btnSendFile'>Cargar archivo</Button>}
 
           </Form>
