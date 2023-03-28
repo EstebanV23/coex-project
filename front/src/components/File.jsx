@@ -41,11 +41,12 @@ export default function File () {
         getValorationService(token, fileData)
           .then(response => {
             setLoading(false)
-            deleteDocumentsService(token)
             if (response.error) {
               sweetAlert('Error de archivo', response.error, 'error')
               return
             }
+            deleteDocumentsService(token)
+              .then((responsePython) => responsePython.json())
             setFileDataPython(response)
           })
       }}

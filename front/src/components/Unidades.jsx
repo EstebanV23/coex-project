@@ -55,7 +55,7 @@ export default function Example () {
           return (
             <Popover className='relative ' key={unit._id}>
 
-              {({ open }) => (
+              {({ open, close }) => (
                 <>
                   <Popover.Button
                     className={`
@@ -82,7 +82,10 @@ export default function Example () {
                             <a
                               key={trimester._id}
                               className='-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none cursor-pointer'
-                              onClick={() => handlerClickGetTrimester(trimester._id, unit._id)}
+                              onClick={() => {
+                                handlerClickGetTrimester(trimester._id, unit._id, close)
+                                close()
+                              }}
                             >
                               <div className='flex h-10 w-10 shrink-0 items-center justify-cente sm:h-12 sm:w-12'>
                                 <AiFillFileText className='text-5xl text-primary-blue' />
@@ -99,7 +102,10 @@ export default function Example () {
                         <div className='bg-gray-100 p-4'>
                           <a
                             className='flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50'
-                            onClick={() => handlerClickModalTrimester(unit._id)}
+                            onClick={() => {
+                              handlerClickModalTrimester(unit._id)
+                              close()
+                            }}
                           >
                             <span className='flex items-center justify-center cursor-pointer'>
                               <span className='text-sm  font-medium text-gray-900 '>
