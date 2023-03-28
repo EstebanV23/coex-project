@@ -1,5 +1,6 @@
 import { Form, Formik } from 'formik'
 import { useEffect, useState } from 'react'
+import getValorationService from '../services/getValorationService'
 import sweetAlert from '../constants/sweetAlert'
 import ViewerExcel from './ViewerExcel'
 import { shallow } from 'zustand/shallow'
@@ -9,7 +10,7 @@ import { useUserStore } from '../stores/useUserStore'
 import Button from './Button'
 import Loading from './Loading'
 
-export default function File () {
+export default function File (dataUpdate) {
   const [fileData, setFileData] = useState(null)
   const [nameFile, setNameFile] = useState(null)
   function Change (file) {
@@ -29,15 +30,8 @@ export default function File () {
         file: ''
       }}
       onSubmit={() => {
-        const f = new FormData()
         setLoading(true)
-        f.append('file', fileData[0])
-        const options = {
-          method: 'POST',
-          body: f
-        }
-        fetch('https://mianthroapi.onrender.com/multi/mitoken', options)
-          .then(response => response.json())
+        getValorationService(token, fileData)
           .then(response => {
             setLoading(false)
             if (response.error) {
