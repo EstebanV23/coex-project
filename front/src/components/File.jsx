@@ -11,6 +11,7 @@ import Button from './Button'
 import Loading from './Loading'
 import TableExcel from './TableExcel'
 import { useFileStore } from '../stores/useFileStore'
+import { useModalStore } from '../stores/useModalStore'
 
 export default function File () {
   const { fileData, fileName, setFileData, fileDataPython, setFileDataPython, resetValuesFile } = useFileStore(store => store, shallow)
@@ -22,11 +23,13 @@ export default function File () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const { token } = useUserStore(store => store, shallow)
   const [loading, setLoading] = useState(false)
+  const { isOpenTrimesterModal } = useModalStore(store => store, shallow)
 
   useEffect(() => {
     hiddenTrue()
     resetValuesFile()
-  }, [])
+  }, [isOpenTrimesterModal])
+
   return (
     <Formik
       initialValues={{
