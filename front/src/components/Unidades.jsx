@@ -9,19 +9,37 @@ import getUnitsService from '../services/getUnitsService'
 import { useUserStore } from '../stores/useUserStore'
 import { useModalStore } from '../stores/useModalStore'
 import { useTrimesterStore } from '../stores/useTrimesterStore'
+import { shallow } from 'zustand/shallow'
+import { useNavbarStore } from '../stores/useNavbarStore'
+import LoadingComponents from './LoadingComponents'
+import { useUnitStore } from '../stores/useUnitStore'
+
 export default function Example () {
   const { openUnitModal, closeUnitModal, isOpenUnitModal } = useModalStore()
   const { openTrimesterModal, isOpenTrimesterModal, closeTrimesterModal } = useModalStore()
-
-  const { token } = useUserStore(store => store)
+  const { token } = useUserStore(store => store, shallow)
   const [unitsResponse, setUnits] = useState(false)
+  const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const { loadTrimester } = useTrimesterStore()
+  const [loading, setLoading] = useState(false)
+  const { setUnitId } = useUnitStore(store => store, shallow)
+
   useEffect(function () {
+    hiddenTrue()
+    setLoading(true)
     getUnitsService(token).then((response) => {
       loadTrimester(response.data.units)
       setUnits(response.data)
+      setLoading(false)
     })
   }, [])
+
+  function handlerClickModalTrimester (unitId) {
+    openTrimesterModal()
+    setUnitId(unitId)
+  }
+
+  if (loading) return <div className='h-full w-full grid place-items-center min-h-[50vh]'><LoadingComponents color='white' size={130} /></div>
 
   return (
     <div className=' w-full max-w-full justify-center  px-4 '>
@@ -71,9 +89,10 @@ export default function Example () {
                             </a>
                           ))}
                         </div>
-                        <div className='bg-gray-50 p-4' onClick={openTrimesterModal}>
+                        <div className='bg-gray-50 p-4'>
                           <a
                             className='flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50'
+                            onClick={() => handlerClickModalTrimester(unit._id)}
                           >
                             <span className='flex items-center justify-center cursor-pointer'>
                               <span className='text-sm  font-medium text-gray-900 '>

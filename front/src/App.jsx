@@ -24,6 +24,7 @@ import Modal from './components/Modal'
 import tokenValidateService from './services/tokenValidateService'
 import sweetAlert from './constants/sweetAlert'
 import ProfilePage from './pages/ProfilePage'
+import FileUpPage from './pages/FileUpPage'
 
 function App () {
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
@@ -77,7 +78,7 @@ function App () {
             <Route path='change-password' element={<Protected><ChangePassword /></Protected>} />
           </Route>
           <Route path='/verify' element={<VerifyPage />} />
-          <Route path='/file-up' element={<Protected verified><File /></Protected>} />
+          <Route path='/file-up' element={<Protected verified><FileUpPage /></Protected>} />
           <Route path='/valoration' element={<Protected><ValoracionUnica /></Protected>} />
           <Route path='/unidades' element={<Protected><Unidades /></Protected>} />
         </Routes>

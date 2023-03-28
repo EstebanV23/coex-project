@@ -17,7 +17,7 @@ const updateTrimesters = Joi.object({
 })
 
 const deleteTrimesters = Joi.object({
-  unitId: Joi.string()
+  unit: Joi.string()
     .required(),
   trimesterId: Joi.string()
     .required()

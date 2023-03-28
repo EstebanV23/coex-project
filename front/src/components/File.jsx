@@ -9,20 +9,23 @@ import { BsFillCloudUploadFill } from 'react-icons/bs'
 import { useUserStore } from '../stores/useUserStore'
 import Button from './Button'
 import Loading from './Loading'
+import TableExcel from './TableExcel'
+import { useFileStore } from '../stores/useFileStore'
 
-export default function File (dataUpdate) {
-  const [fileData, setFileData] = useState(null)
-  const [nameFile, setNameFile] = useState(null)
+export default function File () {
+  const { fileData, fileName, setFileData, fileDataPython, setFileDataPython, resetValuesFile } = useFileStore(store => store, shallow)
+
   function Change (file) {
     setFileData(file)
-    setNameFile(file[0].name)
   }
+
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const { token } = useUserStore(store => store, shallow)
-  const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
+
   useEffect(() => {
     hiddenTrue()
+    resetValuesFile()
   }, [])
   return (
     <Formik
@@ -38,7 +41,7 @@ export default function File (dataUpdate) {
               sweetAlert('Error de archivo', response.error, 'error')
               return
             }
-            setData(response)
+            setFileDataPython(response)
           })
       }}
     >
@@ -49,13 +52,13 @@ export default function File (dataUpdate) {
             <div className='flex items-center bg-white flex-col rounded-3xl gap-3 w-full p-5 shadow-xl'>
               <label className='cursor-pointer' htmlFor='file'><BsFillCloudUploadFill size={70} color='#66a7ad' /></label>
               <input type='file' name='file' id='file' className='w-full h-full' required onChange={(e) => Change(e.target.files)} accept='.xlsx' />
-              {nameFile ? <p className='text-sm text-gray-500'>{nameFile}</p> : <label htmlFor='file' className='text-sm cursor-pointer text-gray-500'>Dale click para subir tu archivo</label>}
+              {fileName ? <p className='text-sm text-gray-500'>{fileName}</p> : <label htmlFor='file' className='text-sm cursor-pointer text-gray-500'>Dale click para subir tu archivo</label>}
             </div>
             {fileData && <Button type='submit' id='btnSendFile'>Cargar archivo</Button>}
 
           </Form>
           {loading && <Loading />}
-          {data && <ViewerExcel json={data} />}
+          {fileDataPython && <TableExcel />}
         </div>
       )}
 
