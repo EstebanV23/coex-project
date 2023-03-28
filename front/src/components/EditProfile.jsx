@@ -82,7 +82,7 @@ export default function EditProfile () {
                 textLabel='Telefono'
               />
               {errorEdit && <p className='text-xl text-error'>El correo al que tratas de cambiar ya está registrado</p>}
-              <Button type='submit' className='text-xl py-2'>Enviar</Button>
+              <Button type='submit' className='text-xl w-full'>Enviar</Button>
             </form>
         }
 

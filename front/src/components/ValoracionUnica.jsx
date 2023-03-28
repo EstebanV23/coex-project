@@ -94,7 +94,7 @@ export default function ValoracionUnica () {
                   icon={<RiPencilRulerLine size={22} />} disabled type='text' textLabel='Valoración' name='valoracion' value={valoracionDiccionario[valoracion] ?? ''} error={errors}
                 />
               </div>
-              <Button type='submit' disabled={loading} className='py-2 transition-all duration-500 text-xl text-primary-blue font-bold hover:bg-primary-blue hover:text-white border-primary-blue'>{loading ? <LoadingComponents size={27} /> : 'Valorar'}</Button>
+              <Button type='submit' disabled={loading} className='py-2 w-full transition-all duration-500 text-xl text-primary-blue font-bold hover:bg-primary-blue hover:text-white border-primary-blue'>{loading ? <LoadingComponents size={27} /> : 'Valorar'}</Button>
 
             </div>
           </Form>

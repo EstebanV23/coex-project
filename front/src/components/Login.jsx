@@ -11,6 +11,7 @@ import { useNavbarStore } from '../stores/useNavbarStore'
 import { shallow } from 'zustand/shallow'
 import EyePassword from './EyePassword'
 import { useModalStore } from '../stores/useModalStore'
+import ButtonMinimalist from './ButtonMinimalist'
 
 const validateInputs = values => {
   const errors = {}
@@ -86,12 +87,7 @@ export default function Login () {
                 </NavLink>
               </div>
 
-              <button
-                type='submit'
-                className='bg-primary-blue text-white h-12 w-full rounded-xl text-xl font-bold hover:bg-primary-blue-600 ease-in-out duration-200'
-              >
-                Iniciar sesión
-              </button>
+              <ButtonMinimalist type='submit'>Iniciar sesión</ButtonMinimalist>
             </Form>
           </div>
         )}

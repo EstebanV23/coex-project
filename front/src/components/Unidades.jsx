@@ -131,7 +131,7 @@ export default function Example () {
       </div>
       <div className='w-full flex justify-center mt-20'>
         <div className='w-60 '>
-          <Button onClick={() => openUnitModal()}>Nueva unidad</Button>
+          <Button className='w-full' onClick={() => openUnitModal()}>Nueva unidad</Button>
         </div>
       </div>
 

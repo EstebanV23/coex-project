@@ -93,7 +93,7 @@ export default function ChangePassword () {
                 autoComplete='off'
                 textLabel='Repite tu nueva contraseña'
               />
-              <Button type='submit' className='text-xl py-2'>Enviar</Button>
+              <Button type='submit' className='text-xl w-full'>Enviar</Button>
             </form>
         }
       </Formik>
