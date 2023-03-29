@@ -18,7 +18,7 @@ async function handlerVerificationHeight (req, res, next) {
     const heighsIncorrects = []
     for (const lastField of lastDocument) {
       for (const field of document) {
-        if ((lastField.registro === field.registro) && (field.talla <= lastField.talla)) {
+        if ((lastField.registro === field.registro) && (field.talla < lastField.talla)) {
           heighsIncorrects.push(field.registro)
           break
         }

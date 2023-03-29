@@ -1,4 +1,5 @@
 import { Popover, Transition } from '@headlessui/react'
+import '../assets/percent.css'
 import { IoMdAdd } from 'react-icons/io'
 import { useState, Fragment, useEffect } from 'react'
 import Button from './Button'
@@ -59,7 +60,7 @@ export default function Unidades () {
     <div className='w-full max-w-[1000px] py-4 m-auto'>
       <div className='flex w-full flex-wrap gap-7 justify-center '>
         {unitsResponse && unitsResponse.units.map((unit) => {
-          const porcent = `w-[${(unit.trimesters.length / 4) * 100}%]`
+          const porcent = (unit.trimesters.length / 4) * 100
           return (
             <Popover className='relative' key={unit._id}>
               {({ close }) => (
@@ -79,7 +80,7 @@ export default function Unidades () {
                       />
                     </div>
                     <div className='w-full text-left'>
-                      <span className='bg-gray-200 relative block h-2 rounded-full w-full'><span className={`h-full absolute top-0 left-0 bg-primary-blue rounded-full ${porcent}`} /></span>
+                      <span className='bg-gray-200 relative block h-2 rounded-full w-full'><span className={`h-full absolute top-0 left-0 bg-primary-blue rounded-full w-[${porcent}%]`} /></span>
                       <span className='text-base'>{unit.trimesters.length}/4</span>
                     </div>
                     <Popover.Button

@@ -58,7 +58,7 @@ function App () {
             return
           }
           if (localStorage.getItem('location')) {
-            navigate(JSON.parse(localStorage.getItem('location'))?.pathname)
+            navigate(JSON.parse(localStorage.getItem('location')).pathname)
           }
         })
         .finally(() => {
