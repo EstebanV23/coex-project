@@ -89,10 +89,10 @@ export default function Register () {
                   />
                 </div>
                 <Input
-                  disabled={loading} icon={<AiTwotonePhone size={22} />} type='text' textLabel='Telefono' name='phone' error={errors}
+                  disabled={loading} icon={<AiTwotonePhone size={22} />} type='tel' textLabel='Telefono' name='phone' error={errors}
                 />
                 <Input
-                  disabled={loading} icon={<MdOutlineAlternateEmail size={22} />} type='text' textLabel='Correo electrónico' name='email' error={errors}
+                  disabled={loading} icon={<MdOutlineAlternateEmail size={22} />} type='email' textLabel='Correo electrónico' name='email' error={errors}
                 />
                 <div className='flex flex-col md:flex-row gap-6 w-full'>
                   <div className='w-full relative'>
@@ -102,7 +102,6 @@ export default function Register () {
 
                     <EyePassword state={showPassword} setState={setShowPassword} />
                   </div>
-
                   <Input
                     disabled={loading} autoComplete='off' icon={<TbPassword size={22} />} type={showPassword ? 'text' : 'password'} textLabel='Repetir contraseña' name='secondPassword' error={errors}
                   />
@@ -118,7 +117,7 @@ export default function Register () {
                   </NavLink>
                   {emailDuplicate && <p className='text-red-500 text-base'>Este correo ya se encuentra registrado</p>}
                 </div>
-                <ButtonMinimalist type='submit'>{loading ? <LoadingComponents size={27} /> : 'Registrarse'}</ButtonMinimalist>
+                <ButtonMinimalist type='submit'>{loading ? <LoadingComponents size={27} color='white' /> : 'Registrarse'}</ButtonMinimalist>
               </div>
             </form>
           </div>
