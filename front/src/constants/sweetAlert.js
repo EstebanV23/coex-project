@@ -7,6 +7,7 @@ export default async function sweetAlert (title, text, icon = 'success', confirm
     confirmButtonText,
     showCancelButton,
     confirmButtonColor,
-    cancelButtonColor
+    cancelButtonColor,
+    cancelButtonAriaLabel: 'Cancelar'
   })
 }
