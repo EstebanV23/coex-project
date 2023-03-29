@@ -1,4 +1,4 @@
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 import sweetAlert from '../constants/sweetAlert'
 import forgotPasswordService from '../services/forgotPasswordService'
@@ -44,11 +44,8 @@ export default function EmailForgotPassword () {
           navigate('/')
         }}
       >
-        {({ errors, handleSubmit }) => (
-          <form
-            className='bg-white w-full max-w-[500px] rounded-xl py-8 px-2 sm:px-8 flex flex-col gap-4'
-            onSubmit={handleSubmit}
-          >
+        {({ errors }) => (
+          <Form className='bg-white w-[95%] max-w-[500px] rounded-xl py-8 px-6 sm:px-8 flex flex-col gap-4'>
             <Input
               icon={<MdOutlineAlternateEmail size={23} />}
               name='email'
@@ -58,7 +55,7 @@ export default function EmailForgotPassword () {
               error={errors}
             />
             <Button type='submit' className='text-primary-blue py-3 border-primary-blue hover:bg-primary-blue hover:text-white transition-all duration-500'>Enviar</Button>
-          </form>
+          </Form>
 
         )}
       </Formik>

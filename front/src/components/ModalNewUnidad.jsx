@@ -38,21 +38,23 @@ export default function ModalNewUnidad ({ name = '', zoneCenter = '', textButton
         {({ errors }) => (
 
           <Form>
-            <h1 className='text-2xl font-bold text-center text-primary-blue-700'>{title}</h1>
-            <Input
-              type='text'
-              name='name'
-              textLabel='Nombre de la unidad'
-              error={errors}
-            />
-            <Input
-              type='text'
-              name='zoneCenter'
-              textLabel='Centro zonal'
-              error={errors}
-            />
+            <h1 className='text-2xl font-bold text-center text-primary-blue-700 '>{title}</h1>
+            <div className='flex flex-col gap-4'>
+              <Input
+                type='text'
+                name='name'
+                textLabel='Nombre de la unidad'
+                error={errors}
+              />
+              <Input
+                type='text'
+                name='zoneCenter'
+                textLabel='Centro zonal'
+                error={errors}
+              />
+            </div>
 
-            <Button className='mt-10' type='submit'>{textButton}</Button>
+            <Button className='mt-10 w-full shadow-xl' type='submit'>{textButton}</Button>
           </Form>
 
         )}

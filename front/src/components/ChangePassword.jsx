@@ -1,4 +1,4 @@
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import { InputBlack } from './Input'
 import { regex } from '../constants/regex'
 import { useUserStore } from '../stores/useUserStore'
@@ -61,8 +61,8 @@ export default function ChangePassword () {
         }}
       >
         {
-          ({ errors, handleSubmit }) =>
-            <form action='' className='flex flex-col gap-3' onSubmit={handleSubmit}>
+          ({ errors }) =>
+            <Form action='' className='flex flex-col gap-3'>
               <div className='relative'>
                 <InputBlack
                   icon={<TbPassword size={23} />}
@@ -94,7 +94,7 @@ export default function ChangePassword () {
                 textLabel='Repite tu nueva contraseña'
               />
               <Button type='submit' className='text-xl w-full'>Enviar</Button>
-            </form>
+            </Form>
         }
       </Formik>
     </div>

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import getValorationService from '../services/getValorationService'
 import deleteDocumentsService from '../services/deleteDocumentsService'
 import sweetAlert from '../constants/sweetAlert'
-import ViewerExcel from './ViewerExcel'
 import { shallow } from 'zustand/shallow'
 import { useNavbarStore } from '../stores/useNavbarStore'
 import { BsFillCloudUploadFill } from 'react-icons/bs'
@@ -59,7 +58,7 @@ export default function File ({ title = 'Cargar Archivo' }) {
         <div className='h-full my-4 text-black flex flex-col items-center w-full overflow-hidden'>
           <strong> <h2 className='text-center text-primary-blue-800 text-4xl mb-10'>{title}</h2></strong>
           <Form className='text-center w-full flex flex-col gap-5 max-w-[200px] mb-5'>
-            <label className='flex items-center bg-white flex-col rounded-3xl gap-3 w-full p-5 shadow-xl cursor-pointer' htmlFor='file'>
+            <label className='flex items-center bg-white flex-col rounded-3xl gap-3 w-full p-5 shadow-lg hover:scale-105 cursor-pointer' htmlFor='file'>
               <BsFillCloudUploadFill size={70} color='#66a7ad' />
               <input type='file' name='file' id='file' className='w-full h-full' required onChange={(e) => Change(e.target.files)} accept='.xlsx' />
               {fileName ? <p className='text-sm text-gray-500'>{fileName}</p> : <p htmlFor='file' className='text-sm cursor-pointer text-gray-500'>Dale click para subir tu archivo</p>}

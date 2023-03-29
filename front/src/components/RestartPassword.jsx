@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import sweetAlert from '../constants/sweetAlert'
 import Input from './Input'
 import Button from './Button'
@@ -49,8 +49,8 @@ export default function RestartPassword () {
         }}
       >
         {
-          ({ errors, handleSubmit }) =>
-            <form action='' className='flex flex-col gap-3 bg-white py-8 px-2 w-full max-w-[500px] sm:px-8 rounded-xl' onSubmit={handleSubmit}>
+          ({ errors }) =>
+            <Form action='' className='flex flex-col gap-3 bg-white py-8 px-2 w-full max-w-[500px] sm:px-8 rounded-xl'>
               <div className='relative'>
                 <Input
                   id='password'
@@ -73,7 +73,7 @@ export default function RestartPassword () {
                 textLabel='Repite tu nueva contraseña'
               />
               <Button type='submit' className='text-primary-blue border-primary-blue hover:text-white hover:bg-primary-blue py-3 text-xl'>Enviar</Button>
-            </form>
+            </Form>
         }
       </Formik>
     </>

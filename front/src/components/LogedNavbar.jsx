@@ -19,7 +19,7 @@ export default function LogedNavbar () {
       <LinksNavbar />
       {isLogged
         ? <><Avatar sizeProp={40} onClick={toggleHiddenModal} className='self-center cursor-pointer font-medium transition-all duration-300 hover:saturate-200'>{`${name} ${surname}`}</Avatar><ModalUser /></>
-        : <Button className='text-white bg-primary-blue-800 bg-opacity-0 px-5 w-fit self-center hover:text-primary-blue-800 hover:bg-white duration-500 ease-in hover:border-slate-300' onClick={() => openLoggin()}>Ingresar</Button>}
+        : <Button className='text-white bg-primary-blue-800 bg-opacity-0 px-5 w-fit self-center hover:text-primary-blue hover:bg-white duration-500 ease-in hover:border-slate-300 ' onClick={() => openLoggin()}>Ingresar</Button>}
 
     </>
   )
