@@ -80,7 +80,7 @@ export default function Unidades () {
                       />
                     </div>
                     <div className='w-full text-left'>
-                      <span className='bg-gray-200 relative block h-2 rounded-full w-full'><span className={`h-full absolute top-0 left-0 bg-primary-blue rounded-full w-[${porcent}%]`} /></span>
+                      <span className='bg-gray-200 relative block h-2 rounded-full w-full'><span className={`h-full absolute top-0 left-0 bg-primary-blue rounded-full w${porcent}`} /></span>
                       <span className='text-base'>{unit.trimesters.length}/4</span>
                     </div>
                     <Popover.Button
