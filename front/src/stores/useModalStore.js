@@ -22,5 +22,8 @@ export const useModalStore = create(set => ({
   isOpenEditTrimester: false,
   openEditTrimester: () => set({ isOpenEditTrimester: true }),
   closeEditTrimester: () => set({ isOpenEditTrimester: false }),
-  resetValuesModals: () => set({ isOpenLoggin: false, isOpenRegister: false, isOpenAvatarEdit: false, isOpenUnitModal: false, isOpenTrimesterModal: false, isOpenViewTrimesterModal: false, isOpenEditTrimester: false })
+  resetValuesModals: () => set({ isOpenLoggin: false, isOpenRegister: false, isOpenAvatarEdit: false, isOpenUnitModal: false, isOpenTrimesterModal: false, isOpenViewTrimesterModal: false, isOpenEditTrimester: false }),
+  isOpenEditUnit: false,
+  openEditUnit: () => set({ isOpenEditUnit: true }),
+  closeEditUnit: () => set({ isOpenEditUnit: false })
 }))
