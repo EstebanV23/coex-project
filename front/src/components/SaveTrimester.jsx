@@ -45,7 +45,7 @@ export default function SaveTrimester () {
 
   return (
     <>
-      {fileDataPython && <Button className='' onClick={() => checkData(fileDataPython)}>Guardar trimestre</Button>}
+      {fileDataPython && <Button className='w-full' onClick={() => checkData(fileDataPython)}>Guardar trimestre</Button>}
     </>
   )
 }
