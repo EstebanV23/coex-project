@@ -13,11 +13,11 @@ export default function useEditUnitModal () {
   return async (elements) => {
     return await updateUnitService({ ...elements, unitId }, token)
       .then((response) => {
+        closeEditUnit()
         if (response.error) {
           sweetAlert('Error al actualizar la unidad', 'Ha ocurrido un error inesperado', 'error')
           return
         }
-        closeEditUnit()
         sweetAlert('Editado con exito', 'Su unidad se ha actualizado correctamente', 'success')
         changeDetected()
       })

@@ -11,14 +11,18 @@ export default function useCreateUnitModal () {
   const { token } = useUserStore(store => store, shallow)
 
   return async (elements) => {
-    const response = await createUnitService(elements, token)
-    closeUnitModal()
-    if (response.error) {
-      sweetAlert('No tienes permisos para crear mas unidades', 'Tienes un límite de creación de unidades, si deseas obtener más unidades comunicate con nosotros en el correo info.mianthro@gmail.com', 'error')
-      return response
-    }
-    sweetAlert('Unidad creada con exito', 'Se ha agregado una unidad exitosamente', 'success')
-    changeDetected()
-    return response
+    return await createUnitService(elements, token)
+      .then(response => {
+        if (response.error) {
+          sweetAlert('No tienes permisos para crear mas unidades', 'Tienes un límite de creación de unidades, si deseas obtener más unidades comunicate con nosotros en el correo info.mianthro@gmail.com', 'error')
+          return
+        }
+        sweetAlert('Unidad creada con exito', 'Se ha agregado una unidad exitosamente', 'success')
+        changeDetected()
+      })
+      .catch(() => sweetAlert('No tienes permisos para crear mas unidades', 'Tienes un límite de creación de unidades, si deseas obtener más unidades comunicate con nosotros en el correo info.mianthro@gmail.com', 'error'))
+      .finally(() => {
+        closeUnitModal()
+      })
   }
 }

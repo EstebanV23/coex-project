@@ -146,6 +146,10 @@ export default function Unidades () {
           <ModalNewTrimestre />
         </Modal>
 
+        <Modal isOpen={isOpenEditUnit} close={closeEditUnit}>
+          <ModalNewUnidad title='Editar Unidad' textButton='Actualizar' name={unit.name} zoneCenter={unit.zoneCenter} callBack={callback} />
+        </Modal>
+
         <Modal isOpen={isOpenUnitModal} close={closeUnitModal}>
           <ModalNewUnidad />
         </Modal>
@@ -158,9 +162,6 @@ export default function Unidades () {
           <ModalEditTrimester />
         </Modal>
 
-        <Modal isOpen={isOpenEditUnit} close={closeEditUnit}>
-          <ModalNewUnidad title='Editar Unidad' textButton='Actualizar' name={unit.name} zoneCenter={unit.zoneCenter} callBack={callback} />
-        </Modal>
       </div>
       <div className='w-full flex justify-center my-20'>
         <div className='w-60 '>

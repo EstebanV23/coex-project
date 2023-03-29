@@ -25,13 +25,9 @@ export default function ModalNewUnidad ({ name = '', zoneCenter = '', textButton
         }}
         onSubmit={async (elements) => {
           setLoading(true)
-          if (callBack) {
-            await callBack(elements)
-            setLoading(false)
-            return
-          }
-
-          await defaultFunction(elements)
+          callBack
+            ? await callBack(elements)
+            : await defaultFunction(elements)
           setLoading(false)
         }}
       >
