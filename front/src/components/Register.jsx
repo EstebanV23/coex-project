@@ -82,28 +82,60 @@ export default function Register () {
 
                 <div className='flex flex-col md:flex-row gap-6 w-full'>
                   <Input
-                    disabled={loading} icon={<BsPersonFill size={22} />} type='text' textLabel='Nombres' name='name' error={errors}
+                    disabled={loading}
+                    icon={<BsPersonFill size={22} />}
+                    type='text'
+                    textLabel='Nombres'
+                    name='name'
+                    error={errors}
                   />
                   <Input
-                    disabled={loading} icon={<BsPersonFill size={22} />} type='text' textLabel='Apellidos' name='surname' error={errors}
+                    disabled={loading}
+                    icon={<BsPersonFill size={22} />}
+                    type='text'
+                    textLabel='Apellidos'
+                    name='surname'
+                    error={errors}
                   />
                 </div>
                 <Input
-                  disabled={loading} icon={<AiTwotonePhone size={22} />} type='tel' textLabel='Telefono' name='phone' error={errors}
+                  disabled={loading}
+                  icon={<AiTwotonePhone size={22} />}
+                  type='tel'
+                  textLabel='Telefono'
+                  name='phone'
+                  error={errors}
                 />
                 <Input
-                  disabled={loading} icon={<MdOutlineAlternateEmail size={22} />} type='email' textLabel='Correo electrónico' name='email' error={errors}
+                  icon={<MdOutlineAlternateEmail size={23} />}
+                  type='email'
+                  textLabel='Correo electrónico'
+                  autoComplete='on'
+                  name='email'
+                  error={errors}
                 />
                 <div className='flex flex-col md:flex-row gap-6 w-full'>
                   <div className='w-full relative'>
                     <Input
-                      disabled={loading} autoComplete='off' icon={<TbPassword size={22} />} type={showPassword ? 'text' : 'password'} textLabel='Contraseña' name='password' error={errors}
+                      disabled={loading}
+                      autoComplete='off'
+                      icon={<TbPassword size={22} />}
+                      type={showPassword ? 'text' : 'password'}
+                      textLabel='Contraseña'
+                      name='password'
+                      error={errors}
                     />
 
                     <EyePassword state={showPassword} setState={setShowPassword} />
                   </div>
                   <Input
-                    disabled={loading} autoComplete='off' icon={<TbPassword size={22} />} type={showPassword ? 'text' : 'password'} textLabel='Repetir contraseña' name='secondPassword' error={errors}
+                    disabled={loading}
+                    autoComplete='off'
+                    icon={<TbPassword size={22} />}
+                    type={showPassword ? 'text' : 'password'}
+                    textLabel='Repetir contraseña'
+                    name='secondPassword'
+                    error={errors}
                   />
                 </div>
                 <div className='flex flex-col items-start justify-between w-full'>
