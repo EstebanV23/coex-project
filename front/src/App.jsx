@@ -50,10 +50,11 @@ function App () {
       tokenValidateService(user.token)
         .then(data => {
           if (data.error) {
-            sweetAlert('Sesión expirada', 'Su sesión ha expirado, por favor vuelva a iniciar sesión', 'info')
             localStorage.removeItem('user')
             restarUser()
             openLoggin()
+            if (data.error.includes('delete account')) sweetAlert('Cuenta eliminada', 'Su cuenta ha sido eliminada ya que no se ha verificado en el tiempo correspondiente', 'error')
+            else sweetAlert('Sesión expirada', 'Su sesión ha expirado, por favor vuelva a iniciar sesión', 'info')
             return
           }
           if (localStorage.getItem('location')) {
@@ -63,7 +64,7 @@ function App () {
         .finally(() => {
           setLoaing(false)
         })
-    }
+    } else setLoaing(false)
   }, [])
 
   if (loading) return <Loading />

@@ -3,6 +3,8 @@ import NutritionistController from '../../controllers/NutitionistController.js'
 import handlerAuthorizationJWT from '../../middlewares/handlerAuthorizationJWT.js'
 import handlerJwtVerify from '../../middlewares/handlerJwtValidate.js'
 import handlerNutritionistVerified from '../../middlewares/handlerNutritionistVerified.js'
+import handlerVerifyDate from '../../middlewares/handlerVerifyDate.js'
+import handlerVerifyDateLogin from '../../middlewares/handlerVerifyDateLogin.js'
 import validateData from '../../middlewares/validationData.js'
 import {
   nutritionistLogin,
@@ -20,6 +22,7 @@ authRouter
   .post(
     '/signin',
     validateData(nutritionistLogin, 'body'),
+    handlerVerifyDateLogin,
     NutritionistController.loginNutritionist
   )
   .post(
@@ -69,6 +72,7 @@ authRouter
   .get(
     '/validate-token/:token',
     handlerJwtVerify('params'),
+    handlerVerifyDate,
     NutritionistController.tokenValidate
   )
   .post(
