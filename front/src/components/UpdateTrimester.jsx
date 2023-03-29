@@ -34,6 +34,6 @@ export default function UpdateTrimester () {
     changeDetected()
   }
   return (
-    <Button onClick={() => updateTrimester()}>Actualizar</Button>
+    <Button className='w-full' onClick={() => updateTrimester()}>Actualizar</Button>
   )
 }
