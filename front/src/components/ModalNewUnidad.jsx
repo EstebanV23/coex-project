@@ -5,9 +5,12 @@ import createUnitService from '../services/createUnitServices'
 import { useUserStore } from '../stores/useUserStore'
 import { useModalStore } from '../stores/useModalStore'
 import sweetAlert from '../constants/sweetAlert'
+import { useUnitStore } from '../stores/useUnitStore'
 export default function ModalNewUnidad () {
   const { token } = useUserStore(store => store)
   const { closeUnitModal } = useModalStore()
+  const { changeDetected } = useUnitStore()
+
   return (
     <Formik
       initialValues={{
@@ -28,6 +31,7 @@ export default function ModalNewUnidad () {
               return
             }
             sweetAlert('Unidad creada con exito', 'Se ha agregado una unidad exitosamente', 'success')
+            changeDetected()
           })
           .finally(() => closeUnitModal())
       }}

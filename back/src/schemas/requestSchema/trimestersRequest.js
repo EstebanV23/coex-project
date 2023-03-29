@@ -13,6 +13,8 @@ const updateTrimesters = Joi.object({
   name: Joi.string(),
   document: Joi.any(),
   trimesterId: Joi.string()
+    .required(),
+  unit: Joi.string()
     .required()
 })
 

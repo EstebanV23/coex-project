@@ -13,8 +13,9 @@ import Loading from './Loading'
 import TableExcel from './TableExcel'
 import { useFileStore } from '../stores/useFileStore'
 import { useModalStore } from '../stores/useModalStore'
+import { useErrorHeightStore } from '../stores/useErrorHeightStore'
 
-export default function File () {
+export default function File ({ title = 'Cargar Archivo' }) {
   const { fileData, fileName, setFileData, fileDataPython, setFileDataPython, resetValuesFile } = useFileStore(store => store, shallow)
 
   function Change (file) {
@@ -23,13 +24,15 @@ export default function File () {
 
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const { token } = useUserStore(store => store, shallow)
-  const [loading, setLoading] = useState(false)
-  const { isOpenTrimesterModal } = useModalStore(store => store, shallow)
+  const [loading, setLoading] = useState(true)
+  const { isOpenTrimesterModal, isOpenEditModal } = useModalStore(store => store, shallow)
+  const { resetValuesIncorrects } = useErrorHeightStore(store => store, shallow)
 
   useEffect(() => {
-    hiddenTrue()
     resetValuesFile()
-  }, [isOpenTrimesterModal])
+    hiddenTrue()
+    setLoading(false)
+  }, [isOpenTrimesterModal, isOpenEditModal])
 
   return (
     <Formik
@@ -37,6 +40,7 @@ export default function File () {
         file: ''
       }}
       onSubmit={() => {
+        resetValuesIncorrects()
         setLoading(true)
         getValorationService(token, fileData)
           .then(response => {
@@ -46,15 +50,14 @@ export default function File () {
               return
             }
             deleteDocumentsService(token)
-              .then((responsePython) => responsePython.json())
             setFileDataPython(response)
           })
       }}
     >
       {() => (
-        <div className='h-full my-10 text-black flex flex-col items-center '>
-          <strong> <h2 className='text-center text-primary-blue-800 text-4xl mb-10'>Subir Archivo</h2></strong>
-          <Form className='text-center w-full flex flex-col gap-5 max-w-[200px] '>
+        <div className='h-full my-4 text-black flex flex-col items-center w-full overflow-hidden'>
+          <strong> <h2 className='text-center text-primary-blue-800 text-4xl mb-10'>{title}</h2></strong>
+          <Form className='text-center w-full flex flex-col gap-5 max-w-[200px] mb-5'>
             <label className='flex items-center bg-white flex-col rounded-3xl gap-3 w-full p-5 shadow-xl cursor-pointer' htmlFor='file'>
               <BsFillCloudUploadFill size={70} color='#66a7ad' />
               <input type='file' name='file' id='file' className='w-full h-full' required onChange={(e) => Change(e.target.files)} accept='.xlsx' />
@@ -63,8 +66,12 @@ export default function File () {
             {fileData && <Button type='submit' id='btnSendFile'>Cargar archivo</Button>}
 
           </Form>
-          {loading && <Loading />}
-          {fileDataPython && <TableExcel />}
+          {loading
+            ? <Loading />
+            : fileDataPython &&
+              <div className='max-w-xl w-full transform overflow-hidden rounded-2xl bg-white p-5'>
+                <TableExcel />
+              </div>}
         </div>
       )}
 

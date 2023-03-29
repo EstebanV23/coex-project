@@ -4,6 +4,7 @@ import handlerAuthorizationJWT from '../../middlewares/handlerAuthorizationJWT.j
 import handlerNotRepudiateMutual from '../../middlewares/handlerNotRepudiateMutual.js'
 import handlerNutritionistVerified from '../../middlewares/handlerNutritionistVerified.js'
 import handlerTrimestersCreate from '../../middlewares/handlerTrimestersCreate.js'
+import handlerVerificationHeight from '../../middlewares/handlerVerificationHeight.js'
 import validateData from '../../middlewares/validationData.js'
 import { newTrimesters, updateTrimesters, deleteTrimesters } from '../../schemas/requestSchema/trimestersRequest.js'
 
@@ -20,6 +21,7 @@ trimestersRouter
     '/create',
     handlerTrimestersCreate('body'),
     validateData(newTrimesters, 'body'),
+    handlerVerificationHeight,
     TrimesterController.createTrimester
   )
   .patch(
