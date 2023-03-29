@@ -162,7 +162,7 @@ export default function Unidades () {
           <ModalNewUnidad title='Editar Unidad' textButton='Actualizar' name={unit.name} zoneCenter={unit.zoneCenter} callBack={callback} />
         </Modal>
       </div>
-      <div className='w-full flex justify-center mt-20'>
+      <div className='w-full flex justify-center my-20'>
         <div className='w-60 '>
           <Button className='w-full flex items-center justify-center' onClick={() => openUnitModal()}><IoMdAdd /> Nueva unidad</Button>
         </div>
