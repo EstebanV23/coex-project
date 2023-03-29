@@ -70,7 +70,7 @@ export default function Unidades () {
                       <span className='text-base'>{unit.trimesters.length}/4</span>
                     </div>
                     <Popover.Button
-                      className='bg-primary-blue-200 transition-all ease-in-out text-base text-primar-blue-900 rounded-md w-full py-2 px-12 sm:px-16 bg-opacity-80 hover:bg-primary-blue-300'
+                      className='bg-primary-blue-200 transition-all ease-in-out text-base text-primary-blue-900 rounded-md w-full py-2 px-12 sm:px-16 bg-opacity-80 hover:bg-primary-blue-300'
                     >
                       Trimestres
                     </Popover.Button>
