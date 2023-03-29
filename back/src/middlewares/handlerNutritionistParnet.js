@@ -9,7 +9,7 @@ function handlerNutritionistParnet (property, nameOfId = 'id') {
       if (!nutritionist.parnet && units.length >= 3) throw new Error('It is not possible to create more units')
       next()
     } catch (error) {
-      error.status = 401
+      error.status = 400
       next(error)
     }
   }
