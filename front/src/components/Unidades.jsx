@@ -16,16 +16,20 @@ import { useUnitStore } from '../stores/useUnitStore'
 import ModalViewTrimester from './ModalViewTrimester'
 import ButtonsActionsTrimester from './ButtonsActionsTrimester'
 import ModalEditTrimester from './ModalEditTrimester'
+import { MdModeEdit } from 'react-icons/md'
+import useEditUnitModal from '../hooks/useEditUnitModal'
 
 export default function Unidades () {
   const { openUnitModal, closeUnitModal, isOpenUnitModal } = useModalStore()
-  const { openTrimesterModal, isOpenTrimesterModal, closeTrimesterModal, isOpenViewTrimesterModal, openViewTrimesterModal, closeViewTrimesterModal, isOpenEditTrimester, closeEditTrimester, resetValuesModals } = useModalStore(store => store, shallow)
+  const { openTrimesterModal, isOpenTrimesterModal, closeTrimesterModal, isOpenViewTrimesterModal, openViewTrimesterModal, closeViewTrimesterModal, isOpenEditTrimester, closeEditTrimester, resetValuesModals, isOpenEditUnit, openEditUnit, closeEditUnit } = useModalStore(store => store, shallow)
   const { token } = useUserStore(store => store, shallow)
   const [unitsResponse, setUnits] = useState(false)
   const { hiddenTrue } = useNavbarStore(store => store, shallow)
   const { loadTrimester, setTrimesterId } = useTrimesterStore()
   const [loading, setLoading] = useState(true)
   const { setUnitId, getChange } = useUnitStore(store => store, shallow)
+  const [unit, setUnit] = useState({})
+  const callback = useEditUnitModal()
 
   useEffect(() => {
     resetValuesModals()
@@ -61,9 +65,18 @@ export default function Unidades () {
               {({ close }) => (
                 <>
                   <div className='flex flex-col items-center px-10 py-5 bg-white rounded-xl shadow-2xl gap-5 basis-1'>
-                    <div className='flex flex-col self-start'>
-                      <span className='text-xl text-primary-blue-800 font-bold leading-none'>{unit.name}</span>
-                      <span className='text-xs leading-none'>{unit.zoneCenter}</span>
+                    <div className='flex justify-between items-center w-full'>
+                      <div className='flex flex-col self-start'>
+                        <span className='text-xl text-primary-blue-800 font-bold leading-none'>{unit.name}</span>
+                        <span className='text-xs leading-none'>{unit.zoneCenter}</span>
+                      </div>
+                      <MdModeEdit
+                        className='p-1 text-2xl bg-primary-blue-300 rounded-md bg-opacity-30 cursor-pointer hover:bg-opacity-60' onClick={() => {
+                          setUnitId(unit._id)
+                          setUnit({ name: unit.name, zoneCenter: unit.zoneCenter })
+                          openEditUnit()
+                        }}
+                      />
                     </div>
                     <div className='w-full text-left'>
                       <span className='bg-gray-200 relative block h-2 rounded-full w-full'><span className={`h-full absolute top-0 left-0 bg-primary-blue rounded-full ${porcent}`} /></span>
@@ -142,6 +155,10 @@ export default function Unidades () {
 
         <Modal isOpen={isOpenEditTrimester} close={closeEditTrimester}>
           <ModalEditTrimester />
+        </Modal>
+
+        <Modal isOpen={isOpenEditUnit} close={closeEditUnit}>
+          <ModalNewUnidad title='Editar Unidad' textButton='Actualizar' name={unit.name} zoneCenter={unit.zoneCenter} callBack={callback} />
         </Modal>
       </div>
       <div className='w-full flex justify-center mt-20'>

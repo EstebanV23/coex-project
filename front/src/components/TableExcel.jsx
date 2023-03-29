@@ -27,7 +27,7 @@ export default function TableExcel () {
             {fileDataPython.map((json, index) => (
               <tr key={index} className={valuesIncorrects && valuesIncorrects.includes(json.registro) ? 'bg-error-400' : 'text-gray-500 hover:bg-slate-300 hover:text-slate-800'}>
                 <th>{index + 1}</th>
-                <th>{json.registro ?? `100000${index}0`}</th>
+                <th>{json.registro}</th>
                 <th>{json.nombre}</th>
                 <th>{json.peso}</th>
                 <th>{json.talla}</th>

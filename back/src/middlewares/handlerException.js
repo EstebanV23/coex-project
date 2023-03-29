@@ -1,8 +1,7 @@
 import buildResponse from '../helpers/buildResponse.js'
 
-function handlerException (err, _, res, next) {
+function handlerException (err, _, res) {
   const { message, status } = err
-  console.log(err)
   buildResponse.failed(res, status, message)
 }
 

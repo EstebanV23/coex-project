@@ -32,7 +32,7 @@ const UnitController = {
     try {
       const { unitId, name, zoneCenter } = req.body
       const update = await Unit.update(unitId, { name, zoneCenter })
-      if (update.modifiedCount === 0) throw new Error('Unit not found')
+      if (update.matchedCount === 0) throw new Error('Unit not found')
       buildResponse.success(res, 200, 'Update unit success', update)
     } catch (err) {
       next(err)
