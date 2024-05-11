@@ -1,0 +1,8 @@
+#file{
+    display: none;
+  }
+#cellTableExcel, th, td {
+    border-collapse: collapse;
+    border: solid rgb(153, 152, 152) 1px ;
+    padding: 7px;
+}
